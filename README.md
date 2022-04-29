@@ -4,7 +4,7 @@
 
 A cross-platform terminal outliner; using it on:
 - Windows (mainly in PowerShell, but old conhost seems to also work)
-- Linux (suckless st termninal and whatever Ubuntu's default terminal is; I think gnome-terminal)
+- Linux (suckless st terminal and whatever Ubuntu's default terminal is; I think gnome-terminal)
 
 Inspired by the amazing https://github.com/void-rs/void (I have a branch that adds very rough Windows support via porting to crossterm-rs here: https://github.com/pmf/void/tree/crossterm-for-windows-support, but lost interest in Rust for recreational programming). I also looked at Zig (which I would love to like), but after spending 4 hours trying to just get at the args array on Windows, I decided to use Go.
 

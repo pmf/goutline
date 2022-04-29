@@ -5,8 +5,7 @@
         "Changed": 0,
         "Txt": "goutline - issues",
         "Numbered": false,
-        "Labels": null,
-        "Selected": false,
+        "Checked": false,
         "Expanded": false,
         "Subs": [
             {
@@ -15,8 +14,7 @@
                 "Changed": 0,
                 "Txt": "Maintenance",
                 "Numbered": false,
-                "Labels": null,
-                "Selected": false,
+                "Checked": false,
                 "Expanded": true,
                 "Subs": [
                     {
@@ -25,8 +23,7 @@
                         "Changed": 0,
                         "Txt": "Create GitHub repo",
                         "Numbered": false,
-                        "Labels": null,
-                        "Selected": true,
+                        "Checked": true,
                         "Expanded": false,
                         "Subs": [
                             {
@@ -35,9 +32,8 @@
                                 "Changed": 0,
                                 "Txt": "Write README",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
-                                "Expanded": false,
+                                "Checked": true,
+                                "Expanded": true,
                                 "Subs": [
                                     {
                                         "Id": "",
@@ -45,10 +41,10 @@
                                         "Changed": 0,
                                         "Txt": "Refer to void as inspiration",
                                         "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": true,
+                                        "Checked": true,
                                         "Expanded": false,
-                                        "Subs": null
+                                        "Subs": null,
+                                        "Meta": null
                                     },
                                     {
                                         "Id": "",
@@ -56,10 +52,10 @@
                                         "Changed": 0,
                                         "Txt": "Describe intended use",
                                         "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": true,
+                                        "Checked": true,
                                         "Expanded": false,
-                                        "Subs": null
+                                        "Subs": null,
+                                        "Meta": null
                                     },
                                     {
                                         "Id": "",
@@ -67,14 +63,16 @@
                                         "Changed": 0,
                                         "Txt": "Best viewed with Pragmata Pro",
                                         "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": true,
+                                        "Checked": true,
                                         "Expanded": false,
-                                        "Subs": null
+                                        "Subs": null,
+                                        "Meta": null
                                     }
-                                ]
+                                ],
+                                "Meta": null
                             }
-                        ]
+                        ],
+                        "Meta": null
                     },
                     {
                         "Id": "",
@@ -82,8 +80,7 @@
                         "Changed": 0,
                         "Txt": "Next issues",
                         "Numbered": false,
-                        "Labels": null,
-                        "Selected": false,
+                        "Checked": false,
                         "Expanded": true,
                         "Subs": [
                             {
@@ -92,33 +89,10 @@
                                 "Changed": 0,
                                 "Txt": "Moving items up/down",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": true,
                                 "Expanded": true,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Simple case",
-                                        "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": true,
-                                        "Expanded": false,
-                                        "Subs": null
-                                    },
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Tricky part is getting item promotion/demotion correct in all cases ...",
-                                        "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": false,
-                                        "Expanded": false,
-                                        "Subs": null
-                                    }
-                                ]
+                                "Subs": [],
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -126,10 +100,10 @@
                                 "Changed": 0,
                                 "Txt": "When doing \"l\" on an already expanded item, do \"down\"",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -137,8 +111,7 @@
                                 "Changed": 0,
                                 "Txt": "Fix misc. selection problems",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
                                 "Subs": [
                                     {
@@ -147,102 +120,13 @@
                                         "Changed": 0,
                                         "Txt": "When creating a new item, it should be at the very least selected and probably als be be in edit mode",
                                         "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": false,
+                                        "Checked": false,
                                         "Expanded": false,
-                                        "Subs": null
+                                        "Subs": null,
+                                        "Meta": null
                                     }
-                                ]
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Auto-delete contents of a new item (or remove the default text for the new item)",
-                                "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
-                                "Expanded": true,
-                                "Subs": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Have a fallback mode for normal fonts",
-                                "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
-                                "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Specifically: make it work with the default terminal font under Windows",
-                                        "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": false,
-                                        "Expanded": false,
-                                        "Subs": null
-                                    }
-                                ]
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Configuration via per-file config item",
-                                "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
-                                "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "but a global/per-user default config would also be nice ...",
-                                        "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": false,
-                                        "Expanded": false,
-                                        "Subs": null
-                                    }
-                                ]
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Have a more intuitive way to enter edit mode than \"e\"",
-                                "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
-                                "Expanded": false,
-                                "Subs": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Check whether the text input prompt can be configured for vi bindings",
-                                "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
-                                "Expanded": false,
-                                "Subs": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Backup \u0026 auto-saving",
-                                "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
-                                "Expanded": false,
-                                "Subs": null
+                                ],
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -250,8 +134,7 @@
                                 "Changed": 0,
                                 "Txt": "Bite the bullet and make org-mod the native save format",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
                                 "Subs": [
                                     {
@@ -260,10 +143,10 @@
                                         "Changed": 0,
                                         "Txt": "new Bite the bullet and make org-mod the native save format.1",
                                         "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": false,
+                                        "Checked": false,
                                         "Expanded": false,
-                                        "Subs": null
+                                        "Subs": null,
+                                        "Meta": null
                                     },
                                     {
                                         "Id": "",
@@ -271,16 +154,120 @@
                                         "Changed": 0,
                                         "Txt": "Mainly because I need Orgzly support ...",
                                         "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": false,
+                                        "Checked": false,
                                         "Expanded": false,
-                                        "Subs": null
+                                        "Subs": null,
+                                        "Meta": null
                                     }
-                                ]
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Auto-delete contents of a new item (or remove the default text for the new item)",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Have a fallback mode for normal fonts",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Specifically: make it work with the default terminal font under Windows",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Configuration via per-file config item",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "but a global/per-user default config would also be nice ...",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Have a more intuitive way to enter edit mode than \"e\"",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Check whether the text input prompt can be configured for vi bindings",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Backup \u0026 auto-saving",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Hoisting support",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
                             }
-                        ]
+                        ],
+                        "Meta": null
                     }
-                ]
+                ],
+                "Meta": null
             },
             {
                 "Id": "",
@@ -288,8 +275,7 @@
                 "Changed": 0,
                 "Txt": "Features (longer term)",
                 "Numbered": false,
-                "Labels": null,
-                "Selected": false,
+                "Checked": false,
                 "Expanded": true,
                 "Subs": [
                     {
@@ -298,9 +284,8 @@
                         "Changed": 0,
                         "Txt": "Integration of external sources",
                         "Numbered": false,
-                        "Labels": null,
-                        "Selected": false,
-                        "Expanded": true,
+                        "Checked": false,
+                        "Expanded": false,
                         "Subs": [
                             {
                                 "Id": "",
@@ -308,10 +293,10 @@
                                 "Changed": 0,
                                 "Txt": "Plain text from external source (file, http)",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": true,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -319,10 +304,10 @@
                                 "Changed": 0,
                                 "Txt": "Other goutline document (readonly? file, http)",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -330,8 +315,7 @@
                                 "Changed": 0,
                                 "Txt": "Dynamic output of other process",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
                                 "Subs": [
                                     {
@@ -340,10 +324,10 @@
                                         "Changed": 0,
                                         "Txt": "Look into how LabPlot handles live data",
                                         "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": false,
+                                        "Checked": false,
                                         "Expanded": true,
-                                        "Subs": null
+                                        "Subs": null,
+                                        "Meta": null
                                     },
                                     {
                                         "Id": "",
@@ -351,12 +335,13 @@
                                         "Changed": 0,
                                         "Txt": "Maybe instead of pulling, we should push from external scripts into running instance?",
                                         "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": false,
+                                        "Checked": false,
                                         "Expanded": false,
-                                        "Subs": null
+                                        "Subs": null,
+                                        "Meta": null
                                     }
-                                ]
+                                ],
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -364,10 +349,10 @@
                                 "Changed": 0,
                                 "Txt": "Markdown import (structure only?)",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -375,10 +360,10 @@
                                 "Changed": 0,
                                 "Txt": "OPML",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -386,10 +371,10 @@
                                 "Changed": 0,
                                 "Txt": "Be usable as a nice structural JSON viewer?",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -397,8 +382,7 @@
                                 "Changed": 0,
                                 "Txt": "JIRA search input",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
                                 "Subs": [
                                     {
@@ -407,14 +391,16 @@
                                         "Changed": 0,
                                         "Txt": "just open in browser ... for commonly used searches",
                                         "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": false,
+                                        "Checked": false,
                                         "Expanded": false,
-                                        "Subs": null
+                                        "Subs": null,
+                                        "Meta": null
                                     }
-                                ]
+                                ],
+                                "Meta": null
                             }
-                        ]
+                        ],
+                        "Meta": null
                     },
                     {
                         "Id": "",
@@ -422,8 +408,7 @@
                         "Changed": 0,
                         "Txt": "Export",
                         "Numbered": false,
-                        "Labels": null,
-                        "Selected": false,
+                        "Checked": false,
                         "Expanded": false,
                         "Subs": [
                             {
@@ -432,10 +417,10 @@
                                 "Changed": 0,
                                 "Txt": "Markdown",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": true,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -443,10 +428,10 @@
                                 "Changed": 0,
                                 "Txt": "HTML",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": true,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -454,10 +439,10 @@
                                 "Changed": 0,
                                 "Txt": "OPML",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -465,10 +450,10 @@
                                 "Changed": 0,
                                 "Txt": "JIRA",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -476,12 +461,13 @@
                                 "Changed": 0,
                                 "Txt": "Confluence",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             }
-                        ]
+                        ],
+                        "Meta": null
                     },
                     {
                         "Id": "",
@@ -489,10 +475,10 @@
                         "Changed": 0,
                         "Txt": "A mode with more space between lines maybe?",
                         "Numbered": false,
-                        "Labels": null,
-                        "Selected": false,
+                        "Checked": false,
                         "Expanded": true,
-                        "Subs": null
+                        "Subs": null,
+                        "Meta": null
                     },
                     {
                         "Id": "",
@@ -500,8 +486,7 @@
                         "Changed": 0,
                         "Txt": "Generic labelling support",
                         "Numbered": false,
-                        "Labels": null,
-                        "Selected": false,
+                        "Checked": false,
                         "Expanded": false,
                         "Subs": [
                             {
@@ -510,12 +495,70 @@
                                 "Changed": 0,
                                 "Txt": "Maybe show in gray beside normal text",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": true,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Possible implementations:",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Plain list of tags",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "List of kv pairs",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "An invisible dedicated \"meta\" suboutline",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": [
+                                            {
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 0,
+                                                "Txt": "I'm sure I'll resist the temptation to get dragged into several layers of meta ... yeah ...",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
                             }
-                        ]
+                        ],
+                        "Meta": null
                     },
                     {
                         "Id": "",
@@ -523,8 +566,7 @@
                         "Changed": 0,
                         "Txt": "How to integrate secondary text",
                         "Numbered": false,
-                        "Labels": null,
-                        "Selected": false,
+                        "Checked": false,
                         "Expanded": false,
                         "Subs": [
                             {
@@ -533,12 +575,13 @@
                                 "Changed": 0,
                                 "Txt": "I don't really want this to devolve into a two pane outliner ...",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             }
-                        ]
+                        ],
+                        "Meta": null
                     },
                     {
                         "Id": "",
@@ -546,9 +589,8 @@
                         "Changed": 0,
                         "Txt": "Virtual nodes",
                         "Numbered": false,
-                        "Labels": null,
-                        "Selected": false,
-                        "Expanded": true,
+                        "Checked": false,
+                        "Expanded": false,
                         "Subs": [
                             {
                                 "Id": "",
@@ -556,10 +598,10 @@
                                 "Changed": 0,
                                 "Txt": "Label search",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -567,10 +609,10 @@
                                 "Changed": 0,
                                 "Txt": "Direct linking",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -578,10 +620,10 @@
                                 "Changed": 0,
                                 "Txt": "Textual search",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
+                                "Checked": false,
                                 "Expanded": false,
-                                "Subs": null
+                                "Subs": null,
+                                "Meta": null
                             },
                             {
                                 "Id": "",
@@ -589,9 +631,8 @@
                                 "Changed": 0,
                                 "Txt": "Filesystem based virtual nodes?",
                                 "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
-                                "Expanded": true,
+                                "Checked": false,
+                                "Expanded": false,
                                 "Subs": [
                                     {
                                         "Id": "",
@@ -599,19 +640,46 @@
                                         "Changed": 0,
                                         "Txt": "meh ... that's just an endless rabbit hole",
                                         "Numbered": false,
-                                        "Labels": null,
-                                        "Selected": false,
+                                        "Checked": false,
                                         "Expanded": false,
-                                        "Subs": null
+                                        "Subs": null,
+                                        "Meta": null
                                     }
-                                ]
+                                ],
+                                "Meta": null
                             }
-                        ]
+                        ],
+                        "Meta": null
+                    },
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "Draw path to current item in bold",
+                        "Numbered": false,
+                        "Checked": false,
+                        "Expanded": false,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Naive implementation causes alignment issues due to control characters messing up character counts",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            }
+                        ],
+                        "Meta": null
                     }
-                ]
+                ],
+                "Meta": null
             }
-        ]
+        ],
+        "Meta": null
     },
     "Config": null,
-    "Cursor": 5
+    "Cursor": 4
 }

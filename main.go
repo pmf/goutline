@@ -26,19 +26,18 @@ type oitem struct {
     // use auto-numbering for subs
     Numbered bool
 
-    // labels
-    // TODO: better as kv pairs
-    Labels []string
-
-    // selection state
-    // TODO: as label
-    Selected bool
+    // Checked state
+    // TODO: as label?
+    Checked bool
 
     // expansion state
     Expanded bool
 
     // child items
     Subs []*oitem
+
+    // generic meta information
+    Meta *oitem
 
     // TODO: maybe use id instead?
     parent *oitem `json:"-"`
@@ -50,6 +49,16 @@ func (o *oitem) Init() {
     for _, sub := range o.Subs {
         sub.parent = o;
         sub.Init();
+    }
+}
+
+// TODO: convenience methods AddSubBefore() and AddSubAfter()
+
+func (o *oitem) AddSubAt(item *oitem, pos int) {
+    if (pos >= 0) && (pos < len(o.Subs)) {
+        o.Subs = append(o.Subs, &oitem{})
+        copy(o.Subs[pos + 1:], o.Subs[pos:])
+        o.Subs[pos] = item
     }
 }
 
@@ -230,7 +239,7 @@ func (m *model) UpdateLinearizedMapping() {
     }
 }
 
-func (m *model) AddItem(parent *oitem) {
+func (m *model) AddNewItem(parent *oitem) {
     new_item := &oitem{parent: parent, Txt: ""}
     parent.Subs = append(parent.Subs, new_item)
     new_item.Txt = fmt.Sprintf("new %s.%d", parent.Txt, len(parent.Subs) - 1)
@@ -269,17 +278,13 @@ func (m *model) DeleteItem(item *oitem) {
 }
 
 func (m *model) MoveUp(item *oitem) {
-    // start with the easy case: item is not the first sub of its parent
     idx := item.IndexOfItem()
 
     if -1 == idx {
         return
     }
 
-    if 0 == idx {
-        // this is the hard case
-        // TODO: implement
-    } else {
+    if 0 != idx {
         tmp := item.parent.Subs[idx - 1]
         item.parent.Subs[idx - 1] = item
         item.parent.Subs[idx    ] = tmp
@@ -291,17 +296,13 @@ func (m *model) MoveUp(item *oitem) {
 }
 
 func (m *model) MoveDown(item *oitem) {
-    // start with the easy case: item is not the last sub of its parent
     idx := item.IndexOfItem()
 
     if -1 == idx {
         return
     }
 
-    if (len(item.parent.Subs) - 1) == idx {
-        // this is the hard case
-        // TODO: implement
-    } else {
+    if (len(item.parent.Subs) - 1) != idx {
         tmp := item.parent.Subs[idx + 1]
         item.parent.Subs[idx + 1] = item
         item.parent.Subs[idx    ] = tmp
@@ -477,7 +478,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 m.MoveDown(cur)
 
             case " ":
-                cur.Selected = !cur.Selected
+                cur.Checked = !cur.Checked
 
             case "tab":
                 m.Promote(cur)
@@ -486,11 +487,11 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 m.Demote(cur)
 
             case "ctrl+p":
-                m.AddItem(cur)
+                m.AddNewItem(cur)
                 m.Expand(cur)
 
             case "enter", "o":
-                m.AddItem(cur.parent)
+                m.AddNewItem(cur.parent)
                 m.Expand(cur.parent)
 
             case "right", "l":
@@ -537,7 +538,7 @@ func drawItem(m model, i int, item *oitem, open_elements map[int]bool) string {
     }
 
     checked := " "
-    if item.Selected {
+    if item.Checked {
         checked = "✓"
     }
 
