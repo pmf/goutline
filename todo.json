@@ -94,8 +94,19 @@
                                 "Numbered": false,
                                 "Labels": null,
                                 "Selected": false,
-                                "Expanded": false,
+                                "Expanded": true,
                                 "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Simple case",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": true,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    },
                                     {
                                         "Id": "",
                                         "Created": 0,
@@ -108,6 +119,51 @@
                                         "Subs": null
                                     }
                                 ]
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "When doing \"l\" on an already expanded item, do \"down\"",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Fix misc. selection problems",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "When creating a new item, it should be at the very least selected and probably als be be in edit mode",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    }
+                                ]
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Auto-delete contents of a new item (or remove the default text for the new item)",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": null
                             },
                             {
                                 "Id": "",
@@ -159,6 +215,17 @@
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
+                                "Txt": "Have a more intuitive way to enter edit mode than \"e\"",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
                                 "Txt": "Check whether the text input prompt can be configured for vi bindings",
                                 "Numbered": false,
                                 "Labels": null,
@@ -170,18 +237,18 @@
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
-                                "Txt": "Auto-delete contents of a new item (or remove the default text for the new item)",
+                                "Txt": "Backup \u0026 auto-saving",
                                 "Numbered": false,
                                 "Labels": null,
                                 "Selected": false,
-                                "Expanded": true,
+                                "Expanded": false,
                                 "Subs": null
                             },
                             {
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
-                                "Txt": "Fix misc. selection problems",
+                                "Txt": "Bite the bullet and make org-mod the native save format",
                                 "Numbered": false,
                                 "Labels": null,
                                 "Selected": false,
@@ -191,7 +258,18 @@
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
-                                        "Txt": "When creating a new item, it should be at the very least selected and probably als be be in edit mode",
+                                        "Txt": "new Bite the bullet and make org-mod the native save format.1",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Mainly because I need Orgzly support ...",
                                         "Numbered": false,
                                         "Labels": null,
                                         "Selected": false,
@@ -199,17 +277,6 @@
                                         "Subs": null
                                     }
                                 ]
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Have a more intuitive way to enter edit mode than \"e\"",
-                                "Numbered": false,
-                                "Labels": null,
-                                "Selected": false,
-                                "Expanded": false,
-                                "Subs": null
                             }
                         ]
                     }
@@ -323,6 +390,29 @@
                                 "Selected": false,
                                 "Expanded": false,
                                 "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "JIRA search input",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "just open in browser ... for commonly used searches",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    }
+                                ]
                             }
                         ]
                     },
@@ -363,6 +453,28 @@
                                 "Created": 0,
                                 "Changed": 0,
                                 "Txt": "OPML",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "JIRA",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Confluence",
                                 "Numbered": false,
                                 "Labels": null,
                                 "Selected": false,
@@ -427,11 +539,79 @@
                                 "Subs": null
                             }
                         ]
+                    },
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "Virtual nodes",
+                        "Numbered": false,
+                        "Labels": null,
+                        "Selected": false,
+                        "Expanded": true,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Label search",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Direct linking",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Textual search",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Filesystem based virtual nodes?",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "meh ... that's just an endless rabbit hole",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
         ]
     },
     "Config": null,
-    "Cursor": 17
+    "Cursor": 5
 }
