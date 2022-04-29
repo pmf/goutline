@@ -268,6 +268,50 @@ func (m *model) DeleteItem(item *oitem) {
     m.UpdateLinearizedMapping()
 }
 
+func (m *model) MoveUp(item *oitem) {
+    // start with the easy case: item is not the first sub of its parent
+    idx := item.IndexOfItem()
+
+    if -1 == idx {
+        return
+    }
+
+    if 0 == idx {
+        // this is the hard case
+        // TODO: implement
+    } else {
+        tmp := item.parent.Subs[idx - 1]
+        item.parent.Subs[idx - 1] = item
+        item.parent.Subs[idx    ] = tmp
+        // parent references can stay the same
+        m.Cursor = m.Cursor - 1
+    }
+
+    m.UpdateLinearizedMapping()
+}
+
+func (m *model) MoveDown(item *oitem) {
+    // start with the easy case: item is not the last sub of its parent
+    idx := item.IndexOfItem()
+
+    if -1 == idx {
+        return
+    }
+
+    if (len(item.parent.Subs) - 1) == idx {
+        // this is the hard case
+        // TODO: implement
+    } else {
+        tmp := item.parent.Subs[idx + 1]
+        item.parent.Subs[idx + 1] = item
+        item.parent.Subs[idx    ] = tmp
+        // parent references can stay the same
+        m.Cursor = m.Cursor + 1
+    }
+
+    m.UpdateLinearizedMapping()
+}
+
 func (m *model) Promote(item *oitem) {
     // Increases the level of the given item
     //
@@ -421,10 +465,16 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                     m.Cursor--
                 }
 
+            case "ctrl+k":
+                m.MoveUp(cur)
+
             case "down", "j":
                 if m.Cursor < len(m.linearized) - 1 {
                     m.Cursor++
                 }
+
+            case "ctrl+j":
+                m.MoveDown(cur)
 
             case " ":
                 cur.Selected = !cur.Selected
