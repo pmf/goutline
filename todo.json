@@ -94,8 +94,20 @@
                                 "Numbered": false,
                                 "Labels": null,
                                 "Selected": false,
-                                "Expanded": true,
-                                "Subs": null
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Tricky part is getting item promotion/demotion correct in all cases ...",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    }
+                                ]
                             },
                             {
                                 "Id": "",
@@ -173,7 +185,7 @@
                                 "Numbered": false,
                                 "Labels": null,
                                 "Selected": false,
-                                "Expanded": true,
+                                "Expanded": false,
                                 "Subs": [
                                     {
                                         "Id": "",
@@ -187,6 +199,17 @@
                                         "Subs": null
                                     }
                                 ]
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Have a more intuitive way to enter edit mode than \"e\"",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
                             }
                         ]
                     }
@@ -200,7 +223,7 @@
                 "Numbered": false,
                 "Labels": null,
                 "Selected": false,
-                "Expanded": true,
+                "Expanded": false,
                 "Subs": [
                     {
                         "Id": "",
@@ -210,7 +233,7 @@
                         "Numbered": false,
                         "Labels": null,
                         "Selected": false,
-                        "Expanded": true,
+                        "Expanded": false,
                         "Subs": [
                             {
                                 "Id": "",
@@ -300,7 +323,7 @@
                         "Numbered": false,
                         "Labels": null,
                         "Selected": false,
-                        "Expanded": true,
+                        "Expanded": false,
                         "Subs": [
                             {
                                 "Id": "",
@@ -356,7 +379,7 @@
                         "Numbered": false,
                         "Labels": null,
                         "Selected": false,
-                        "Expanded": true,
+                        "Expanded": false,
                         "Subs": [
                             {
                                 "Id": "",
@@ -379,7 +402,7 @@
                         "Numbered": false,
                         "Labels": null,
                         "Selected": false,
-                        "Expanded": true,
+                        "Expanded": false,
                         "Subs": [
                             {
                                 "Id": "",
@@ -399,5 +422,5 @@
         ]
     },
     "Config": null,
-    "Cursor": 22
+    "Cursor": 8
 }

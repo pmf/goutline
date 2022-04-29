@@ -441,7 +441,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             case "enter", "o":
                 m.AddItem(cur.parent)
-                m.Expand(cur)
+                m.Expand(cur.parent)
 
             case "right", "l":
                 m.Expand(cur)
