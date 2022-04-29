@@ -223,7 +223,7 @@
                 "Numbered": false,
                 "Labels": null,
                 "Selected": false,
-                "Expanded": false,
+                "Expanded": true,
                 "Subs": [
                     {
                         "Id": "",
@@ -233,7 +233,7 @@
                         "Numbered": false,
                         "Labels": null,
                         "Selected": false,
-                        "Expanded": false,
+                        "Expanded": true,
                         "Subs": [
                             {
                                 "Id": "",
@@ -307,6 +307,17 @@
                                 "Created": 0,
                                 "Changed": 0,
                                 "Txt": "OPML",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Be usable as a nice structural JSON viewer?",
                                 "Numbered": false,
                                 "Labels": null,
                                 "Selected": false,
@@ -422,5 +433,5 @@
         ]
     },
     "Config": null,
-    "Cursor": 8
+    "Cursor": 17
 }

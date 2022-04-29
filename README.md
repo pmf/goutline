@@ -10,6 +10,11 @@ Best viewed with Pragmata Pro
 
 Powered by [Bubble Tea](https://github.com/charmbracelet/bubbletea)
 
+## Screenshots
+
+On Windows:
+![Screenshot on Windows](/screenshots/windows1.png)
+
 ## Build
 ```
 go get goutline
