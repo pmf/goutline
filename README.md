@@ -6,14 +6,21 @@ A cross-platform terminal outliner
 
 Inspired by the amazing https://github.com/void-rs/void
 
-Best viewed with Pragmata Pro.
+Best viewed with Pragmata Pro
+
+Powered by [Bubble Tea](https://github.com/charmbracelet/bubbletea)
 
 ## Build
+```
 go get goutline
 go build
+```
 
+## Run
+```
 ./goutline # implicitly uses out.json in current directory when saving (warning: no auto saving right now; do s, then q)
 ./goutline my_file.json # use this file
+```
 
 ## Key bindings
 (I try to keep these up to date, but refer directly to the implementation if something seems to behave oddly.)
