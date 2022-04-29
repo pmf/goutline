@@ -32,6 +32,8 @@ SUBJECT TO CHANGE!
 | left, h              | Collapse current item |
 | down, j              | Next item |
 | up, k                | Previous item |
+| tab                  | Demote item (is that even a word?) |
+| shift-tab            | Promote item |}
 | q                    | Leave (*without* saving currently!) |
 | s                    | Save current file (out.json if nothing else has been specified) |
 

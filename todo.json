@@ -142,6 +142,51 @@
                                         "Subs": null
                                     }
                                 ]
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Check whether the text input prompt can be configured for vi bindings",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Auto-delete contents of a new item (or remove the default text for the new item)",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Fix misc. selection problems",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "When creating a new item, it should be at the very least selected and probably als be be in edit mode",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -151,11 +196,11 @@
                 "Id": "",
                 "Created": 0,
                 "Changed": 0,
-                "Txt": "Features",
+                "Txt": "Features (longer term)",
                 "Numbered": false,
                 "Labels": null,
                 "Selected": false,
-                "Expanded": false,
+                "Expanded": true,
                 "Subs": [
                     {
                         "Id": "",
@@ -291,11 +336,68 @@
                                 "Subs": null
                             }
                         ]
+                    },
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "A mode with more space between lines maybe?",
+                        "Numbered": false,
+                        "Labels": null,
+                        "Selected": false,
+                        "Expanded": true,
+                        "Subs": null
+                    },
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "Generic labelling support",
+                        "Numbered": false,
+                        "Labels": null,
+                        "Selected": false,
+                        "Expanded": true,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Maybe show in gray beside normal text",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": null
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "How to integrate secondary text",
+                        "Numbered": false,
+                        "Labels": null,
+                        "Selected": false,
+                        "Expanded": true,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "I don't really want this to devolve into a two pane outliner ...",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            }
+                        ]
                     }
                 ]
             }
         ]
     },
     "Config": null,
-    "Cursor": 5
+    "Cursor": 22
 }
