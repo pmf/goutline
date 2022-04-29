@@ -1,0 +1,165 @@
+{
+    "Title": {
+        "Id": "",
+        "Created": 0,
+        "Changed": 0,
+        "Txt": "goutline - issues",
+        "Numbered": false,
+        "Labels": null,
+        "Selected": false,
+        "Expanded": false,
+        "Subs": [
+            {
+                "Id": "",
+                "Created": 0,
+                "Changed": 0,
+                "Txt": "Maintenance",
+                "Numbered": false,
+                "Labels": null,
+                "Selected": false,
+                "Expanded": true,
+                "Subs": [
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "Create GitHub repo",
+                        "Numbered": false,
+                        "Labels": null,
+                        "Selected": false,
+                        "Expanded": true,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Write README",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Refer to void as inspiration",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Describe intended use",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Best viewed with Pragmata Pro",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "Id": "",
+                "Created": 0,
+                "Changed": 0,
+                "Txt": "Features",
+                "Numbered": false,
+                "Labels": null,
+                "Selected": false,
+                "Expanded": true,
+                "Subs": [
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "Integration of external sources",
+                        "Numbered": false,
+                        "Labels": null,
+                        "Selected": false,
+                        "Expanded": true,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Plain text from external source (file, http)",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Other goutline document (readonly? file, http)",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Dynamic output of other process",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Look into how LabPlot handles live data",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": true,
+                                        "Subs": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Maybe instead of pulling, we should push from external scripts into running instance?",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "Config": null,
+    "Cursor": 12
+}
