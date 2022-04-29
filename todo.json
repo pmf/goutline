@@ -26,8 +26,8 @@
                         "Txt": "Create GitHub repo",
                         "Numbered": false,
                         "Labels": null,
-                        "Selected": false,
-                        "Expanded": true,
+                        "Selected": true,
+                        "Expanded": false,
                         "Subs": [
                             {
                                 "Id": "",
@@ -37,7 +37,7 @@
                                 "Numbered": false,
                                 "Labels": null,
                                 "Selected": false,
-                                "Expanded": true,
+                                "Expanded": false,
                                 "Subs": [
                                     {
                                         "Id": "",
@@ -46,7 +46,7 @@
                                         "Txt": "Refer to void as inspiration",
                                         "Numbered": false,
                                         "Labels": null,
-                                        "Selected": false,
+                                        "Selected": true,
                                         "Expanded": false,
                                         "Subs": null
                                     },
@@ -57,7 +57,7 @@
                                         "Txt": "Describe intended use",
                                         "Numbered": false,
                                         "Labels": null,
-                                        "Selected": false,
+                                        "Selected": true,
                                         "Expanded": false,
                                         "Subs": null
                                     },
@@ -66,6 +66,75 @@
                                         "Created": 0,
                                         "Changed": 0,
                                         "Txt": "Best viewed with Pragmata Pro",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": true,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "Next issues",
+                        "Numbered": false,
+                        "Labels": null,
+                        "Selected": false,
+                        "Expanded": true,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Moving items up/down",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Have a fallback mode for normal fonts",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Specifically: make it work with the default terminal font under Windows",
+                                        "Numbered": false,
+                                        "Labels": null,
+                                        "Selected": false,
+                                        "Expanded": false,
+                                        "Subs": null
+                                    }
+                                ]
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Configuration via per-file config item",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "but a global/per-user default config would also be nice ...",
                                         "Numbered": false,
                                         "Labels": null,
                                         "Selected": false,
@@ -86,7 +155,7 @@
                 "Numbered": false,
                 "Labels": null,
                 "Selected": false,
-                "Expanded": true,
+                "Expanded": false,
                 "Subs": [
                     {
                         "Id": "",
@@ -128,7 +197,7 @@
                                 "Numbered": false,
                                 "Labels": null,
                                 "Selected": false,
-                                "Expanded": true,
+                                "Expanded": false,
                                 "Subs": [
                                     {
                                         "Id": "",
@@ -153,6 +222,73 @@
                                         "Subs": null
                                     }
                                 ]
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Markdown import (structure only?)",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "OPML",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "Export",
+                        "Numbered": false,
+                        "Labels": null,
+                        "Selected": false,
+                        "Expanded": true,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Markdown",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "HTML",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": true,
+                                "Subs": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "OPML",
+                                "Numbered": false,
+                                "Labels": null,
+                                "Selected": false,
+                                "Expanded": false,
+                                "Subs": null
                             }
                         ]
                     }
@@ -161,5 +297,5 @@
         ]
     },
     "Config": null,
-    "Cursor": 12
+    "Cursor": 5
 }
