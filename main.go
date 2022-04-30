@@ -239,7 +239,7 @@ func (m *model) UpdateLinearizedMapping() {
     }
 }
 
-func (m *model) AddNewItem(parent *oitem) *oitem{
+func (m *model) AddNewItem(parent *oitem) *oitem {
     new_item := &oitem{parent: parent, Txt: ""}
     parent.Subs = append(parent.Subs, new_item)
     //new_item.Txt = fmt.Sprintf("new %s.%d", parent.Txt, len(parent.Subs) - 1)
@@ -248,20 +248,47 @@ func (m *model) AddNewItem(parent *oitem) *oitem{
     return new_item
 }
 
-func (m *model) AddNewItemAndEdit(parent *oitem) *oitem{
+func (m *model) AddNewItemAndEdit(parent *oitem) *oitem {
     new_item := m.AddNewItem(parent)
     m.Expand(parent)
     new_cur_pos := m.PosInLinearized(new_item)
 
     if -1 != new_cur_pos {
         m.Cursor = new_cur_pos
+        new_item.edited = true
+        m.editingItem = true
+        m.textinput.SetValue(new_item.Txt)
     }
 
-    new_item.edited = true
-    m.editingItem = true
-    m.textinput.SetValue(new_item.Txt)
-
     return new_item
+}
+
+func (m *model) AddNewItemAfterCurrentAndEdit(item *oitem) *oitem {
+    insert_pos := item.IndexOfItem() + 1
+
+    if -1 != insert_pos {
+        new_item := &oitem{parent: item.parent}
+        item.parent.Subs = append(item.parent.Subs, &oitem{})
+        copy(item.parent.Subs[insert_pos + 1:], item.parent.Subs[insert_pos:])
+        item.parent.Subs[insert_pos] = new_item
+
+        m.UpdateLinearizedMapping()
+
+        new_cur_pos := m.PosInLinearized(new_item)
+
+        if -1 != new_cur_pos {
+            m.Cursor = new_cur_pos
+            new_item.edited = true
+            m.editingItem = true
+            m.textinput.SetValue(new_item.Txt)
+        }
+
+        m.UpdateLinearizedMapping()
+
+        return new_item
+    }
+
+    return nil
 }
 
 func (m *model) PosInLinearized(item *oitem) int {
@@ -527,7 +554,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 m.AddNewItemAndEdit(cur)
 
             case "enter", "o":
-                m.AddNewItemAndEdit(cur.parent)
+                m.AddNewItemAfterCurrentAndEdit(cur)
 
             case "right", "l":
                 m.Expand(cur)

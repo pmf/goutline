@@ -167,7 +167,7 @@
                                 "Changed": 0,
                                 "Txt": "When creating a sibling item, item is created at the end of the list instead of after the current item",
                                 "Numbered": false,
-                                "Checked": false,
+                                "Checked": true,
                                 "Expanded": false,
                                 "Subs": null,
                                 "Meta": null
@@ -219,7 +219,7 @@
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
-                                        "Txt": "new Bite the bullet and make org-mod the native save format.1",
+                                        "Txt": "new Bite the bullet and make org-mod the native save format",
                                         "Numbered": false,
                                         "Checked": false,
                                         "Expanded": false,
@@ -830,5 +830,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 6
+    "Cursor": 7
 }
