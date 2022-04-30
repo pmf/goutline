@@ -259,6 +259,7 @@ func (m *model) AddNewItemAndEdit(parent *oitem) *oitem{
 
     new_item.edited = true
     m.editingItem = true
+    m.textinput.SetValue(new_item.Txt)
 
     return new_item
 }

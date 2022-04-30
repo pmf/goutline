@@ -154,6 +154,28 @@
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
+                                "Txt": "When moving items up, and the preceding sibling is expanded, cursor does nor remain on the moved item (logic assumes doing -1 is enough)",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "When creating a sibling item, item is created at the end of the list instead of after the current item",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
                                 "Txt": "Backup \u0026 auto-saving",
                                 "Numbered": false,
                                 "Checked": false,
@@ -191,7 +213,7 @@
                                 "Txt": "Bite the bullet and make org-mod the native save format",
                                 "Numbered": false,
                                 "Checked": false,
-                                "Expanded": false,
+                                "Expanded": true,
                                 "Subs": [
                                     {
                                         "Id": "",
@@ -228,17 +250,6 @@
                                         "Meta": null
                                     }
                                 ],
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Hoisting support",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
                                 "Meta": null
                             },
                             {
@@ -285,6 +296,17 @@
                                         "Meta": null
                                     }
                                 ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Hoisting support",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
                                 "Meta": null
                             },
                             {
@@ -754,6 +776,52 @@
                             }
                         ],
                         "Meta": null
+                    },
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "Shortcut navigation",
+                        "Numbered": false,
+                        "Checked": false,
+                        "Expanded": true,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Maybe like this:",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "\"n\" toggles on a mode where every item in the linearized view is numbered 0-9a-zA-Z",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Pressing on of those immediately jumps to it and leaves \"n\" mode",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            }
+                        ],
+                        "Meta": null
                     }
                 ],
                 "Meta": null
@@ -762,5 +830,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 15
+    "Cursor": 6
 }
