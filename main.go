@@ -483,7 +483,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             switch msg.String() {
 
-            case "e":
+            case "i":
                 cur.edited = true
                 m.editingItem = true
                 m.textinput.SetValue(cur.Txt)
