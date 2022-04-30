@@ -259,6 +259,7 @@ func (m *model) AddNewItemAndEdit(parent *oitem) *oitem{
 
     new_item.edited = true
     m.editingItem = true
+    m.textinput.SetValue(new_item.Txt)
 
     return new_item
 }
@@ -319,10 +320,13 @@ func (m *model) MoveUp(item *oitem) {
         item.parent.Subs[idx - 1] = item
         item.parent.Subs[idx    ] = tmp
         // parent references can stay the same
-        m.Cursor = m.Cursor - 1
     }
 
     m.UpdateLinearizedMapping()
+
+    if pos := m.PosInLinearized(item); -1 != pos {
+        m.Cursor = pos
+    }
 }
 
 func (m *model) MoveDown(item *oitem) {
@@ -337,10 +341,13 @@ func (m *model) MoveDown(item *oitem) {
         item.parent.Subs[idx + 1] = item
         item.parent.Subs[idx    ] = tmp
         // parent references can stay the same
-        m.Cursor = m.Cursor + 1
     }
 
     m.UpdateLinearizedMapping()
+
+    if pos := m.PosInLinearized(item); -1 != pos {
+        m.Cursor = pos
+    }
 }
 
 func (m *model) Promote(item *oitem) {
