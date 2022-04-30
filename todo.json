@@ -156,7 +156,7 @@
                                 "Changed": 0,
                                 "Txt": "When moving items up, and the preceding sibling is expanded, cursor does nor remain on the moved item (logic assumes doing -1 is enough)",
                                 "Numbered": false,
-                                "Checked": false,
+                                "Checked": true,
                                 "Expanded": false,
                                 "Subs": null,
                                 "Meta": null
