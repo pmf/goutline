@@ -239,11 +239,41 @@ func (m *model) UpdateLinearizedMapping() {
     }
 }
 
-func (m *model) AddNewItem(parent *oitem) {
+func (m *model) AddNewItem(parent *oitem) *oitem{
     new_item := &oitem{parent: parent, Txt: ""}
     parent.Subs = append(parent.Subs, new_item)
-    new_item.Txt = fmt.Sprintf("new %s.%d", parent.Txt, len(parent.Subs) - 1)
+    //new_item.Txt = fmt.Sprintf("new %s.%d", parent.Txt, len(parent.Subs) - 1)
     m.UpdateLinearizedMapping()
+
+    return new_item
+}
+
+func (m *model) AddNewItemAndEdit(parent *oitem) *oitem{
+    new_item := m.AddNewItem(parent)
+    m.Expand(parent)
+    new_cur_pos := m.PosInLinearized(new_item)
+
+    if -1 != new_cur_pos {
+        m.Cursor = new_cur_pos
+    }
+
+    new_item.edited = true
+    m.editingItem = true
+
+    return new_item
+}
+
+func (m *model) PosInLinearized(item *oitem) int {
+    result := -1
+
+    for idx, cur := range m.linearized {
+        if cur == item {
+            result = idx
+            break
+        }
+    }
+
+    return result
 }
 
 func (m *model) Expand(item *oitem) {
@@ -487,12 +517,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 m.Demote(cur)
 
             case "ctrl+p":
-                m.AddNewItem(cur)
-                m.Expand(cur)
+                m.AddNewItemAndEdit(cur)
 
             case "enter", "o":
-                m.AddNewItem(cur.parent)
-                m.Expand(cur.parent)
+                m.AddNewItemAndEdit(cur.parent)
 
             case "right", "l":
                 m.Expand(cur)
