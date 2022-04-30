@@ -41,7 +41,7 @@ SUBJECT TO CHANGE!
 |----------------------|---------------------------------------|
 | enter                | Insert new sibling below current item |
 | ctrl+p               | Add new item as child of current item |
-| e                    | Enter edit mode (in edit mode, the bubbletea input widget conveniently offers pseudo-readline key bindings) |
+| i                    | Enter edit mode (in edit mode, the bubbletea input widget conveniently offers pseudo-readline key bindings) |
 | (in edit mode) esc   | Exit edit mode and discard changes |
 | (in edit mode) enter | Confirm changes and leave edit mode |
 | backspace, d         | Delete current item |

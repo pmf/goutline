@@ -98,10 +98,10 @@
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
-                                "Txt": "When doing \"l\" on an already expanded item, do \"down\"",
+                                "Txt": "Have a more intuitive way to enter edit mode than \"e\"",
                                 "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
+                                "Checked": true,
+                                "Expanded": true,
                                 "Subs": null,
                                 "Meta": null
                             },
@@ -111,6 +111,51 @@
                                 "Changed": 0,
                                 "Txt": "Fix misc. selection problems",
                                 "Numbered": false,
+                                "Checked": true,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "When creating a new item, it should be at the very least selected",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "... and probably also be in edit mode",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": true,
+                                        "Subs": [],
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Auto-select contents of a new item (or remove the default text for the new item)",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": true,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Backup \u0026 auto-saving",
+                                "Numbered": false,
                                 "Checked": false,
                                 "Expanded": false,
                                 "Subs": [
@@ -118,7 +163,7 @@
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
-                                        "Txt": "When creating a new item, it should be at the very least selected and probably als be be in edit mode",
+                                        "Txt": "Maybe always save to $filename.bak, even when just quitting?",
                                         "Numbered": false,
                                         "Checked": false,
                                         "Expanded": false,
@@ -126,6 +171,17 @@
                                         "Meta": null
                                     }
                                 ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "When doing \"l\" on an already expanded item, do \"down\"",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
                                 "Meta": null
                             },
                             {
@@ -155,8 +211,20 @@
                                         "Txt": "Mainly because I need Orgzly support ...",
                                         "Numbered": false,
                                         "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 0,
+                                                "Txt": ".. but maybe I can extend Orgzly instead ...",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
                                         "Meta": null
                                     }
                                 ],
@@ -166,34 +234,11 @@
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
-                                "Txt": "Auto-delete contents of a new item (or remove the default text for the new item)",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": true,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Have a fallback mode for normal fonts",
+                                "Txt": "Hoisting support",
                                 "Numbered": false,
                                 "Checked": false,
                                 "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Specifically: make it work with the default terminal font under Windows",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
-                                        "Meta": null
-                                    }
-                                ],
+                                "Subs": null,
                                 "Meta": null
                             },
                             {
@@ -223,11 +268,23 @@
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
-                                "Txt": "Have a more intuitive way to enter edit mode than \"e\"",
+                                "Txt": "Have a fallback mode for normal fonts",
                                 "Numbered": false,
                                 "Checked": false,
                                 "Expanded": false,
-                                "Subs": null,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Specifically: make it work with the default terminal font under Windows",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
                                 "Meta": null
                             },
                             {
@@ -245,22 +302,23 @@
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
-                                "Txt": "Backup \u0026 auto-saving",
+                                "Txt": "Find out why \"del\" does not work",
                                 "Numbered": false,
                                 "Checked": false,
                                 "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Hoisting support",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "seems to be independent of which terminal is being used",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
                                 "Meta": null
                             }
                         ],
@@ -278,6 +336,85 @@
                 "Checked": false,
                 "Expanded": true,
                 "Subs": [
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "Virtual nodes",
+                        "Numbered": false,
+                        "Checked": false,
+                        "Expanded": false,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Transclusion is a must!",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Label search",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Direct linking",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Textual search",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Filesystem based virtual nodes?",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "meh ... that's just an endless rabbit hole",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            }
+                        ],
+                        "Meta": null
+                    },
                     {
                         "Id": "",
                         "Created": 0,
@@ -476,8 +613,20 @@
                         "Txt": "A mode with more space between lines maybe?",
                         "Numbered": false,
                         "Checked": false,
-                        "Expanded": true,
-                        "Subs": null,
+                        "Expanded": false,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "and double amount of indentation?",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            }
+                        ],
                         "Meta": null
                     },
                     {
@@ -587,74 +736,6 @@
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
-                        "Txt": "Virtual nodes",
-                        "Numbered": false,
-                        "Checked": false,
-                        "Expanded": false,
-                        "Subs": [
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Label search",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Direct linking",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Textual search",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Filesystem based virtual nodes?",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "meh ... that's just an endless rabbit hole",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
-                                        "Meta": null
-                                    }
-                                ],
-                                "Meta": null
-                            }
-                        ],
-                        "Meta": null
-                    },
-                    {
-                        "Id": "",
-                        "Created": 0,
-                        "Changed": 0,
                         "Txt": "Draw path to current item in bold",
                         "Numbered": false,
                         "Checked": false,
@@ -681,5 +762,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 4
+    "Cursor": 15
 }
