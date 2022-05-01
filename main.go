@@ -8,6 +8,8 @@ import (
     tea "github.com/charmbracelet/bubbletea"
     "github.com/charmbracelet/lipgloss"
     "github.com/charmbracelet/bubbles/textinput"
+
+    //"golang.org/x/sys/windows"
 )
 
 type oitem struct {
@@ -738,3 +740,17 @@ func main() {
     }
 }
 
+/*
+func main() {
+    in, _ := windows.Open("CONIN$", windows.O_RDWR, 0)
+    windows.SetConsoleMode(in, windows.ENABLE_WINDOW_INPUT)
+    buf := make([]uint16, 1024)
+    var iC byte = 0 
+    var to_read uint32
+    to_read = 1
+    var read uint32
+    windows.ReadConsole(in, &buf[0], to_read, &read, &iC)
+
+    fmt.Printf("read: 0x%x\n", buf[0])
+}
+*/

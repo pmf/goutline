@@ -179,7 +179,7 @@
                                 "Txt": "Check whether the text input prompt can be configured for vi bindings",
                                 "Numbered": false,
                                 "Checked": true,
-                                "Expanded": true,
+                                "Expanded": false,
                                 "Subs": [
                                     {
                                         "Id": "",
@@ -286,6 +286,17 @@
                                                                 "Expanded": false,
                                                                 "Subs": null,
                                                                 "Meta": null
+                                                            },
+                                                            {
+                                                                "Id": "",
+                                                                "Created": 0,
+                                                                "Changed": 0,
+                                                                "Txt": " assumption is that a read returns all runes, but we might have received only a part of multibyte UTF-8 encoded rune and must read more (keeping the start part here) for 'ß', we expect 0xc3 0x9f in UTF-8, but when the error occurs, it's 0xe1 (which is also NOT 'ß'' in the Windows-1252 codepage or the ISO/IEC 8859-1 codepage, where it is 0xdf) This overwiew (https://www.torsten-horn.de/techdocs/encoding.htm) show us: 'ß'' is 0xe1 in Codepage 437 and Codepage 850. After setting the system wide codepage to UTF-8, ReadConsoleInput yields 0xdf for 'ß'",
+                                                                "Numbered": false,
+                                                                "Checked": false,
+                                                                "Expanded": false,
+                                                                "Subs": null,
+                                                                "Meta": null
                                                             }
                                                         ],
                                                         "Meta": null
@@ -305,6 +316,40 @@
                                                 "Meta": null
                                             }
                                         ],
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Handling of long lines",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Maybe a configurable number of lines that are shown by default",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Or full inline expansion on click",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
                                         "Meta": null
                                     }
                                 ],
@@ -1049,5 +1094,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 19
+    "Cursor": 18
 }
