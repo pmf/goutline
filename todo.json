@@ -176,6 +176,155 @@
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
+                                "Txt": "Check whether the text input prompt can be configured for vi bindings",
+                                "Numbered": false,
+                                "Checked": true,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Nope; readline emacs-like bindings are implemented directly in textinput",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Prompt has problems with German umlauts (probably a general Unicode problem)",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Umlauts are displayed correctly in the items and in the prompt when loading from JSON; it's just entry that seems to be the problem",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Crashes also when not in the prompt, and also when pasting instead of entering",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "There seems to be an existing issue: https://github.com/charmbracelet/bubbletea/issues/153",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 0,
+                                                "Txt": "After changing the system settings to force UTF-8, it no longer crashes, but umlauts (and space!) don't work",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": true,
+                                                "Subs": [
+                                                    {
+                                                        "Id": "",
+                                                        "Created": 0,
+                                                        "Changed": 0,
+                                                        "Txt": "Issue with space fixed locally in textinput.go (see also https://github.com/charmbracelet/bubbles/issues/144)",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    }
+                                                ],
+                                                "Meta": null
+                                            },
+                                            {
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 0,
+                                                "Txt": "We're going deep, boys: https://nullprogram.com/blog/2020/05/04/",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": true,
+                                                "Subs": [
+                                                    {
+                                                        "Id": "",
+                                                        "Created": 0,
+                                                        "Changed": 0,
+                                                        "Txt": "Problem might be that normal CONIN reports wide chars, even if system is otherwise configured for UTF-8",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": true,
+                                                        "Subs": [
+                                                            {
+                                                                "Id": "",
+                                                                "Created": 0,
+                                                                "Changed": 0,
+                                                                "Txt": "This behavior would have to be fixed in cancelreader, I think",
+                                                                "Numbered": false,
+                                                                "Checked": false,
+                                                                "Expanded": false,
+                                                                "Subs": null,
+                                                                "Meta": null
+                                                            }
+                                                        ],
+                                                        "Meta": null
+                                                    },
+                                                    {
+                                                        "Id": "",
+                                                        "Created": 0,
+                                                        "Changed": 0,
+                                                        "Txt": "Might also be relevant: https://forum.golangbridge.org/t/windows-raw-console-i-o/22487",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    }
+                                                ],
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "When starting without filename, the default out.json is used for saving, but is not actually loaded",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
                                 "Txt": "Backup \u0026 auto-saving",
                                 "Numbered": false,
                                 "Checked": false,
@@ -313,17 +462,6 @@
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
-                                "Txt": "Check whether the text input prompt can be configured for vi bindings",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
                                 "Txt": "Find out why \"del\" does not work",
                                 "Numbered": false,
                                 "Checked": false,
@@ -432,6 +570,29 @@
                                         "Meta": null
                                     }
                                 ],
+                                "Meta": null
+                            }
+                        ],
+                        "Meta": null
+                    },
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "Tabular view",
+                        "Numbered": false,
+                        "Checked": false,
+                        "Expanded": false,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Driven by metadata",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
                                 "Meta": null
                             }
                         ],
@@ -784,7 +945,7 @@
                         "Txt": "Shortcut navigation",
                         "Numbered": false,
                         "Checked": false,
-                        "Expanded": true,
+                        "Expanded": false,
                         "Subs": [
                             {
                                 "Id": "",
@@ -822,6 +983,64 @@
                             }
                         ],
                         "Meta": null
+                    },
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "GUI",
+                        "Numbered": false,
+                        "Checked": false,
+                        "Expanded": false,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Maybe use a virtual terminal driver plus ebiten?",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            }
+                        ],
+                        "Meta": null
+                    }
+                ],
+                "Meta": null
+            },
+            {
+                "Id": "",
+                "Created": 0,
+                "Changed": 0,
+                "Txt": "Devlog",
+                "Numbered": false,
+                "Checked": false,
+                "Expanded": true,
+                "Subs": [
+                    {
+                        "Id": "",
+                        "Created": 0,
+                        "Changed": 0,
+                        "Txt": "I like the way Go allows overwriting dependencies (even deeply transitive ones) with local versions a lot",
+                        "Numbered": false,
+                        "Checked": false,
+                        "Expanded": true,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "This does not even require a rebuild of the dependency or any of its referencing modules, but just a rebuild of the final top level consumer module!",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            }
+                        ],
+                        "Meta": null
                     }
                 ],
                 "Meta": null
@@ -830,5 +1049,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 7
+    "Cursor": 19
 }
