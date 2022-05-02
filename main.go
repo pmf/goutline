@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "os"
+    "time"
     "io/ioutil"
     "encoding/json"
     tea "github.com/charmbracelet/bubbletea"
@@ -18,10 +19,10 @@ type oitem struct {
     Id string
 
     // time created
-    Created uint64
+    Created int64
 
     // time last changed
-    Changed uint64
+    Changed int64
 
     // main text
     Txt string
@@ -55,13 +56,63 @@ func (o *oitem) Init() {
     }
 }
 
+func (o *oitem) SetTimestampCreatedNow() {
+    o.Created = time.Now().UTC().Unix()
+    //o.Created = time.Now().UTC().Format(time.RFC3339)
+}
+
+func (o *oitem) SetTimestampChangedNow() {
+    o.Changed = time.Now().UTC().Unix()
+    //o.Created = time.Now().UTC().Format(time.RFC3339)
+}
+
+func (o *oitem) DeepCopy() *oitem {
+    result := &oitem{Txt: o.Txt}
+    result.SetTimestampCreatedNow()
+
+    result.Numbered = o.Numbered
+    result.Checked = o.Checked
+
+    if nil != o.Meta {
+        result.Meta = o.Meta.DeepCopy()
+    }
+
+    for _, sub := range o.Subs {
+        new_sub := sub.DeepCopy()
+        new_sub.parent = result
+        result.Subs = append(result.Subs, new_sub)
+    }
+
+    return result
+}
+
 // TODO: convenience methods AddSubBefore() and AddSubAfter()
+
+func (o *oitem) AddSubAfterThis(item *oitem) {
+    if nil == o.parent {
+        return
+    }
+
+    if nil == item {
+        return
+    }
+
+    pos := o.IndexOfItem()
+
+    if -1 == pos {
+        return
+    }
+
+    o.parent.AddSubAt(item, pos)
+}
 
 func (o *oitem) AddSubAt(item *oitem, pos int) {
     if (pos >= 0) && (pos < len(o.Subs)) {
         o.Subs = append(o.Subs, &oitem{})
         copy(o.Subs[pos + 1:], o.Subs[pos:])
         o.Subs[pos] = item
+        item.parent = o
+        o.SetTimestampChangedNow()
     }
 }
 
@@ -78,6 +129,8 @@ func (o *oitem) Delete(item *oitem) {
 
     item.parent = nil
     o.Subs = append(o.Subs[:idx], o.Subs[idx + 1 :]...)
+
+    o.SetTimestampChangedNow()
 }
 
 func (o *oitem) IsFirstSibling() bool {
@@ -144,13 +197,13 @@ type model struct {
     Cursor int
     
     linearized []*oitem
-    
     linearCount int
+
+    copiedItem *oitem
 
     filename string
 
     textinput textinput.Model
-
     editingItem bool
 
     viewport viewport.Model
@@ -192,6 +245,8 @@ func InitialModel() model {
                 &oitem{Txt: "Item"}}},
         Config: &oitem{}}
 
+    result.Title.SetTimestampCreatedNow();
+
     result.CommonPostInit()
 
     return result
@@ -223,6 +278,7 @@ func ModelFromFile(filename string) (model, error) {
 
 func (m model) SetTitle(title string) {
     m.Title.Txt = title
+    m.Title.SetTimestampChangedNow()
 }
 
 func (m model) Init() tea.Cmd {
@@ -251,10 +307,12 @@ func (m *model) UpdateLinearizedMapping() {
 
 func (m *model) AddNewItem(parent *oitem) *oitem {
     new_item := &oitem{parent: parent, Txt: ""}
+    new_item.SetTimestampCreatedNow()
     parent.Subs = append(parent.Subs, new_item)
     //new_item.Txt = fmt.Sprintf("new %s.%d", parent.Txt, len(parent.Subs) - 1)
     m.UpdateLinearizedMapping()
 
+    parent.SetTimestampChangedNow()
     return new_item
 }
 
@@ -278,6 +336,7 @@ func (m *model) AddNewItemAfterCurrentAndEdit(item *oitem) *oitem {
 
     if -1 != insert_pos {
         new_item := &oitem{parent: item.parent}
+        new_item.SetTimestampCreatedNow()
         item.parent.Subs = append(item.parent.Subs, &oitem{})
         copy(item.parent.Subs[insert_pos + 1:], item.parent.Subs[insert_pos:])
         item.parent.Subs[insert_pos] = new_item
@@ -292,6 +351,8 @@ func (m *model) AddNewItemAfterCurrentAndEdit(item *oitem) *oitem {
             m.editingItem = true
             m.textinput.SetValue(new_item.Txt)
         }
+
+        item.SetTimestampChangedNow()
 
         m.UpdateLinearizedMapping()
 
@@ -329,6 +390,9 @@ func (m *model) DeleteItem(item *oitem) {
         return
     }
 
+    // save
+    p := item.parent
+
     // make sure we're not deleting the last item
     if (item.Level(nil) == 1) && (len(item.parent.Subs) == 1) {
         item.Txt = "empty"
@@ -338,11 +402,31 @@ func (m *model) DeleteItem(item *oitem) {
         }
 
         item.Subs = nil
+        item.SetTimestampChangedNow()
     } else {
         item.parent.Delete(item)
     }
 
+    p.SetTimestampChangedNow()
     m.UpdateLinearizedMapping()
+}
+
+func (m *model) AddSubAfterThis(o *oitem, item *oitem) {
+    if nil == o {
+        return
+    }
+
+    if nil == item {
+        return
+    }
+
+    o.AddSubAfterThis(item)
+
+    m.UpdateLinearizedMapping()
+
+    if pos := m.PosInLinearized(item); -1 != pos {
+        m.Cursor = pos
+    }
 }
 
 func (m *model) MoveUp(item *oitem) {
@@ -424,8 +508,11 @@ func (m *model) Promote(item *oitem) {
             item.parent.Subs = append(item.parent.Subs[:index_of_item_within_parent], item.parent.Subs[index_of_item_within_parent + 1 :]...)
 
             // attach to new parent
+            item.parent.SetTimestampChangedNow()
             item.parent = prec
+            item.parent.SetTimestampChangedNow()
             prec.Subs = append(prec.Subs, item)
+            item.SetTimestampChangedNow()
 
             m.Expand(item.parent)
             m.UpdateLinearizedMapping()
@@ -471,7 +558,10 @@ func (m *model) Demote(item *oitem) {
                 item.parent.parent.Subs[target_index] = item
             }
 
+            item.parent.SetTimestampChangedNow()
             item.parent = item.parent.parent
+            item.parent.SetTimestampChangedNow()
+            item.SetTimestampChangedNow()
             m.UpdateLinearizedMapping()
         }
     }
@@ -542,6 +632,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 cur.edited = false
                 m.editingItem = false
                 cur.Txt = m.textinput.Value()
+
+                cur.SetTimestampChangedNow()
             }
         }
 
