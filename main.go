@@ -8,6 +8,7 @@ import (
     tea "github.com/charmbracelet/bubbletea"
     "github.com/charmbracelet/lipgloss"
     "github.com/charmbracelet/bubbles/textinput"
+    "github.com/charmbracelet/bubbles/viewport"
 
     //"golang.org/x/sys/windows"
 )
@@ -130,6 +131,10 @@ func (o *oitem) IndexOfItem() int {
     return result
 }
 
+const useHighPerformanceRenderer = false
+const verticalMarginHeight = 0
+const headerHeight = 0
+
 type model struct {
     
     Title *oitem
@@ -147,6 +152,9 @@ type model struct {
     textinput textinput.Model
 
     editingItem bool
+
+    viewport viewport.Model
+    winSizeReady bool
 }
 
 func (m *model) CommonPostInit() {
@@ -487,11 +495,40 @@ func (m model) SaveCurrentAs(filename string) bool {
     return true
 }
 
+func (m *model) handleWinSizeChange(msg tea.WindowSizeMsg) []tea.Cmd {
+    var cmds []tea.Cmd
+
+    if !m.winSizeReady {
+        m.viewport = viewport.New(msg.Width, msg.Height - verticalMarginHeight)
+        m.viewport.YPosition = headerHeight
+        m.viewport.HighPerformanceRendering = useHighPerformanceRenderer
+        m.viewport.SetContent(m.contentView())
+        m.winSizeReady = true
+
+        m.viewport.YPosition = headerHeight + 1
+    } else {
+        m.viewport.Width = msg.Width
+        m.viewport.Height = msg.Height - verticalMarginHeight
+    }
+
+    if useHighPerformanceRenderer {
+        cmds = append(cmds, viewport.Sync(m.viewport))
+    }
+
+    return cmds
+}
+
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+    var cmd tea.Cmd
+    var cmds []tea.Cmd
+
     cur := m.linearized[m.Cursor]
 
     if m.editingItem {
         switch msg := msg.(type) {
+
+        case tea.WindowSizeMsg:
+            cmds = m.handleWinSizeChange(msg)
 
         case tea.KeyMsg:
 
@@ -511,9 +548,11 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
         if m.editingItem {
             m.textinput, _ = m.textinput.Update(msg)
         }
-
     } else {
         switch msg := msg.(type) {
+
+        case tea.WindowSizeMsg:
+            cmds = m.handleWinSizeChange(msg)
 
         case tea.KeyMsg:
 
@@ -589,7 +628,25 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
         m.Cursor = m.linearCount - 1
     }
 
-    return m, nil
+    m.viewport.SetContent(m.contentView())
+
+    canUpdateViewport := true
+
+    switch msg.(type) {
+
+        case tea.KeyMsg:
+            // only dispatch messages when
+            if m.editingItem {
+                canUpdateViewport = false
+            }
+    }
+
+    if canUpdateViewport {
+        m.viewport, cmd = m.viewport.Update(msg)
+        cmds = append(cmds, cmd)
+    }
+
+    return m, tea.Batch(cmds...)
 }
 
 func drawItem(m model, i int, item *oitem, open_elements map[int]bool) string {
@@ -663,7 +720,6 @@ func drawItem(m model, i int, item *oitem, open_elements map[int]bool) string {
         open_elements_indicator += fmt.Sprintf(" (level: %d, oe: %v (len %d) branch: %s)", level, open_elements, len(open_elements), branches)
     }
 
-    //color_yellow := lipgloss.Color("227")
     color_purple := lipgloss.Color("63")
 
     var selected_style lipgloss.Style
@@ -682,14 +738,18 @@ func drawItem(m model, i int, item *oitem, open_elements map[int]bool) string {
     }
 }
 
-func (m model) View() string {
+func (m model) contentView() string {
     // keep track of which elements are open on each level (displayed part of subs, but more subs
     // will be painted after painting intermediate subs of higher levels)
     open_elements := make(map[int]bool)
     //level_headers := "   012345\n"
 
+    color_yellow := lipgloss.Color("227")
+    header_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
+    footer_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
 
-    s := m.Title.Txt + "\n\n"
+    s := header_style.Render(m.Title.Txt) + "\n\n"
+
     //s += level_headers
 
     for i, item := range m.linearized {
@@ -706,13 +766,21 @@ func (m model) View() string {
 
     if m.Cursor < len(m.linearized) {
         s += fmt.Sprintf(
-            "\nPress q to quit.      cursor: %d  IsLastSibling: %t IsFirstSibling: %t \n",
+            "\n" + footer_style.Render("Press q to quit.      cursor: %d  IsLastSibling: %t IsFirstSibling: %t ") + "\n",
             m.Cursor,
             m.linearized[m.Cursor].IsLastSibling(),
             m.linearized[m.Cursor].IsFirstSibling())
     }
 
     return s
+}
+
+func (m model) View() string {
+    if !m.winSizeReady {
+        return "\n  Initializing..."
+    }
+
+    return fmt.Sprintf("%s", m.viewport.View())
 }
 
 func main() {
