@@ -3,11 +3,15 @@ package main
 import (
     "fmt"
     "os"
+    "time"
     "io/ioutil"
     "encoding/json"
     tea "github.com/charmbracelet/bubbletea"
     "github.com/charmbracelet/lipgloss"
     "github.com/charmbracelet/bubbles/textinput"
+    "github.com/charmbracelet/bubbles/viewport"
+
+    //"golang.org/x/sys/windows"
 )
 
 type oitem struct {
@@ -15,10 +19,10 @@ type oitem struct {
     Id string
 
     // time created
-    Created uint64
+    Created int64
 
     // time last changed
-    Changed uint64
+    Changed int64
 
     // main text
     Txt string
@@ -52,13 +56,63 @@ func (o *oitem) Init() {
     }
 }
 
+func (o *oitem) SetTimestampCreatedNow() {
+    o.Created = time.Now().UTC().Unix()
+    //o.Created = time.Now().UTC().Format(time.RFC3339)
+}
+
+func (o *oitem) SetTimestampChangedNow() {
+    o.Changed = time.Now().UTC().Unix()
+    //o.Created = time.Now().UTC().Format(time.RFC3339)
+}
+
+func (o *oitem) DeepCopy() *oitem {
+    result := &oitem{Txt: o.Txt}
+    result.SetTimestampCreatedNow()
+
+    result.Numbered = o.Numbered
+    result.Checked = o.Checked
+
+    if nil != o.Meta {
+        result.Meta = o.Meta.DeepCopy()
+    }
+
+    for _, sub := range o.Subs {
+        new_sub := sub.DeepCopy()
+        new_sub.parent = result
+        result.Subs = append(result.Subs, new_sub)
+    }
+
+    return result
+}
+
 // TODO: convenience methods AddSubBefore() and AddSubAfter()
+
+func (o *oitem) AddSubAfterThis(item *oitem) {
+    if nil == o.parent {
+        return
+    }
+
+    if nil == item {
+        return
+    }
+
+    pos := o.IndexOfItem()
+
+    if -1 == pos {
+        return
+    }
+
+    o.parent.AddSubAt(item, pos)
+}
 
 func (o *oitem) AddSubAt(item *oitem, pos int) {
     if (pos >= 0) && (pos < len(o.Subs)) {
         o.Subs = append(o.Subs, &oitem{})
         copy(o.Subs[pos + 1:], o.Subs[pos:])
         o.Subs[pos] = item
+        item.parent = o
+        o.SetTimestampChangedNow()
     }
 }
 
@@ -75,6 +129,8 @@ func (o *oitem) Delete(item *oitem) {
 
     item.parent = nil
     o.Subs = append(o.Subs[:idx], o.Subs[idx + 1 :]...)
+
+    o.SetTimestampChangedNow()
 }
 
 func (o *oitem) IsFirstSibling() bool {
@@ -128,6 +184,10 @@ func (o *oitem) IndexOfItem() int {
     return result
 }
 
+const useHighPerformanceRenderer = false
+const verticalMarginHeight = 0
+const headerHeight = 0
+
 type model struct {
     
     Title *oitem
@@ -137,14 +197,17 @@ type model struct {
     Cursor int
     
     linearized []*oitem
-    
     linearCount int
+
+    copiedItem *oitem
 
     filename string
 
     textinput textinput.Model
-
     editingItem bool
+
+    viewport viewport.Model
+    winSizeReady bool
 }
 
 func (m *model) CommonPostInit() {
@@ -182,6 +245,8 @@ func InitialModel() model {
                 &oitem{Txt: "Item"}}},
         Config: &oitem{}}
 
+    result.Title.SetTimestampCreatedNow();
+
     result.CommonPostInit()
 
     return result
@@ -213,6 +278,7 @@ func ModelFromFile(filename string) (model, error) {
 
 func (m model) SetTitle(title string) {
     m.Title.Txt = title
+    m.Title.SetTimestampChangedNow()
 }
 
 func (m model) Init() tea.Cmd {
@@ -239,29 +305,61 @@ func (m *model) UpdateLinearizedMapping() {
     }
 }
 
-func (m *model) AddNewItem(parent *oitem) *oitem{
+func (m *model) AddNewItem(parent *oitem) *oitem {
     new_item := &oitem{parent: parent, Txt: ""}
+    new_item.SetTimestampCreatedNow()
     parent.Subs = append(parent.Subs, new_item)
     //new_item.Txt = fmt.Sprintf("new %s.%d", parent.Txt, len(parent.Subs) - 1)
     m.UpdateLinearizedMapping()
 
+    parent.SetTimestampChangedNow()
     return new_item
 }
 
-func (m *model) AddNewItemAndEdit(parent *oitem) *oitem{
+func (m *model) AddNewItemAndEdit(parent *oitem) *oitem {
     new_item := m.AddNewItem(parent)
     m.Expand(parent)
     new_cur_pos := m.PosInLinearized(new_item)
 
     if -1 != new_cur_pos {
         m.Cursor = new_cur_pos
+        new_item.edited = true
+        m.editingItem = true
+        m.textinput.SetValue(new_item.Txt)
     }
 
-    new_item.edited = true
-    m.editingItem = true
-    m.textinput.SetValue(new_item.Txt)
-
     return new_item
+}
+
+func (m *model) AddNewItemAfterCurrentAndEdit(item *oitem) *oitem {
+    insert_pos := item.IndexOfItem() + 1
+
+    if -1 != insert_pos {
+        new_item := &oitem{parent: item.parent}
+        new_item.SetTimestampCreatedNow()
+        item.parent.Subs = append(item.parent.Subs, &oitem{})
+        copy(item.parent.Subs[insert_pos + 1:], item.parent.Subs[insert_pos:])
+        item.parent.Subs[insert_pos] = new_item
+
+        m.UpdateLinearizedMapping()
+
+        new_cur_pos := m.PosInLinearized(new_item)
+
+        if -1 != new_cur_pos {
+            m.Cursor = new_cur_pos
+            new_item.edited = true
+            m.editingItem = true
+            m.textinput.SetValue(new_item.Txt)
+        }
+
+        item.SetTimestampChangedNow()
+
+        m.UpdateLinearizedMapping()
+
+        return new_item
+    }
+
+    return nil
 }
 
 func (m *model) PosInLinearized(item *oitem) int {
@@ -292,6 +390,9 @@ func (m *model) DeleteItem(item *oitem) {
         return
     }
 
+    // save
+    p := item.parent
+
     // make sure we're not deleting the last item
     if (item.Level(nil) == 1) && (len(item.parent.Subs) == 1) {
         item.Txt = "empty"
@@ -301,11 +402,31 @@ func (m *model) DeleteItem(item *oitem) {
         }
 
         item.Subs = nil
+        item.SetTimestampChangedNow()
     } else {
         item.parent.Delete(item)
     }
 
+    p.SetTimestampChangedNow()
     m.UpdateLinearizedMapping()
+}
+
+func (m *model) AddSubAfterThis(o *oitem, item *oitem) {
+    if nil == o {
+        return
+    }
+
+    if nil == item {
+        return
+    }
+
+    o.AddSubAfterThis(item)
+
+    m.UpdateLinearizedMapping()
+
+    if pos := m.PosInLinearized(item); -1 != pos {
+        m.Cursor = pos
+    }
 }
 
 func (m *model) MoveUp(item *oitem) {
@@ -387,8 +508,11 @@ func (m *model) Promote(item *oitem) {
             item.parent.Subs = append(item.parent.Subs[:index_of_item_within_parent], item.parent.Subs[index_of_item_within_parent + 1 :]...)
 
             // attach to new parent
+            item.parent.SetTimestampChangedNow()
             item.parent = prec
+            item.parent.SetTimestampChangedNow()
             prec.Subs = append(prec.Subs, item)
+            item.SetTimestampChangedNow()
 
             m.Expand(item.parent)
             m.UpdateLinearizedMapping()
@@ -434,7 +558,10 @@ func (m *model) Demote(item *oitem) {
                 item.parent.parent.Subs[target_index] = item
             }
 
+            item.parent.SetTimestampChangedNow()
             item.parent = item.parent.parent
+            item.parent.SetTimestampChangedNow()
+            item.SetTimestampChangedNow()
             m.UpdateLinearizedMapping()
         }
     }
@@ -458,11 +585,40 @@ func (m model) SaveCurrentAs(filename string) bool {
     return true
 }
 
+func (m *model) handleWinSizeChange(msg tea.WindowSizeMsg) []tea.Cmd {
+    var cmds []tea.Cmd
+
+    if !m.winSizeReady {
+        m.viewport = viewport.New(msg.Width, msg.Height - verticalMarginHeight)
+        m.viewport.YPosition = headerHeight
+        m.viewport.HighPerformanceRendering = useHighPerformanceRenderer
+        m.viewport.SetContent(m.contentView())
+        m.winSizeReady = true
+
+        m.viewport.YPosition = headerHeight + 1
+    } else {
+        m.viewport.Width = msg.Width
+        m.viewport.Height = msg.Height - verticalMarginHeight
+    }
+
+    if useHighPerformanceRenderer {
+        cmds = append(cmds, viewport.Sync(m.viewport))
+    }
+
+    return cmds
+}
+
 func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+    var cmd tea.Cmd
+    var cmds []tea.Cmd
+
     cur := m.linearized[m.Cursor]
 
     if m.editingItem {
         switch msg := msg.(type) {
+
+        case tea.WindowSizeMsg:
+            cmds = m.handleWinSizeChange(msg)
 
         case tea.KeyMsg:
 
@@ -476,15 +632,19 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 cur.edited = false
                 m.editingItem = false
                 cur.Txt = m.textinput.Value()
+
+                cur.SetTimestampChangedNow()
             }
         }
 
         if m.editingItem {
             m.textinput, _ = m.textinput.Update(msg)
         }
-
     } else {
         switch msg := msg.(type) {
+
+        case tea.WindowSizeMsg:
+            cmds = m.handleWinSizeChange(msg)
 
         case tea.KeyMsg:
 
@@ -494,6 +654,15 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 cur.edited = true
                 m.editingItem = true
                 m.textinput.SetValue(cur.Txt)
+
+            case "c":
+                m.copiedItem = cur.DeepCopy()
+
+            case "v":
+                if nil != m.copiedItem {
+                    m.AddSubAfterThis(cur, m.copiedItem)
+                    m.copiedItem = nil
+                }
 
             case "ctrl+c", "q":
                 return m, tea.Quit
@@ -527,7 +696,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 m.AddNewItemAndEdit(cur)
 
             case "enter", "o":
-                m.AddNewItemAndEdit(cur.parent)
+                m.AddNewItemAfterCurrentAndEdit(cur)
 
             case "right", "l":
                 m.Expand(cur)
@@ -560,7 +729,25 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
         m.Cursor = m.linearCount - 1
     }
 
-    return m, nil
+    m.viewport.SetContent(m.contentView())
+
+    canUpdateViewport := true
+
+    switch msg.(type) {
+
+        case tea.KeyMsg:
+            // only dispatch messages when
+            if m.editingItem {
+                canUpdateViewport = false
+            }
+    }
+
+    if canUpdateViewport {
+        m.viewport, cmd = m.viewport.Update(msg)
+        cmds = append(cmds, cmd)
+    }
+
+    return m, tea.Batch(cmds...)
 }
 
 func drawItem(m model, i int, item *oitem, open_elements map[int]bool) string {
@@ -634,7 +821,6 @@ func drawItem(m model, i int, item *oitem, open_elements map[int]bool) string {
         open_elements_indicator += fmt.Sprintf(" (level: %d, oe: %v (len %d) branch: %s)", level, open_elements, len(open_elements), branches)
     }
 
-    //color_yellow := lipgloss.Color("227")
     color_purple := lipgloss.Color("63")
 
     var selected_style lipgloss.Style
@@ -653,14 +839,18 @@ func drawItem(m model, i int, item *oitem, open_elements map[int]bool) string {
     }
 }
 
-func (m model) View() string {
+func (m model) contentView() string {
     // keep track of which elements are open on each level (displayed part of subs, but more subs
     // will be painted after painting intermediate subs of higher levels)
     open_elements := make(map[int]bool)
     //level_headers := "   012345\n"
 
+    color_yellow := lipgloss.Color("227")
+    header_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
+    footer_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
 
-    s := m.Title.Txt + "\n\n"
+    s := header_style.Render(m.Title.Txt) + "\n\n"
+
     //s += level_headers
 
     for i, item := range m.linearized {
@@ -677,7 +867,7 @@ func (m model) View() string {
 
     if m.Cursor < len(m.linearized) {
         s += fmt.Sprintf(
-            "\nPress q to quit.      cursor: %d  IsLastSibling: %t IsFirstSibling: %t \n",
+            "\n" + footer_style.Render("Press q to quit.      cursor: %d  IsLastSibling: %t IsFirstSibling: %t ") + "\n",
             m.Cursor,
             m.linearized[m.Cursor].IsLastSibling(),
             m.linearized[m.Cursor].IsFirstSibling())
@@ -686,23 +876,31 @@ func (m model) View() string {
     return s
 }
 
+func (m model) View() string {
+    if !m.winSizeReady {
+        return "\n  Initializing..."
+    }
+
+    return fmt.Sprintf("%s", m.viewport.View())
+}
+
 func main() {
-    var m model
+    var filename string
 
     if len(os.Args) > 1 {
-        filename := os.Args[1]
-        var err error
-        m, err = ModelFromFile(filename)
-
-        if err != nil {
-            fmt.Printf("Could not load file: %s; using default contents\n\n", filename)
-            m = InitialModel()
-            m.filename = filename
-        }
+        filename = os.Args[1]
     } else {
-        m = InitialModel()
+        filename = "out.json"
     }
-    
+
+    m, err := ModelFromFile(filename)
+
+    if err != nil {
+        fmt.Printf("Could not load file: %s; using default contents\n\n", filename)
+        m = InitialModel()
+        m.filename = filename
+    }
+
     p := tea.NewProgram(m)
     
     if err := p.Start(); err != nil {
@@ -711,3 +909,17 @@ func main() {
     }
 }
 
+/*
+func main() {
+    in, _ := windows.Open("CONIN$", windows.O_RDWR, 0)
+    windows.SetConsoleMode(in, windows.ENABLE_WINDOW_INPUT)
+    buf := make([]uint16, 1024)
+    var iC byte = 0 
+    var to_read uint32
+    to_read = 1
+    var read uint32
+    windows.ReadConsole(in, &buf[0], to_read, &read, &iC)
+
+    fmt.Printf("read: 0x%x\n", buf[0])
+}
+*/
