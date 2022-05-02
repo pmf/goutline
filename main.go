@@ -885,22 +885,22 @@ func (m model) View() string {
 }
 
 func main() {
-    var m model
+    var filename string
 
     if len(os.Args) > 1 {
-        filename := os.Args[1]
-        var err error
-        m, err = ModelFromFile(filename)
-
-        if err != nil {
-            fmt.Printf("Could not load file: %s; using default contents\n\n", filename)
-            m = InitialModel()
-            m.filename = filename
-        }
+        filename = os.Args[1]
     } else {
-        m = InitialModel()
+        filename = "out.json"
     }
-    
+
+    m, err := ModelFromFile(filename)
+
+    if err != nil {
+        fmt.Printf("Could not load file: %s; using default contents\n\n", filename)
+        m = InitialModel()
+        m.filename = filename
+    }
+
     p := tea.NewProgram(m)
     
     if err := p.Start(); err != nil {
