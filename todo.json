@@ -335,10 +335,21 @@
                             {
                                 "Id": "",
                                 "Created": 1651498710,
-                                "Changed": 1651507716,
+                                "Changed": 1651520303,
                                 "Txt": "Need to disable j/k navigation that is being hijacked by viewport when in edit mode",
                                 "Numbered": false,
                                 "Checked": true,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 1651520303,
+                                "Changed": 1651520340,
+                                "Txt": "Promoting the first second level sub (?) fails (item disappears)",
+                                "Numbered": false,
+                                "Checked": false,
                                 "Expanded": false,
                                 "Subs": null,
                                 "Meta": null
@@ -1709,5 +1720,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 20
+    "Cursor": 18
 }
