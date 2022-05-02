@@ -385,9 +385,13 @@ func (m *model) Collapse(item *oitem) {
     m.UpdateLinearizedMapping()
 }
 
-func (m *model) DeleteItem(item *oitem) {
+func (m *model) DeleteItem(item *oitem) *oitem{
+    if nil == item {
+        return nil
+    }
+
     if nil == item.parent {
-        return
+        return nil
     }
 
     // save
@@ -409,6 +413,8 @@ func (m *model) DeleteItem(item *oitem) {
 
     p.SetTimestampChangedNow()
     m.UpdateLinearizedMapping()
+
+    return item
 }
 
 func (m *model) AddSubAfterThis(o *oitem, item *oitem) {
@@ -657,6 +663,13 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             case "c":
                 m.copiedItem = cur.DeepCopy()
+
+            case "x":
+                // alternative operation would be:
+                // m.copiedItem =m.DeepCopy(cur)
+                // m.DeleteItem(cur)
+
+                m.copiedItem = m.DeleteItem(cur)
 
             case "v":
                 if nil != m.copiedItem {
