@@ -86,6 +86,29 @@ func (o *oitem) DeepCopy() *oitem {
     return result
 }
 
+func (o *oitem) DeepCopyForUndo() *oitem {
+    result := &oitem{Txt: o.Txt}
+
+    result.Numbered = o.Numbered
+    result.Checked = o.Checked
+    result.Expanded = o.Expanded
+    result.Created = o.Created
+    result.Changed = o.Changed
+    result.Id = o.Id
+
+    if nil != o.Meta {
+        result.Meta = o.Meta.DeepCopyForUndo()
+    }
+
+    for _, sub := range o.Subs {
+        new_sub := sub.DeepCopyForUndo()
+        new_sub.parent = result
+        result.Subs = append(result.Subs, new_sub)
+    }
+
+    return result
+}
+
 // TODO: convenience methods AddSubBefore() and AddSubAfter()
 
 func (o *oitem) AddSubAfterThis(item *oitem) {
@@ -208,6 +231,9 @@ type model struct {
 
     viewport viewport.Model
     winSizeReady bool
+
+    undoList []*oitem
+    redoList []*oitem
 }
 
 func (m *model) CommonPostInit() {
@@ -276,7 +302,23 @@ func ModelFromFile(filename string) (model, error) {
     return result, err
 }
 
-func (m model) SetTitle(title string) {
+func (m *model) PushUndo() {
+    undo_entry := m.Title.DeepCopyForUndo()
+    m.undoList = append(m.undoList, undo_entry)
+}
+
+func (m *model) PopUndo() {
+    if len(m.undoList) == 0 {
+        return
+    }
+
+    m.Title = m.undoList[len(m.undoList) - 1]
+    m.undoList = m.undoList[:len(m.undoList) - 1]
+
+    m.UpdateLinearizedMapping()
+}
+
+func (m *model) SetTitle(title string) {
     m.Title.Txt = title
     m.Title.SetTimestampChangedNow()
 }
@@ -385,9 +427,13 @@ func (m *model) Collapse(item *oitem) {
     m.UpdateLinearizedMapping()
 }
 
-func (m *model) DeleteItem(item *oitem) {
+func (m *model) DeleteItem(item *oitem) *oitem{
+    if nil == item {
+        return nil
+    }
+
     if nil == item.parent {
-        return
+        return nil
     }
 
     // save
@@ -409,6 +455,8 @@ func (m *model) DeleteItem(item *oitem) {
 
     p.SetTimestampChangedNow()
     m.UpdateLinearizedMapping()
+
+    return item
 }
 
 func (m *model) AddSubAfterThis(o *oitem, item *oitem) {
@@ -631,8 +679,9 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
             case "enter":
                 cur.edited = false
                 m.editingItem = false
-                cur.Txt = m.textinput.Value()
+                m.PushUndo()
 
+                cur.Txt = m.textinput.Value()
                 cur.SetTimestampChangedNow()
             }
         }
@@ -658,11 +707,23 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
             case "c":
                 m.copiedItem = cur.DeepCopy()
 
+            case "x":
+                // alternative operation would be:
+                // m.copiedItem =m.DeepCopy(cur)
+                // m.DeleteItem(cur)
+
+                m.copiedItem = m.DeleteItem(cur)
+                m.PushUndo()
+
             case "v":
                 if nil != m.copiedItem {
                     m.AddSubAfterThis(cur, m.copiedItem)
                     m.copiedItem = nil
+                    m.PushUndo()
                 }
+
+            case "u":
+                m.PopUndo()
 
             case "ctrl+c", "q":
                 return m, tea.Quit
@@ -674,6 +735,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             case "ctrl+k":
                 m.MoveUp(cur)
+                m.PushUndo()
 
             case "down", "j":
                 if m.Cursor < len(m.linearized) - 1 {
@@ -682,21 +744,27 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             case "ctrl+j":
                 m.MoveDown(cur)
+                m.PushUndo()
 
             case " ":
                 cur.Checked = !cur.Checked
+                m.PushUndo()
 
             case "tab":
                 m.Promote(cur)
+                m.PushUndo()
 
             case "shift+tab":
                 m.Demote(cur)
+                m.PushUndo()
 
             case "ctrl+p":
                 m.AddNewItemAndEdit(cur)
+                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
 
             case "enter", "o":
                 m.AddNewItemAfterCurrentAndEdit(cur)
+                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
 
             case "right", "l":
                 m.Expand(cur)
@@ -713,6 +781,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             case "delete", "d", "backspace":
                 m.DeleteItem(cur)
+                m.PushUndo()
 
             case "s":
                 m.SaveCurrentAs(m.filename)
@@ -849,7 +918,8 @@ func (m model) contentView() string {
     header_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
     footer_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
 
-    s := header_style.Render(m.Title.Txt) + "\n\n"
+    header_text := fmt.Sprintf("%s [%s]", m.Title.Txt, m.filename)
+    s := header_style.Render(header_text) + "\n\n"
 
     //s += level_headers
 

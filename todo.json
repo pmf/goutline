@@ -335,12 +335,57 @@
                             {
                                 "Id": "",
                                 "Created": 1651498710,
-                                "Changed": 1651498740,
-                                "Txt": "Need to disable j/k navigation that is being highjacked by viewport when in edit mode",
+                                "Changed": 1651520303,
+                                "Txt": "Need to disable j/k navigation that is being hijacked by viewport when in edit mode",
+                                "Numbered": false,
+                                "Checked": true,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 1651520303,
+                                "Changed": 1651520340,
+                                "Txt": "Promoting the first second level sub (?) fails (item disappears)",
                                 "Numbered": false,
                                 "Checked": false,
                                 "Expanded": false,
                                 "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 0,
+                                "Txt": "Undo/redo",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Easiest way: serialize to temp (in-memory?) state upon action and restore upon undo",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [],
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Automatically provided at the model leave by bubbletea, but our items are pointers ...",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
                                 "Meta": null
                             },
                             {
@@ -591,40 +636,6 @@
                                 "Checked": false,
                                 "Expanded": false,
                                 "Subs": null,
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Undo/redo",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Easiest way: serialize to temp (in-memory?) state upon action and restore upon undo",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": true,
-                                        "Subs": [],
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Automatically provided at the model leave by bubbletea, but our items are pointers ...",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
-                                        "Meta": null
-                                    }
-                                ],
                                 "Meta": null
                             },
                             {
@@ -1688,8 +1699,8 @@
                                     {
                                         "Id": "",
                                         "Created": 1651498541,
-                                        "Changed": 1651498557,
-                                        "Txt": "Except for the fact that my h/j navigation was highjacked",
+                                        "Changed": 1651507737,
+                                        "Txt": "Except for the fact that my h/j navigation was hijacked, but that was my own fault",
                                         "Numbered": false,
                                         "Checked": false,
                                         "Expanded": false,
@@ -1709,5 +1720,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 17
+    "Cursor": 18
 }

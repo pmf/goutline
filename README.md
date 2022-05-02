@@ -50,7 +50,10 @@ SUBJECT TO CHANGE!
 | down, j              | Next item |
 | up, k                | Previous item |
 | tab                  | Demote item (is that even a word?) |
-| shift-tab            | Promote item |}
-| q                    | Leave (*without* saving currently!) |
+| shift-tab            | Promote item |
+| c                    | Copy item |
+| x                    | Cut item |
+| v                    | Paste item |
+| u                    | Undo (*WARNING*: does not work currently) |
+| q                    | Leave (*WARNING*: *without* saving currently!) |
 | s                    | Save current file (out.json if nothing else has been specified) |
-
