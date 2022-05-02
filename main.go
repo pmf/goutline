@@ -655,6 +655,15 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 m.editingItem = true
                 m.textinput.SetValue(cur.Txt)
 
+            case "c":
+                m.copiedItem = cur.DeepCopy()
+
+            case "v":
+                if nil != m.copiedItem {
+                    m.AddSubAfterThis(cur, m.copiedItem)
+                    m.copiedItem = nil
+                }
+
             case "ctrl+c", "q":
                 return m, tea.Quit
 
