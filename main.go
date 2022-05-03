@@ -233,10 +233,15 @@ type model struct {
     winSizeReady bool
 
     undoList []*oitem
-    redoList []*oitem
+    undoIndex int
+    currentStateReachedViaUndoList bool
+
+    newestItem *oitem
 }
 
 func (m *model) CommonPostInit() {
+    m.undoIndex = -1
+
     for _, item := range m.Title.Subs {
         item.parent = m.Title
         item.Init()
@@ -304,7 +309,21 @@ func ModelFromFile(filename string) (model, error) {
 
 func (m *model) PushUndo() {
     undo_entry := m.Title.DeepCopyForUndo()
-    m.undoList = append(m.undoList, undo_entry)
+
+    if m.undoIndex == len(m.undoList) - 1 {
+        m.undoList = append(m.undoList, undo_entry)
+        m.undoIndex++
+    } else {
+        // clear redo entries
+        if m.undoIndex >= 0 {
+            m.undoList = m.undoList[:m.undoIndex]
+        } else {
+            m.undoList = nil
+        }
+
+        m.undoList = append(m.undoList, undo_entry)
+        m.undoIndex++
+    }
 }
 
 func (m *model) PopUndo() {
@@ -312,9 +331,36 @@ func (m *model) PopUndo() {
         return
     }
 
-    m.Title = m.undoList[len(m.undoList) - 1]
-    m.undoList = m.undoList[:len(m.undoList) - 1]
+    if m.undoIndex == -1 {
+        return
+    }
 
+    // If we're not at the head of the list, we need to push
+    // the current state so that redo will work
+    if m.undoIndex == len(m.undoList) - 1 && !m.currentStateReachedViaUndoList{
+        undo_entry := m.Title.DeepCopyForUndo()
+        m.undoList = append(m.undoList, undo_entry)
+    }
+
+    m.Title = m.undoList[m.undoIndex]
+    m.undoIndex--
+
+    m.currentStateReachedViaUndoList = true
+    m.UpdateLinearizedMapping()
+}
+
+func (m *model) Redo() {
+    redo_index := m.undoIndex + 1
+
+    if redo_index > len(m.undoList) - 1 {
+        return
+    }
+
+    m.Title = m.undoList[redo_index]
+
+    m.undoIndex = redo_index
+
+    m.currentStateReachedViaUndoList = true
     m.UpdateLinearizedMapping()
 }
 
@@ -676,13 +722,25 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 cur.edited = false
                 m.editingItem = false
 
+                if nil != m.newestItem {
+                    m.DeleteItem(m.newestItem)
+                    m.newestItem = nil
+                }
+
             case "enter":
                 cur.edited = false
                 m.editingItem = false
-                m.PushUndo()
 
-                cur.Txt = m.textinput.Value()
-                cur.SetTimestampChangedNow()
+                new_text := m.textinput.Value()
+
+                if "" == new_text && cur == m.newestItem {
+                    m.DeleteItem(m.newestItem)
+                    m.newestItem = nil
+                } else if cur.Txt != new_text {
+                    m.PushUndo()
+                    cur.Txt = new_text
+                    cur.SetTimestampChangedNow()
+                }
             }
         }
 
@@ -712,18 +770,41 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 // m.copiedItem =m.DeepCopy(cur)
                 // m.DeleteItem(cur)
 
-                m.copiedItem = m.DeleteItem(cur)
                 m.PushUndo()
+                m.copiedItem = m.DeleteItem(cur)
 
             case "v":
                 if nil != m.copiedItem {
+                    m.PushUndo()
                     m.AddSubAfterThis(cur, m.copiedItem)
                     m.copiedItem = nil
-                    m.PushUndo()
                 }
+
+            case "delete", "d", "backspace":
+                m.PushUndo()
+                m.DeleteItem(cur)
+
+            case "tab":
+                m.PushUndo()
+                m.Promote(cur)
+
+            case "shift+tab":
+                m.PushUndo()
+                m.Demote(cur)
+
+            case "ctrl+p":
+                m.newestItem = m.AddNewItemAndEdit(cur)
+                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
+
+            case "enter", "o":
+                m.newestItem = m.AddNewItemAfterCurrentAndEdit(cur)
+                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
 
             case "u":
                 m.PopUndo()
+
+            case "ctrl+r":
+                m.Redo()
 
             case "ctrl+c", "q":
                 return m, tea.Quit
@@ -734,8 +815,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 }
 
             case "ctrl+k":
-                m.MoveUp(cur)
                 m.PushUndo()
+                m.MoveUp(cur)
 
             case "down", "j":
                 if m.Cursor < len(m.linearized) - 1 {
@@ -743,28 +824,12 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 }
 
             case "ctrl+j":
-                m.MoveDown(cur)
                 m.PushUndo()
+                m.MoveDown(cur)
 
             case " ":
+                m.PushUndo()
                 cur.Checked = !cur.Checked
-                m.PushUndo()
-
-            case "tab":
-                m.Promote(cur)
-                m.PushUndo()
-
-            case "shift+tab":
-                m.Demote(cur)
-                m.PushUndo()
-
-            case "ctrl+p":
-                m.AddNewItemAndEdit(cur)
-                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
-
-            case "enter", "o":
-                m.AddNewItemAfterCurrentAndEdit(cur)
-                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
 
             case "right", "l":
                 m.Expand(cur)
@@ -778,10 +843,6 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                         m.Collapse(cur.parent)
                     }
                 }
-
-            case "delete", "d", "backspace":
-                m.DeleteItem(cur)
-                m.PushUndo()
 
             case "s":
                 m.SaveCurrentAs(m.filename)
@@ -805,7 +866,9 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
     switch msg.(type) {
 
         case tea.KeyMsg:
-            // only dispatch messages when
+            // dispatching key messages while the prompt is open scrolls
+            // the viewport on j/k in addition to j/k being added in
+            // the input field ...
             if m.editingItem {
                 canUpdateViewport = false
             }
@@ -937,10 +1000,24 @@ func (m model) contentView() string {
 
     if m.Cursor < len(m.linearized) {
         s += fmt.Sprintf(
-            "\n" + footer_style.Render("Press q to quit.      cursor: %d  IsLastSibling: %t IsFirstSibling: %t ") + "\n",
+            "\n" + footer_style.Render("Press q to quit.      cursor: %d  undoIndex: %d len(undoList): %d reachedViaUndo: %t") + "\n",
             m.Cursor,
-            m.linearized[m.Cursor].IsLastSibling(),
-            m.linearized[m.Cursor].IsFirstSibling())
+            m.undoIndex,
+            len(m.undoList),
+            m.currentStateReachedViaUndoList)
+    }
+
+    visualizeUndoList := true
+
+    if visualizeUndoList {
+        for idx, item := range m.undoList {
+            prefix := "  "
+            if idx == m.undoIndex {
+                prefix = "->"
+            }
+
+            s += fmt.Sprintf("%s %s\n", prefix, item.Subs[0].Txt)
+        }
     }
 
     return s
