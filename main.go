@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "os"
+    //"strings"
     "time"
     "io/ioutil"
     "encoding/json"
@@ -11,6 +12,7 @@ import (
     "github.com/charmbracelet/bubbles/textinput"
     "github.com/charmbracelet/bubbles/viewport"
 
+    //org "github.com/niklasfasching/go-org/org"
     //"golang.org/x/sys/windows"
 )
 
@@ -109,8 +111,6 @@ func (o *oitem) DeepCopyForUndo() *oitem {
     return result
 }
 
-// TODO: convenience methods AddSubBefore() and AddSubAfter()
-
 func (o *oitem) AddSubAfterThis(item *oitem) {
     if nil == o.parent {
         return
@@ -126,17 +126,25 @@ func (o *oitem) AddSubAfterThis(item *oitem) {
         return
     }
 
-    o.parent.AddSubAt(item, pos)
+    o.parent.AddSubAt(item, pos + 1)
 }
 
 func (o *oitem) AddSubAt(item *oitem, pos int) {
-    if (pos >= 0) && (pos < len(o.Subs)) {
+    if pos < 0 {
+        return
+    }
+
+    if pos < len(o.Subs) {
         o.Subs = append(o.Subs, &oitem{})
         copy(o.Subs[pos + 1:], o.Subs[pos:])
         o.Subs[pos] = item
         item.parent = o
         o.SetTimestampChangedNow()
-    }
+    } else if pos == len(o.Subs) {
+        // special case: insert position is one after the existing items
+        o.Subs = append(o.Subs, item)
+        item.parent = o
+    } 
 }
 
 func (o *oitem) Delete(item *oitem) {
@@ -233,10 +241,24 @@ type model struct {
     winSizeReady bool
 
     undoList []*oitem
-    redoList []*oitem
+    undoIndex int
+    currentStateReachedViaUndoList bool
+
+    newestItem *oitem
+}
+
+type Visitor interface {
+    VisitTitle(m *model, item *oitem) error
+    VisitConfig(m *model, item *oitem) error
+    VisitItem(m *model, item *oitem, level int) error
 }
 
 func (m *model) CommonPostInit() {
+    m.undoIndex = -1
+    
+    m.Title.Expanded = true
+
+
     for _, item := range m.Title.Subs {
         item.parent = m.Title
         item.Init()
@@ -304,7 +326,21 @@ func ModelFromFile(filename string) (model, error) {
 
 func (m *model) PushUndo() {
     undo_entry := m.Title.DeepCopyForUndo()
-    m.undoList = append(m.undoList, undo_entry)
+
+    if m.undoIndex == len(m.undoList) - 1 {
+        m.undoList = append(m.undoList, undo_entry)
+        m.undoIndex++
+    } else {
+        // clear redo entries
+        if m.undoIndex >= 0 {
+            m.undoList = m.undoList[:m.undoIndex]
+        } else {
+            m.undoList = nil
+        }
+
+        m.undoList = append(m.undoList, undo_entry)
+        m.undoIndex++
+    }
 }
 
 func (m *model) PopUndo() {
@@ -312,9 +348,36 @@ func (m *model) PopUndo() {
         return
     }
 
-    m.Title = m.undoList[len(m.undoList) - 1]
-    m.undoList = m.undoList[:len(m.undoList) - 1]
+    if m.undoIndex == -1 {
+        return
+    }
 
+    // If we're not at the head of the list, we need to push
+    // the current state so that redo will work
+    if m.undoIndex == len(m.undoList) - 1 && !m.currentStateReachedViaUndoList{
+        undo_entry := m.Title.DeepCopyForUndo()
+        m.undoList = append(m.undoList, undo_entry)
+    }
+
+    m.Title = m.undoList[m.undoIndex]
+    m.undoIndex--
+
+    m.currentStateReachedViaUndoList = true
+    m.UpdateLinearizedMapping()
+}
+
+func (m *model) Redo() {
+    redo_index := m.undoIndex + 1
+
+    if redo_index > len(m.undoList) - 1 {
+        return
+    }
+
+    m.Title = m.undoList[redo_index]
+
+    m.undoIndex = redo_index
+
+    m.currentStateReachedViaUndoList = true
     m.UpdateLinearizedMapping()
 }
 
@@ -324,6 +387,91 @@ func (m *model) SetTitle(title string) {
 }
 
 func (m model) Init() tea.Cmd {
+    return nil
+}
+
+// TODO: corresponding func m.VisitLinearized()? this could also be done with
+//       a filter for visit that checks for item.Expanded
+
+func (m *model) VisitAll(visitor Visitor) error {
+    err := visitor.VisitTitle(m, m.Title)
+
+    if nil != err {
+        return err
+    }
+
+    err = visitor.VisitConfig(m, m.Config)
+
+    if nil != err {
+        return err
+    }
+
+    err = m.visitItemInternal(visitor, m.Title)
+
+    if nil != err {
+        return err
+    }
+
+    return nil
+}
+
+func (m *model) VisitLinearized(visitor Visitor) error {
+    err := visitor.VisitTitle(m, m.Title)
+
+    if nil != err {
+        return err
+    }
+
+    err = visitor.VisitConfig(m, m.Config)
+
+    if nil != err {
+        return err
+    }
+
+    err = m.visitItemInternalOnlyExpanded(visitor, m.Title)
+
+    if nil != err {
+        return err
+    }
+
+    return nil
+}
+
+func (m *model) visitItemInternal(visitor Visitor, item *oitem) error {
+    err := visitor.VisitItem(m, item, item.Level(nil))
+
+    if nil != err {
+        return err
+    }
+
+    for _, sub := range item.Subs {
+        err = m.visitItemInternal(visitor, sub)
+
+        if nil != err {
+            return err
+        }
+    }
+
+    return nil
+}
+
+func (m *model) visitItemInternalOnlyExpanded(visitor Visitor, item *oitem) error {
+    err := visitor.VisitItem(m, item, item.Level(nil))
+
+    if nil != err {
+        return err
+    }
+
+    if item.Expanded {
+        for _, sub := range item.Subs {
+            err = m.visitItemInternalOnlyExpanded(visitor, sub)
+
+            if nil != err {
+                return err
+            }
+        }
+    }
+
     return nil
 }
 
@@ -662,6 +810,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
     cur := m.linearized[m.Cursor]
 
+    canUpdateViewport := true
+
     if m.editingItem {
         switch msg := msg.(type) {
 
@@ -676,13 +826,25 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 cur.edited = false
                 m.editingItem = false
 
+                if nil != m.newestItem {
+                    m.DeleteItem(m.newestItem)
+                    m.newestItem = nil
+                }
+
             case "enter":
                 cur.edited = false
                 m.editingItem = false
-                m.PushUndo()
 
-                cur.Txt = m.textinput.Value()
-                cur.SetTimestampChangedNow()
+                new_text := m.textinput.Value()
+
+                if "" == new_text && cur == m.newestItem {
+                    m.DeleteItem(m.newestItem)
+                    m.newestItem = nil
+                } else if cur.Txt != new_text {
+                    m.PushUndo()
+                    cur.Txt = new_text
+                    cur.SetTimestampChangedNow()
+                }
             }
         }
 
@@ -712,18 +874,41 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 // m.copiedItem =m.DeepCopy(cur)
                 // m.DeleteItem(cur)
 
-                m.copiedItem = m.DeleteItem(cur)
                 m.PushUndo()
+                m.copiedItem = m.DeleteItem(cur)
 
             case "v":
                 if nil != m.copiedItem {
+                    m.PushUndo()
                     m.AddSubAfterThis(cur, m.copiedItem)
                     m.copiedItem = nil
-                    m.PushUndo()
                 }
+
+            case "delete", "d", "backspace":
+                m.PushUndo()
+                m.DeleteItem(cur)
+
+            case "tab":
+                m.PushUndo()
+                m.Promote(cur)
+
+            case "shift+tab":
+                m.PushUndo()
+                m.Demote(cur)
+
+            case "ctrl+p":
+                m.newestItem = m.AddNewItemAndEdit(cur)
+                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
+
+            case "enter", "o":
+                m.newestItem = m.AddNewItemAfterCurrentAndEdit(cur)
+                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
 
             case "u":
                 m.PopUndo()
+
+            case "ctrl+r":
+                m.Redo()
 
             case "ctrl+c", "q":
                 return m, tea.Quit
@@ -734,8 +919,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 }
 
             case "ctrl+k":
-                m.MoveUp(cur)
                 m.PushUndo()
+                m.MoveUp(cur)
 
             case "down", "j":
                 if m.Cursor < len(m.linearized) - 1 {
@@ -743,28 +928,13 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 }
 
             case "ctrl+j":
-                m.MoveDown(cur)
                 m.PushUndo()
+                m.MoveDown(cur)
 
             case " ":
+                m.PushUndo()
                 cur.Checked = !cur.Checked
-                m.PushUndo()
-
-            case "tab":
-                m.Promote(cur)
-                m.PushUndo()
-
-            case "shift+tab":
-                m.Demote(cur)
-                m.PushUndo()
-
-            case "ctrl+p":
-                m.AddNewItemAndEdit(cur)
-                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
-
-            case "enter", "o":
-                m.AddNewItemAfterCurrentAndEdit(cur)
-                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
+                canUpdateViewport = false
 
             case "right", "l":
                 m.Expand(cur)
@@ -779,12 +949,15 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                     }
                 }
 
-            case "delete", "d", "backspace":
-                m.DeleteItem(cur)
-                m.PushUndo()
-
             case "s":
                 m.SaveCurrentAs(m.filename)
+
+            /*
+            case "O":
+                orgConfig := org.New()
+                orgDoc := orgConfig.Parse(strings.NewReader(""), "out.org")
+                fmt.Printf("O %s\n", orgDoc)
+            */
            }
         }
     }
@@ -800,12 +973,12 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
     m.viewport.SetContent(m.contentView())
 
-    canUpdateViewport := true
-
     switch msg.(type) {
 
         case tea.KeyMsg:
-            // only dispatch messages when
+            // dispatching key messages while the prompt is open scrolls
+            // the viewport on j/k in addition to j/k being added in
+            // the input field ...
             if m.editingItem {
                 canUpdateViewport = false
             }
@@ -935,12 +1108,33 @@ func (m model) contentView() string {
 
     //s += level_headers
 
+    copiedItemTxt := "-"
+
+    if nil != m.copiedItem {
+        copiedItemTxt = m.copiedItem.Txt
+    }
+
     if m.Cursor < len(m.linearized) {
         s += fmt.Sprintf(
-            "\n" + footer_style.Render("Press q to quit.      cursor: %d  IsLastSibling: %t IsFirstSibling: %t ") + "\n",
+            "\n" + footer_style.Render("Press q to quit.      cursor: %d  undoIndex: %d len(undoList): %d reachedViaUndo: %t copied: %s") + "\n",
             m.Cursor,
-            m.linearized[m.Cursor].IsLastSibling(),
-            m.linearized[m.Cursor].IsFirstSibling())
+            m.undoIndex,
+            len(m.undoList),
+            m.currentStateReachedViaUndoList,
+            copiedItemTxt)
+    }
+
+    visualizeUndoList := true
+
+    if visualizeUndoList {
+        for idx, item := range m.undoList {
+            prefix := "  "
+            if idx == m.undoIndex {
+                prefix = "->"
+            }
+
+            s += fmt.Sprintf("%s %s\n", prefix, item.Subs[0].Txt)
+        }
     }
 
     return s

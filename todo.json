@@ -11,43 +11,79 @@
             {
                 "Id": "",
                 "Created": 0,
-                "Changed": 0,
+                "Changed": 1651556033,
                 "Txt": "Inspirations",
                 "Numbered": false,
                 "Checked": false,
-                "Expanded": true,
+                "Expanded": false,
                 "Subs": [
                     {
                         "Id": "",
                         "Created": 0,
-                        "Changed": 0,
+                        "Changed": 1651556017,
                         "Txt": "void",
                         "Numbered": false,
                         "Checked": false,
                         "Expanded": false,
-                        "Subs": null,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 1651556014,
+                                "Changed": 1651556026,
+                                "Txt": "Innovative and free-form",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            }
+                        ],
                         "Meta": null
                     },
                     {
                         "Id": "",
                         "Created": 0,
-                        "Changed": 0,
+                        "Changed": 1651556007,
                         "Txt": "hnb",
                         "Numbered": false,
                         "Checked": false,
                         "Expanded": false,
-                        "Subs": null,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 1651556005,
+                                "Changed": 1651556012,
+                                "Txt": "Simple and clean",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            }
+                        ],
                         "Meta": null
                     },
                     {
                         "Id": "",
                         "Created": 0,
-                        "Changed": 0,
+                        "Changed": 1651556033,
                         "Txt": "org-mode",
                         "Numbered": false,
                         "Checked": false,
                         "Expanded": false,
-                        "Subs": null,
+                        "Subs": [
+                            {
+                                "Id": "",
+                                "Created": 1651556029,
+                                "Changed": 1651556051,
+                                "Txt": "Interaction with Android via Orgzly",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            }
+                        ],
                         "Meta": null
                     }
                 ],
@@ -122,7 +158,7 @@
                     {
                         "Id": "",
                         "Created": 0,
-                        "Changed": 1651496772,
+                        "Changed": 1651668707,
                         "Txt": "Next issues",
                         "Numbered": false,
                         "Checked": false,
@@ -136,7 +172,7 @@
                                 "Numbered": false,
                                 "Checked": true,
                                 "Expanded": true,
-                                "Subs": [],
+                                "Subs": null,
                                 "Meta": null
                             },
                             {
@@ -178,7 +214,7 @@
                                         "Numbered": false,
                                         "Checked": true,
                                         "Expanded": true,
-                                        "Subs": [],
+                                        "Subs": null,
                                         "Meta": null
                                     },
                                     {
@@ -345,23 +381,12 @@
                             },
                             {
                                 "Id": "",
-                                "Created": 1651520303,
-                                "Changed": 1651520340,
-                                "Txt": "Promoting the first second level sub (?) fails (item disappears)",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
                                 "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Undo/redo",
+                                "Changed": 1651555916,
+                                "Txt": "Undo",
                                 "Numbered": false,
-                                "Checked": false,
-                                "Expanded": true,
+                                "Checked": true,
+                                "Expanded": false,
                                 "Subs": [
                                     {
                                         "Id": "",
@@ -369,9 +394,9 @@
                                         "Changed": 0,
                                         "Txt": "Easiest way: serialize to temp (in-memory?) state upon action and restore upon undo",
                                         "Numbered": false,
-                                        "Checked": false,
+                                        "Checked": true,
                                         "Expanded": true,
-                                        "Subs": [],
+                                        "Subs": null,
                                         "Meta": null
                                     },
                                     {
@@ -390,8 +415,191 @@
                             },
                             {
                                 "Id": "",
+                                "Created": 1651520303,
+                                "Changed": 1651561008,
+                                "Txt": "Promoting the first second level sub (?) fails (item disappears)",
+                                "Numbered": false,
+                                "Checked": true,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 1651561008,
+                                        "Changed": 1651561014,
+                                        "Txt": "Could not reproduce this",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 1651668686,
+                                "Changed": 1651668707,
+                                "Txt": "Space key both checks item and scrolls viewport",
+                                "Numbered": false,
+                                "Checked": true,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 1651555916,
+                                "Changed": 1651668707,
+                                "Txt": "Redo",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 1651555921,
+                                        "Changed": 1651573074,
+                                        "Txt": "Use two lists or just undoList and a pointer?",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Id": "",
+                                                "Created": 1651555964,
+                                                "Changed": 1651573072,
+                                                "Txt": "Behavior:",
+                                                "Numbered": false,
+                                                "Checked": true,
+                                                "Expanded": true,
+                                                "Subs": [
+                                                    {
+                                                        "Id": "",
+                                                        "Created": 1651555969,
+                                                        "Changed": 1651556202,
+                                                        "Txt": "Add undo entries as usual",
+                                                        "Numbered": false,
+                                                        "Checked": true,
+                                                        "Expanded": true,
+                                                        "Subs": [
+                                                            {
+                                                                "Id": "",
+                                                                "Created": 1651555984,
+                                                                "Changed": 1651556199,
+                                                                "Txt": "But additionally move pointer",
+                                                                "Numbered": false,
+                                                                "Checked": true,
+                                                                "Expanded": false,
+                                                                "Subs": null,
+                                                                "Meta": null
+                                                            }
+                                                        ],
+                                                        "Meta": null
+                                                    },
+                                                    {
+                                                        "Id": "",
+                                                        "Created": 1651556199,
+                                                        "Changed": 1651556225,
+                                                        "Txt": "When popping entry, decrease pointer and restore item at index",
+                                                        "Numbered": false,
+                                                        "Checked": true,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    },
+                                                    {
+                                                        "Id": "",
+                                                        "Created": 1651556225,
+                                                        "Changed": 1651556254,
+                                                        "Txt": "When now pushing an entry, clear entries after the current item before pushing current state",
+                                                        "Numbered": false,
+                                                        "Checked": true,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    },
+                                                    {
+                                                        "Id": "",
+                                                        "Created": 1651556254,
+                                                        "Changed": 1651573065,
+                                                        "Txt": "When doing redo, increase pointer and restore item at index",
+                                                        "Numbered": false,
+                                                        "Checked": true,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    }
+                                                ],
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 1651573065,
+                                        "Changed": 1651573110,
+                                        "Txt": "When at the end of the list (after going down and up again), an undo adds a useless entry",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 1651573110,
+                                        "Changed": 1651668686,
+                                        "Txt": "When at index -1 with non-empty list, restore lags by one",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 1651667815,
+                                "Changed": 1651667877,
+                                "Txt": "Proper undo entries",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 1651667838,
+                                        "Changed": 1651667874,
+                                        "Txt": "So we can label them with action names",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Id": "",
+                                                "Created": 1651667852,
+                                                "Changed": 1651667873,
+                                                "Txt": "For example \"Added \u003ctext\u003e to \u003ctext\u003e\"",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
                                 "Created": 0,
-                                "Changed": 0,
+                                "Changed": 1651661706,
                                 "Txt": "Search/filter",
                                 "Numbered": false,
                                 "Checked": false,
@@ -425,7 +633,7 @@
                                                 "Numbered": false,
                                                 "Checked": false,
                                                 "Expanded": true,
-                                                "Subs": [],
+                                                "Subs": null,
                                                 "Meta": null
                                             },
                                             {
@@ -554,6 +762,40 @@
                                                 "Meta": null
                                             }
                                         ],
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 1651661706,
+                                "Changed": 1651661753,
+                                "Txt": "Strikethrough support",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 1651661742,
+                                        "Changed": 1651661757,
+                                        "Txt": "Check how this is handled by lipgloss",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 1651661757,
+                                        "Changed": 1651661774,
+                                        "Txt": "Should we wait for generic label support?",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
                                         "Meta": null
                                     }
                                 ],
@@ -993,7 +1235,7 @@
                 "Txt": "Features (longer term)",
                 "Numbered": false,
                 "Checked": false,
-                "Expanded": false,
+                "Expanded": true,
                 "Subs": [
                     {
                         "Id": "",
@@ -1451,21 +1693,55 @@
                     {
                         "Id": "",
                         "Created": 0,
-                        "Changed": 0,
+                        "Changed": 1651667925,
                         "Txt": "Draw path to current item in bold",
                         "Numbered": false,
                         "Checked": false,
-                        "Expanded": false,
+                        "Expanded": true,
                         "Subs": [
                             {
                                 "Id": "",
                                 "Created": 0,
-                                "Changed": 0,
+                                "Changed": 1651555864,
                                 "Txt": "Naive implementation causes alignment issues due to control characters messing up character counts",
                                 "Numbered": false,
                                 "Checked": false,
                                 "Expanded": false,
                                 "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 1651555864,
+                                "Changed": 1651667925,
+                                "Txt": "Could actually turn out to be a quite tricky problem ...",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 1651667914,
+                                "Changed": 1651667927,
+                                "Txt": "Alternative (maybe simpler?):",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 1651667927,
+                                        "Changed": 1651667949,
+                                        "Txt": "Draw parents of current entry in bold",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
                                 "Meta": null
                             }
                         ],
@@ -1653,7 +1929,7 @@
                 "Txt": "Devlog",
                 "Numbered": false,
                 "Checked": false,
-                "Expanded": true,
+                "Expanded": false,
                 "Subs": [
                     {
                         "Id": "",
@@ -1662,7 +1938,7 @@
                         "Txt": "I like the way Go allows overwriting dependencies (even deeply transitive ones) with local versions a lot",
                         "Numbered": false,
                         "Checked": false,
-                        "Expanded": true,
+                        "Expanded": false,
                         "Subs": [
                             {
                                 "Id": "",
@@ -1685,7 +1961,7 @@
                         "Txt": "bubbletea is really nice to use",
                         "Numbered": false,
                         "Checked": false,
-                        "Expanded": true,
+                        "Expanded": false,
                         "Subs": [
                             {
                                 "Id": "",
@@ -1694,7 +1970,7 @@
                                 "Txt": "For example, viewport integration for scrolling has been extremely straight forward",
                                 "Numbered": false,
                                 "Checked": false,
-                                "Expanded": true,
+                                "Expanded": false,
                                 "Subs": [
                                     {
                                         "Id": "",
