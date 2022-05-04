@@ -109,8 +109,6 @@ func (o *oitem) DeepCopyForUndo() *oitem {
     return result
 }
 
-// TODO: convenience methods AddSubBefore() and AddSubAfter()
-
 func (o *oitem) AddSubAfterThis(item *oitem) {
     if nil == o.parent {
         return
@@ -126,17 +124,25 @@ func (o *oitem) AddSubAfterThis(item *oitem) {
         return
     }
 
-    o.parent.AddSubAt(item, pos)
+    o.parent.AddSubAt(item, pos + 1)
 }
 
 func (o *oitem) AddSubAt(item *oitem, pos int) {
-    if (pos >= 0) && (pos < len(o.Subs)) {
+    if pos < 0 {
+        return
+    }
+
+    if pos < len(o.Subs) {
         o.Subs = append(o.Subs, &oitem{})
         copy(o.Subs[pos + 1:], o.Subs[pos:])
         o.Subs[pos] = item
         item.parent = o
         o.SetTimestampChangedNow()
-    }
+    } else if pos == len(o.Subs) {
+        // special case: insert position is one after the existing items
+        o.Subs = append(o.Subs, item)
+        item.parent = o
+    } 
 }
 
 func (o *oitem) Delete(item *oitem) {
@@ -239,8 +245,17 @@ type model struct {
     newestItem *oitem
 }
 
+type Visitor interface {
+    VisitTitle(m *model, item *oitem) error
+    VisitConfig(m *model, item *oitem) error
+    VisitItem(m *model, item *oitem, level int) error
+}
+
 func (m *model) CommonPostInit() {
     m.undoIndex = -1
+    
+    m.Title.Expanded = true
+
 
     for _, item := range m.Title.Subs {
         item.parent = m.Title
@@ -370,6 +385,91 @@ func (m *model) SetTitle(title string) {
 }
 
 func (m model) Init() tea.Cmd {
+    return nil
+}
+
+// TODO: corresponding func m.VisitLinearized()? this could also be done with
+//       a filter for visit that checks for item.Expanded
+
+func (m *model) VisitAll(visitor Visitor) error {
+    err := visitor.VisitTitle(m, m.Title)
+
+    if nil != err {
+        return err
+    }
+
+    err = visitor.VisitConfig(m, m.Config)
+
+    if nil != err {
+        return err
+    }
+
+    err = m.visitItemInternal(visitor, m.Title)
+
+    if nil != err {
+        return err
+    }
+
+    return nil
+}
+
+func (m *model) VisitLinearized(visitor Visitor) error {
+    err := visitor.VisitTitle(m, m.Title)
+
+    if nil != err {
+        return err
+    }
+
+    err = visitor.VisitConfig(m, m.Config)
+
+    if nil != err {
+        return err
+    }
+
+    err = m.visitItemInternalOnlyExpanded(visitor, m.Title)
+
+    if nil != err {
+        return err
+    }
+
+    return nil
+}
+
+func (m *model) visitItemInternal(visitor Visitor, item *oitem) error {
+    err := visitor.VisitItem(m, item, item.Level(nil))
+
+    if nil != err {
+        return err
+    }
+
+    for _, sub := range item.Subs {
+        err = m.visitItemInternal(visitor, sub)
+
+        if nil != err {
+            return err
+        }
+    }
+
+    return nil
+}
+
+func (m *model) visitItemInternalOnlyExpanded(visitor Visitor, item *oitem) error {
+    err := visitor.VisitItem(m, item, item.Level(nil))
+
+    if nil != err {
+        return err
+    }
+
+    if item.Expanded {
+        for _, sub := range item.Subs {
+            err = m.visitItemInternalOnlyExpanded(visitor, sub)
+
+            if nil != err {
+                return err
+            }
+        }
+    }
+
     return nil
 }
 
@@ -708,6 +808,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
     cur := m.linearized[m.Cursor]
 
+    canUpdateViewport := true
+
     if m.editingItem {
         switch msg := msg.(type) {
 
@@ -830,6 +932,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
             case " ":
                 m.PushUndo()
                 cur.Checked = !cur.Checked
+                canUpdateViewport = false
 
             case "right", "l":
                 m.Expand(cur)
@@ -860,8 +963,6 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
     }
 
     m.viewport.SetContent(m.contentView())
-
-    canUpdateViewport := true
 
     switch msg.(type) {
 
@@ -998,13 +1099,20 @@ func (m model) contentView() string {
 
     //s += level_headers
 
+    copiedItemTxt := "-"
+
+    if nil != m.copiedItem {
+        copiedItemTxt = m.copiedItem.Txt
+    }
+
     if m.Cursor < len(m.linearized) {
         s += fmt.Sprintf(
-            "\n" + footer_style.Render("Press q to quit.      cursor: %d  undoIndex: %d len(undoList): %d reachedViaUndo: %t") + "\n",
+            "\n" + footer_style.Render("Press q to quit.      cursor: %d  undoIndex: %d len(undoList): %d reachedViaUndo: %t copied: %s") + "\n",
             m.Cursor,
             m.undoIndex,
             len(m.undoList),
-            m.currentStateReachedViaUndoList)
+            m.currentStateReachedViaUndoList,
+            copiedItemTxt)
     }
 
     visualizeUndoList := true
