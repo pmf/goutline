@@ -3,6 +3,7 @@ package main
 import (
     "fmt"
     "os"
+    //"strings"
     "time"
     "io/ioutil"
     "encoding/json"
@@ -11,6 +12,7 @@ import (
     "github.com/charmbracelet/bubbles/textinput"
     "github.com/charmbracelet/bubbles/viewport"
 
+    //org "github.com/niklasfasching/go-org/org"
     //"golang.org/x/sys/windows"
 )
 
@@ -949,6 +951,13 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             case "s":
                 m.SaveCurrentAs(m.filename)
+
+            /*
+            case "O":
+                orgConfig := org.New()
+                orgDoc := orgConfig.Parse(strings.NewReader(""), "out.org")
+                fmt.Printf("O %s\n", orgDoc)
+            */
            }
         }
     }
