@@ -589,8 +589,17 @@ func (m *model) Expand(item *oitem) {
 }
 
 func (m *model) Collapse(item *oitem) {
+    was_expanded := item.Expanded
     item.Expanded = false
     m.UpdateLinearizedMapping()
+
+    if was_expanded {
+        m.Cursor = m.PosInLinearized(item)
+    } else {
+        if nil != item.parent {
+            m.Cursor = m.PosInLinearized(item.parent)
+        }
+    }
 }
 
 func (m *model) DeleteItem(item *oitem) *oitem{
