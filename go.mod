@@ -18,5 +18,8 @@ require (
 	github.com/mattn/go-isatty v0.0.14
 	github.com/muesli/reflow v0.3.0
 	github.com/muesli/termenv v0.11.1-0.20220212125758-44cd13922739
+
+	github.com/niklasfasching/go-org v1.6.2
+
 	golang.org/x/sys v0.0.0-20220209214540-3681064d5158 // indirect
 )

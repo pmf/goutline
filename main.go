@@ -200,6 +200,24 @@ func (o *oitem) Level(upTo *oitem) int {
     return level
 }
 
+func (o *oitem) HasSub(sub *oitem) bool {
+    result := false
+
+    for _, item := range o.Subs {
+        if item == sub {
+            return true
+        }
+
+        result = item.HasSub(sub)
+
+        if result {
+            return result
+        }
+    }
+
+    return false
+}
+
 func (o *oitem) IndexOfItem() int {
     result := -1
 
@@ -865,6 +883,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 cur.edited = true
                 m.editingItem = true
                 m.textinput.SetValue(cur.Txt)
+                m.textinput.CursorEnd()
 
             case "c":
                 m.copiedItem = cur.DeepCopy()
@@ -992,7 +1011,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
     return m, tea.Batch(cmds...)
 }
 
-func drawItem(m model, i int, item *oitem, open_elements map[int]bool) string {
+func drawItem(m *model, i int, item *oitem, open_elements map[int]bool) string {
     cursor_left := " "
     cursor_right := ""
 
@@ -1067,11 +1086,21 @@ func drawItem(m model, i int, item *oitem, open_elements map[int]bool) string {
 
     var selected_style lipgloss.Style
 
+    selected_style = lipgloss.NewStyle()
+    
     if m.Cursor == i {
-        //selected_style = lipgloss.NewStyle().Bold(true).Background(lipgloss.Color("227"));
-        selected_style = lipgloss.NewStyle().Background(color_purple).Foreground(lipgloss.Color("255"));
-    } else {
-        selected_style = lipgloss.NewStyle()
+        selected_style = selected_style.Background(color_purple).Foreground(lipgloss.Color("255"))
+    }
+
+    if item.Checked {
+        selected_style = selected_style.Strikethrough(true)
+    }
+
+    cur := m.linearized[m.Cursor]
+    parent_of_cur := item.HasSub(cur)
+    
+    if parent_of_cur {
+        selected_style = selected_style.Bold(true)
     }
 
     if item.edited {
@@ -1097,7 +1126,7 @@ func (m model) contentView() string {
     //s += level_headers
 
     for i, item := range m.linearized {
-        s += drawItem(m, i, item, open_elements)
+        s += drawItem(&m, i, item, open_elements)
 
         if !item.IsLastSibling() {
             open_elements[item.Level(nil)] = true
