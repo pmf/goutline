@@ -34,8 +34,8 @@ type oitem struct {
     Meta *oitem
 
     // TODO: maybe use id instead?
-    parent *oitem `json:"-"`
-
+    parent *oitem
+    
     edited bool
 }
 

@@ -6,7 +6,7 @@
         "Txt": "goutline - issues",
         "Numbered": false,
         "Checked": false,
-        "Expanded": false,
+        "Expanded": true,
         "Subs": [
             {
                 "Id": "",
@@ -506,92 +506,12 @@
                             },
                             {
                                 "Id": "",
-                                "Created": 1651742720,
-                                "Changed": 1651742734,
-                                "Txt": "Refactor to standard package structure",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 1651732624,
-                                "Txt": "Bite the bullet and make org-mod the native save format",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "new Bite the bullet and make org-mod the native save format",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 1651732624,
-                                        "Txt": "Mainly because I need Orgzly support ...",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": true,
-                                        "Subs": [
-                                            {
-                                                "Id": "",
-                                                "Created": 0,
-                                                "Changed": 1651732614,
-                                                "Txt": ".. but maybe I can extend Orgzly instead ...",
-                                                "Numbered": false,
-                                                "Checked": false,
-                                                "Expanded": true,
-                                                "Subs": [],
-                                                "Meta": null
-                                            }
-                                        ],
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Id": "",
-                                        "Created": 1651732578,
-                                        "Changed": 1651732624,
-                                        "Txt": "The niklasfasching/go-org parser does not allow programmatic manipulation, but is truly a parser only",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": true,
-                                        "Subs": [
-                                            {
-                                                "Id": "",
-                                                "Created": 1651732615,
-                                                "Changed": 1651732665,
-                                                "Txt": "Would need to extend it and make the Document and Outline elements manipulatable",
-                                                "Numbered": false,
-                                                "Checked": false,
-                                                "Expanded": false,
-                                                "Subs": null,
-                                                "Meta": null
-                                            }
-                                        ],
-                                        "Meta": null
-                                    }
-                                ],
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
                                 "Created": 1651555916,
                                 "Changed": 1651668707,
                                 "Txt": "Redo",
                                 "Numbered": false,
                                 "Checked": false,
-                                "Expanded": false,
+                                "Expanded": true,
                                 "Subs": [
                                     {
                                         "Id": "",
@@ -693,6 +613,109 @@
                                         "Checked": false,
                                         "Expanded": false,
                                         "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 1651742720,
+                                "Changed": 1652113321,
+                                "Txt": "Refactor to standard package structure",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 1652113321,
+                                        "Changed": 1652113332,
+                                        "Txt": "Factor out domain classes",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 1652113332,
+                                        "Changed": 1652113340,
+                                        "Txt": "Factor out main tol into cmd",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 1651732624,
+                                "Txt": "Bite the bullet and make org-mod the native save format",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "new Bite the bullet and make org-mod the native save format",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 1651732624,
+                                        "Txt": "Mainly because I need Orgzly support ...",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 1651732614,
+                                                "Txt": ".. but maybe I can extend Orgzly instead ...",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": true,
+                                                "Subs": [],
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Id": "",
+                                        "Created": 1651732578,
+                                        "Changed": 1651732624,
+                                        "Txt": "The niklasfasching/go-org parser does not allow programmatic manipulation, but is truly a parser only",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Id": "",
+                                                "Created": 1651732615,
+                                                "Changed": 1651732665,
+                                                "Txt": "Would need to extend it and make the Document and Outline elements manipulatable",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
                                         "Meta": null
                                     }
                                 ],
@@ -2053,5 +2076,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 19
+    "Cursor": 27
 }

@@ -38,6 +38,7 @@ type model struct {
 
     undoList []*oitem
     undoIndex int
+    redoIndex int
     currentStateReachedViaUndoList bool
 
     newestItem *oitem
@@ -51,6 +52,7 @@ type Visitor interface {
 
 func (m *model) CommonPostInit() {
     m.undoIndex = -1
+    m.redoIndex = -1
     
     m.Title.Expanded = true
 
@@ -167,15 +169,17 @@ func (m *model) PopUndo() {
 }
 
 func (m *model) Redo() {
-    redo_index := m.undoIndex + 1
-
-    if redo_index > len(m.undoList) - 1 {
+    if -1 == m.redoIndex {
         return
     }
 
-    m.Title = m.undoList[redo_index]
+    if m.redoIndex > len(m.undoList) - 1 {
+        return
+    }
 
-    m.undoIndex = redo_index
+    m.Title = m.undoList[m.redoIndex]
+
+    m.redoIndex++
 
     m.currentStateReachedViaUndoList = true
     m.UpdateLinearizedMapping()
@@ -936,9 +940,10 @@ func (m model) contentView() string {
 
     if m.Cursor < len(m.linearized) {
         s += fmt.Sprintf(
-            "\n" + footer_style.Render("Press q to quit.      cursor: %d  undoIndex: %d len(undoList): %d reachedViaUndo: %t copied: %s") + "\n",
+            "\n" + footer_style.Render("Press q to quit.      cursor: %d  undoIndex: %d redoIndex: %d len(undoList): %d reachedViaUndo: %t copied: %s") + "\n",
             m.Cursor,
             m.undoIndex,
+            m.redoIndex,
             len(m.undoList),
             m.currentStateReachedViaUndoList,
             copiedItemTxt)
@@ -949,8 +954,21 @@ func (m model) contentView() string {
     if visualizeUndoList {
         for idx, item := range m.undoList {
             prefix := "  "
-            if idx == m.undoIndex {
-                prefix = "->"
+
+            if idx == m.undoIndex && idx == m.redoIndex {
+                prefix += "ur"
+            } else if idx == m.undoIndex {
+                prefix += "u "
+            } else if idx == m.redoIndex {
+                prefix += " r"
+            } else {
+                prefix += "  "
+            }
+
+            if idx == m.undoIndex || idx == m.redoIndex {
+                prefix += " ->"
+            } else {
+                prefix += "   "
             }
 
             s += fmt.Sprintf("%s %s\n", prefix, item.Subs[0].Txt)
