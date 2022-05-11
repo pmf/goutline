@@ -48,6 +48,7 @@ type Visitor interface {
     VisitTitle(m *model, item *oitem) error
     VisitConfig(m *model, item *oitem) error
     VisitItem(m *model, item *oitem, level int) error
+    ShouldDescend(m *model, item *oitem) bool
 }
 
 func (m *model) CommonPostInit() {
@@ -133,6 +134,9 @@ func (m *model) PushUndo() {
         m.undoList = append(m.undoList, undo_entry)
         m.undoIndex++
     } else {
+        // mark redo as being unavailable
+        m.redoIndex = -1
+
         // clear redo entries
         if m.undoIndex >= 0 {
             m.undoList = m.undoList[:m.undoIndex]
@@ -154,7 +158,9 @@ func (m *model) PopUndo() {
         return
     }
 
-    // If we're not at the head of the list, we need to push
+    m.redoIndex = m.undoIndex + 1
+    
+    // if we're not at the head of the list, we need to push
     // the current state so that redo will work
     if m.undoIndex == len(m.undoList) - 1 && !m.currentStateReachedViaUndoList{
         undo_entry := m.Title.DeepCopyForUndo()
@@ -179,6 +185,7 @@ func (m *model) Redo() {
 
     m.Title = m.undoList[m.redoIndex]
 
+    m.undoIndex++
     m.redoIndex++
 
     m.currentStateReachedViaUndoList = true
@@ -210,29 +217,9 @@ func (m *model) VisitAll(visitor Visitor) error {
         return err
     }
 
-    err = m.visitItemInternal(visitor, m.Title)
-
-    if nil != err {
-        return err
+    for _, sub := range m.Title.Subs {
+        err = m.visitItemInternal(visitor, sub)
     }
-
-    return nil
-}
-
-func (m *model) VisitLinearized(visitor Visitor) error {
-    err := visitor.VisitTitle(m, m.Title)
-
-    if nil != err {
-        return err
-    }
-
-    err = visitor.VisitConfig(m, m.Config)
-
-    if nil != err {
-        return err
-    }
-
-    err = m.visitItemInternalOnlyExpanded(visitor, m.Title)
 
     if nil != err {
         return err
@@ -248,11 +235,13 @@ func (m *model) visitItemInternal(visitor Visitor, item *oitem) error {
         return err
     }
 
-    for _, sub := range item.Subs {
-        err = m.visitItemInternal(visitor, sub)
+    if visitor.ShouldDescend(m, item) {
+        for _, sub := range item.Subs {
+            err = m.visitItemInternal(visitor, sub)
 
-        if nil != err {
-            return err
+            if nil != err {
+                return err
+            }
         }
     }
 
@@ -279,24 +268,34 @@ func (m *model) visitItemInternalOnlyExpanded(visitor Visitor, item *oitem) erro
     return nil
 }
 
-func (m *model) UpdateLinearizedMappingInternal(item *oitem) {
+type LinearizationVisitor struct {
+}
+
+func (v *LinearizationVisitor) VisitTitle(m *model, item *oitem) error {
+    return nil
+}
+
+func (v *LinearizationVisitor) VisitConfig(m *model, item *oitem) error {
+    return nil
+}
+
+func (v *LinearizationVisitor) VisitItem(m *model, item *oitem, level int) error {
     m.linearCount++
     m.linearized = append(m.linearized, item)
 
-    if item.Expanded {
-        for _, sub := range item.Subs {
-            m.UpdateLinearizedMappingInternal(sub)
-        }
-    }
+    return nil
+}
+
+func (v *LinearizationVisitor) ShouldDescend(m *model, item *oitem) bool {
+    return item.Expanded
 }
 
 func (m *model) UpdateLinearizedMapping() {
     m.linearCount = 0
     m.linearized = nil
 
-    for _, item := range m.Title.Subs {
-        m.UpdateLinearizedMappingInternal(item)
-    }
+    v := &LinearizationVisitor{}
+    m.VisitAll(v)
 }
 
 func (m *model) AddNewItem(parent *oitem) *oitem {
@@ -438,11 +437,16 @@ func (m *model) AddSubAfterThis(o *oitem, item *oitem) {
     }
 }
 
-func (m *model) MoveUp(item *oitem) {
+func (m *model) CanMoveUp(item *oitem) bool {
+    // TDOO: implement
+    return true
+}
+
+func (m *model) MoveUp(item *oitem) bool {
     idx := item.IndexOfItem()
 
     if -1 == idx {
-        return
+        return false
     }
 
     if 0 != idx {
@@ -454,16 +458,29 @@ func (m *model) MoveUp(item *oitem) {
 
     m.UpdateLinearizedMapping()
 
+    result := false
+
     if pos := m.PosInLinearized(item); -1 != pos {
+        if m.Cursor != pos {
+            result = true
+        }
+
         m.Cursor = pos
     }
+
+    return result
 }
 
-func (m *model) MoveDown(item *oitem) {
+func (m *model) CanMoveDown(item *oitem) bool {
+    // TDOO: implement
+    return true
+}
+
+func (m *model) MoveDown(item *oitem) bool {
     idx := item.IndexOfItem()
 
     if -1 == idx {
-        return
+        return false
     }
 
     if (len(item.parent.Subs) - 1) != idx {
@@ -475,9 +492,34 @@ func (m *model) MoveDown(item *oitem) {
 
     m.UpdateLinearizedMapping()
 
+    result := false
+
     if pos := m.PosInLinearized(item); -1 != pos {
+        if m.Cursor != pos {
+            result = true
+        }
+
         m.Cursor = pos
     }
+
+    return result
+}
+
+func (m *model) GoDown() {
+    if m.Cursor < len(m.linearized) - 1 {
+        m.Cursor++
+    }
+}
+
+func (m *model) GoUp() {
+    if m.Cursor > 0 {
+        m.Cursor--
+    }
+}
+
+func (m *model) ToggleChecked(item *oitem) {
+    m.PushUndo()
+    item.Checked = !item.Checked
 }
 
 func (m *model) Promote(item *oitem) {
@@ -728,36 +770,39 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 return m, tea.Quit
 
             case "up", "k":
-                if m.Cursor > 0 {
-                    m.Cursor--
-                }
+                m.GoUp()
 
             case "ctrl+k":
-                m.PushUndo()
-                m.MoveUp(cur)
-
-            case "down", "j":
-                if m.Cursor < len(m.linearized) - 1 {
-                    m.Cursor++
+                if m.CanMoveUp(cur) {
+                    m.PushUndo()
+                    m.MoveUp(cur)
                 }
 
+            case "down", "j":
+                m.GoDown()
+
             case "ctrl+j":
-                m.PushUndo()
-                m.MoveDown(cur)
+                if m.CanMoveDown(cur) {
+                    m.PushUndo()
+                    m.MoveDown(cur)
+                }
 
             case " ":
-                m.PushUndo()
-                cur.Checked = !cur.Checked
+                m.ToggleChecked(cur)
                 canUpdateViewport = false
 
             case "right", "l":
-                m.Expand(cur)
+                if !cur.HasSubs() || cur.Expanded {
+                    m.GoDown()
+                } else {
+                    m.Expand(cur)
+                }
 
             case "left", "h":
-                if cur.Expanded {
+                if cur.HasSubs() && cur.Expanded {
                     m.Collapse(cur)
                 } else {
-                    // if already collapses, collapse parent
+                    // if already collapsed, collapse parent
                     if nil != cur.parent {
                         m.Collapse(cur.parent)
                     }
@@ -949,7 +994,7 @@ func (m model) contentView() string {
             copiedItemTxt)
     }
 
-    visualizeUndoList := true
+    visualizeUndoList := false
 
     if visualizeUndoList {
         for idx, item := range m.undoList {

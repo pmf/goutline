@@ -4,6 +4,26 @@ import(
     "time"
 )
 
+type OItem interface {
+    GetId() string
+    GetCreated() int64
+    GetChanged() int64
+    GetTxt() string
+    GetChecked() bool
+
+    GetSubs() []*OItem
+
+    GetMeta() *OItem
+
+    GetParent() *OItem
+
+    // TODO: this is more of a view method
+    GetExpanded() bool
+    SetExpanded(expand bool)
+
+    GetEdited() bool
+}
+
 type oitem struct {
     // unique id
     Id string
@@ -33,7 +53,6 @@ type oitem struct {
     // generic meta information
     Meta *oitem
 
-    // TODO: maybe use id instead?
     parent *oitem
     
     edited bool
@@ -45,6 +64,52 @@ func (o *oitem) Init() {
         sub.Init();
     }
 }
+
+/*
+func (o *oitem) GetId() string {
+    return o.Id
+}
+
+func (o *oitem) GetCreated() int64 {
+    return o.Created
+}
+
+func (o *oitem) GetChanged() int64 {
+    return o.Changed
+}
+
+func (o *oitem) GetTxt() string {
+    return o.Txt
+}
+
+func (o *oitem) GetChecked() bool {
+    return o.Checked
+}
+
+func (o *oitem) GetSubs() []*OItem {
+    return o.Subs
+}
+
+func (o *oitem) GetMeta() *OItem {
+    return o.Meta
+}
+
+func (o *oitem) GetParent() *OItem {
+    return o.parent
+}
+
+func (o *oitem) GetExpanded() bool {
+    return o.Expanded
+}
+
+func (o *oitem) SetExpanded(expand bool) {
+    o.Expanded = expanded
+}
+
+func (o *oitem) GetEdited() bool {
+    return o.Edited
+}
+*/
 
 func (o *oitem) SetTimestampCreatedNow() {
     o.Created = time.Now().UTC().Unix()
