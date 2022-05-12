@@ -5,23 +5,44 @@ import(
 )
 
 type OItem interface {
+    Init()
     GetId() string
     GetCreated() int64
+    SetTimestampCreatedNow()
     GetChanged() int64
+    SetTimestampChangedNow()
     GetTxt() string
-    GetChecked() bool
+    SetTxt(txt string)
+    IsChecked() bool
+    SetChecked(checked bool)
 
-    GetSubs() []*OItem
+    GetSubs() []OItem
+    SetSubs(subs []OItem)
 
-    GetMeta() *OItem
+    GetMeta() OItem
 
-    GetParent() *OItem
+    GetParent() OItem
+    SetParent(item OItem)
 
     // TODO: this is more of a view method
-    GetExpanded() bool
-    SetExpanded(expand bool)
+    IsExpanded() bool
+    SetExpanded(expanded bool)
 
-    GetEdited() bool
+    IsEdited() bool
+    SetEdited(edited bool)
+
+    Delete(item OItem)
+    AddSubAfterThis(item OItem)
+    AddSubAt(item OItem, pos int)
+    IsFirstSibling() bool
+    IsLastSibling() bool
+    HasSubs() bool
+    Level(upTo OItem) int
+    HasSub(sub OItem) bool
+    IndexOfItem() int
+
+    DeepCopy() OItem
+    DeepCopyForUndo() OItem
 }
 
 type oitem struct {
@@ -48,24 +69,23 @@ type oitem struct {
     Expanded bool
 
     // child items
-    Subs []*oitem
+    Subs []OItem
 
     // generic meta information
-    Meta *oitem
+    Meta OItem
 
-    parent *oitem
+    parent OItem
     
     edited bool
 }
 
 func (o *oitem) Init() {
     for _, sub := range o.Subs {
-        sub.parent = o;
+        sub.SetParent(o);
         sub.Init();
     }
 }
 
-/*
 func (o *oitem) GetId() string {
     return o.Id
 }
@@ -82,34 +102,53 @@ func (o *oitem) GetTxt() string {
     return o.Txt
 }
 
-func (o *oitem) GetChecked() bool {
+func (o *oitem) SetTxt(txt string) {
+    o.Txt = txt
+}
+
+func (o *oitem) IsChecked() bool {
     return o.Checked
 }
 
-func (o *oitem) GetSubs() []*OItem {
+func (o *oitem) SetChecked(checked bool) {
+    o.Checked = checked
+}
+
+func (o *oitem) GetSubs() []OItem {
     return o.Subs
 }
 
-func (o *oitem) GetMeta() *OItem {
+func (o *oitem) SetSubs(subs []OItem) {
+    o.Subs = subs
+}
+
+func (o *oitem) GetMeta() OItem {
     return o.Meta
 }
 
-func (o *oitem) GetParent() *OItem {
+func (o *oitem) GetParent() OItem {
     return o.parent
 }
 
-func (o *oitem) GetExpanded() bool {
+func (o *oitem) SetParent(item OItem) {
+    o.parent = item
+}
+
+func (o *oitem) IsExpanded() bool {
     return o.Expanded
 }
 
-func (o *oitem) SetExpanded(expand bool) {
+func (o *oitem) SetExpanded(expanded bool) {
     o.Expanded = expanded
 }
 
-func (o *oitem) GetEdited() bool {
-    return o.Edited
+func (o *oitem) IsEdited() bool {
+    return o.edited
 }
-*/
+
+func (o *oitem) SetEdited(edited bool) {
+    o.edited = edited
+}
 
 func (o *oitem) SetTimestampCreatedNow() {
     o.Created = time.Now().UTC().Unix()
@@ -121,7 +160,7 @@ func (o *oitem) SetTimestampChangedNow() {
     //o.Created = time.Now().UTC().Format(time.RFC3339)
 }
 
-func (o *oitem) DeepCopy() *oitem {
+func (o *oitem) DeepCopy() OItem {
     result := &oitem{Txt: o.Txt}
     result.SetTimestampCreatedNow()
 
@@ -134,14 +173,14 @@ func (o *oitem) DeepCopy() *oitem {
 
     for _, sub := range o.Subs {
         new_sub := sub.DeepCopy()
-        new_sub.parent = result
+        new_sub.SetParent(result)
         result.Subs = append(result.Subs, new_sub)
     }
 
     return result
 }
 
-func (o *oitem) DeepCopyForUndo() *oitem {
+func (o *oitem) DeepCopyForUndo() OItem {
     result := &oitem{Txt: o.Txt}
 
     result.Numbered = o.Numbered
@@ -157,14 +196,14 @@ func (o *oitem) DeepCopyForUndo() *oitem {
 
     for _, sub := range o.Subs {
         new_sub := sub.DeepCopyForUndo()
-        new_sub.parent = result
+        new_sub.SetParent(result)
         result.Subs = append(result.Subs, new_sub)
     }
 
     return result
 }
 
-func (o *oitem) AddSubAfterThis(item *oitem) {
+func (o *oitem) AddSubAfterThis(item OItem) {
     if nil == o.parent {
         return
     }
@@ -182,7 +221,7 @@ func (o *oitem) AddSubAfterThis(item *oitem) {
     o.parent.AddSubAt(item, pos + 1)
 }
 
-func (o *oitem) AddSubAt(item *oitem, pos int) {
+func (o *oitem) AddSubAt(item OItem, pos int) {
     if pos < 0 {
         return
     }
@@ -191,17 +230,17 @@ func (o *oitem) AddSubAt(item *oitem, pos int) {
         o.Subs = append(o.Subs, &oitem{})
         copy(o.Subs[pos + 1:], o.Subs[pos:])
         o.Subs[pos] = item
-        item.parent = o
+        item.SetParent(o)
         o.SetTimestampChangedNow()
     } else if pos == len(o.Subs) {
         // special case: insert position is one after the existing items
         o.Subs = append(o.Subs, item)
-        item.parent = o
+        item.SetParent(o)
     } 
 }
 
-func (o *oitem) Delete(item *oitem) {
-    if item.parent != o {
+func (o *oitem) Delete(item OItem) {
+    if item.GetParent() != o {
         return
     }
 
@@ -211,14 +250,14 @@ func (o *oitem) Delete(item *oitem) {
         return
     }
 
-    item.parent = nil
+    item.SetParent(nil)
     o.Subs = append(o.Subs[:idx], o.Subs[idx + 1 :]...)
 
     o.SetTimestampChangedNow()
 }
 
 func (o *oitem) IsFirstSibling() bool {
-    if (nil != o.parent) && (o.parent.Subs[0] == o) {
+    if (nil != o.parent) && (o.parent.GetSubs()[0] == o) {
         return true
     }
 
@@ -226,7 +265,7 @@ func (o *oitem) IsFirstSibling() bool {
 }
 
 func (o *oitem) IsLastSibling() bool {
-    if (nil != o.parent) && (o.parent.Subs[len(o.parent.Subs) - 1] == o) {
+    if (nil != o.parent) && (o.parent.GetSubs()[len(o.parent.GetSubs()) - 1] == o) {
         return true
     }
 
@@ -237,23 +276,23 @@ func (o *oitem) HasSubs() bool {
     return 0 != len(o.Subs)
 }
 
-func (o *oitem) Level(upTo *oitem) int {
+func (o *oitem) Level(upTo OItem) int {
     level := 0
-    var cur *oitem = o.parent
+    var cur OItem = o.parent
 
     if nil != upTo {
         level++
     }
 
     for cur != upTo {
-        cur = cur.parent
+        cur = cur.GetParent()
         level++
     }
 
     return level
 }
 
-func (o *oitem) HasSub(sub *oitem) bool {
+func (o *oitem) HasSub(sub OItem) bool {
     result := false
 
     for _, item := range o.Subs {
@@ -275,7 +314,7 @@ func (o *oitem) IndexOfItem() int {
     result := -1
 
     if nil != o.parent {
-        for i, cur := range o.parent.Subs {
+        for i, cur := range o.parent.GetSubs() {
             if cur == o {
                 result = i
                 break

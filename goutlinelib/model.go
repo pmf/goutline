@@ -17,16 +17,16 @@ const headerHeight = 0
 
 type model struct {
     
-    Title *oitem
+    Title OItem
     
-    Config *oitem
+    Config OItem
 
     Cursor int
     
-    linearized []*oitem
+    linearized []OItem
     linearCount int
 
-    copiedItem *oitem
+    copiedItem OItem
 
     filename string
 
@@ -36,30 +36,30 @@ type model struct {
     viewport viewport.Model
     winSizeReady bool
 
-    undoList []*oitem
+    undoList []OItem
     undoIndex int
     redoIndex int
     currentStateReachedViaUndoList bool
 
-    newestItem *oitem
+    newestItem OItem
 }
 
 type Visitor interface {
-    VisitTitle(m *model, item *oitem) error
-    VisitConfig(m *model, item *oitem) error
-    VisitItem(m *model, item *oitem, level int) error
-    ShouldDescend(m *model, item *oitem) bool
+    VisitTitle(m *model, item OItem) error
+    VisitConfig(m *model, item OItem) error
+    VisitItem(m *model, item OItem, level int) error
+    ShouldDescend(m *model, item OItem) bool
 }
 
 func (m *model) CommonPostInit() {
     m.undoIndex = -1
     m.redoIndex = -1
     
-    m.Title.Expanded = true
+    m.Title.SetExpanded(true)
 
 
-    for _, item := range m.Title.Subs {
-        item.parent = m.Title
+    for _, item := range m.Title.GetSubs() {
+        item.SetParent(m.Title)
         item.Init()
     }
 
@@ -78,9 +78,9 @@ func InitialModel() model {
     result := model{
         Title: &oitem{
             Txt: "TODO",
-            Subs: []*oitem{
+            Subs: []OItem{
                 &oitem{Txt: "AAA"},
-                &oitem{Txt: "BBB", Subs: []*oitem{&oitem{Txt: "bbb"}}},
+                &oitem{Txt: "BBB", Subs: []OItem{&oitem{Txt: "bbb"}}},
                 &oitem{Txt: "CCC"}}}}
     */
 
@@ -88,7 +88,7 @@ func InitialModel() model {
         filename: "out.json",
         Title: &oitem{
             Txt: "TODO",
-            Subs: []*oitem{
+            Subs: []OItem{
                 &oitem{Txt: "Item"}}},
         Config: &oitem{}}
 
@@ -193,7 +193,7 @@ func (m *model) Redo() {
 }
 
 func (m *model) SetTitle(title string) {
-    m.Title.Txt = title
+    m.Title.SetTxt(title)
     m.Title.SetTimestampChangedNow()
 }
 
@@ -217,7 +217,7 @@ func (m *model) VisitAll(visitor Visitor) error {
         return err
     }
 
-    for _, sub := range m.Title.Subs {
+    for _, sub := range m.Title.GetSubs() {
         err = m.visitItemInternal(visitor, sub)
     }
 
@@ -228,7 +228,7 @@ func (m *model) VisitAll(visitor Visitor) error {
     return nil
 }
 
-func (m *model) visitItemInternal(visitor Visitor, item *oitem) error {
+func (m *model) visitItemInternal(visitor Visitor, item OItem) error {
     err := visitor.VisitItem(m, item, item.Level(nil))
 
     if nil != err {
@@ -236,7 +236,7 @@ func (m *model) visitItemInternal(visitor Visitor, item *oitem) error {
     }
 
     if visitor.ShouldDescend(m, item) {
-        for _, sub := range item.Subs {
+        for _, sub := range item.GetSubs() {
             err = m.visitItemInternal(visitor, sub)
 
             if nil != err {
@@ -248,15 +248,15 @@ func (m *model) visitItemInternal(visitor Visitor, item *oitem) error {
     return nil
 }
 
-func (m *model) visitItemInternalOnlyExpanded(visitor Visitor, item *oitem) error {
+func (m *model) visitItemInternalOnlyExpanded(visitor Visitor, item OItem) error {
     err := visitor.VisitItem(m, item, item.Level(nil))
 
     if nil != err {
         return err
     }
 
-    if item.Expanded {
-        for _, sub := range item.Subs {
+    if item.IsExpanded() {
+        for _, sub := range item.GetSubs() {
             err = m.visitItemInternalOnlyExpanded(visitor, sub)
 
             if nil != err {
@@ -271,23 +271,23 @@ func (m *model) visitItemInternalOnlyExpanded(visitor Visitor, item *oitem) erro
 type LinearizationVisitor struct {
 }
 
-func (v *LinearizationVisitor) VisitTitle(m *model, item *oitem) error {
+func (v *LinearizationVisitor) VisitTitle(m *model, item OItem) error {
     return nil
 }
 
-func (v *LinearizationVisitor) VisitConfig(m *model, item *oitem) error {
+func (v *LinearizationVisitor) VisitConfig(m *model, item OItem) error {
     return nil
 }
 
-func (v *LinearizationVisitor) VisitItem(m *model, item *oitem, level int) error {
+func (v *LinearizationVisitor) VisitItem(m *model, item OItem, level int) error {
     m.linearCount++
     m.linearized = append(m.linearized, item)
 
     return nil
 }
 
-func (v *LinearizationVisitor) ShouldDescend(m *model, item *oitem) bool {
-    return item.Expanded
+func (v *LinearizationVisitor) ShouldDescend(m *model, item OItem) bool {
+    return item.IsExpanded()
 }
 
 func (m *model) UpdateLinearizedMapping() {
@@ -298,41 +298,41 @@ func (m *model) UpdateLinearizedMapping() {
     m.VisitAll(v)
 }
 
-func (m *model) AddNewItem(parent *oitem) *oitem {
+func (m *model) AddNewItem(parent OItem) OItem {
     new_item := &oitem{parent: parent, Txt: ""}
     new_item.SetTimestampCreatedNow()
-    parent.Subs = append(parent.Subs, new_item)
-    //new_item.Txt = fmt.Sprintf("new %s.%d", parent.Txt, len(parent.Subs) - 1)
+    parent.SetSubs(append(parent.GetSubs(), new_item))
+    //new_item.SetTxt(fmt.Sprintf("new %s.%d", parent.GetTxt(), len(parent.GetSubs()) - 1))
     m.UpdateLinearizedMapping()
 
     parent.SetTimestampChangedNow()
     return new_item
 }
 
-func (m *model) AddNewItemAndEdit(parent *oitem) *oitem {
+func (m *model) AddNewItemAndEdit(parent OItem) OItem {
     new_item := m.AddNewItem(parent)
     m.Expand(parent)
     new_cur_pos := m.PosInLinearized(new_item)
 
     if -1 != new_cur_pos {
         m.Cursor = new_cur_pos
-        new_item.edited = true
+        new_item.SetEdited(true)
         m.editingItem = true
-        m.textinput.SetValue(new_item.Txt)
+        m.textinput.SetValue(new_item.GetTxt())
     }
 
     return new_item
 }
 
-func (m *model) AddNewItemAfterCurrentAndEdit(item *oitem) *oitem {
+func (m *model) AddNewItemAfterCurrentAndEdit(item OItem) OItem {
     insert_pos := item.IndexOfItem() + 1
 
     if -1 != insert_pos {
-        new_item := &oitem{parent: item.parent}
+        new_item := &oitem{parent: item.GetParent()}
         new_item.SetTimestampCreatedNow()
-        item.parent.Subs = append(item.parent.Subs, &oitem{})
-        copy(item.parent.Subs[insert_pos + 1:], item.parent.Subs[insert_pos:])
-        item.parent.Subs[insert_pos] = new_item
+        item.GetParent().SetSubs(append(item.GetParent().GetSubs(), &oitem{}))
+        copy(item.GetParent().GetSubs()[insert_pos + 1:], item.GetParent().GetSubs()[insert_pos:])
+        item.GetParent().GetSubs()[insert_pos] = new_item
 
         m.UpdateLinearizedMapping()
 
@@ -342,7 +342,7 @@ func (m *model) AddNewItemAfterCurrentAndEdit(item *oitem) *oitem {
             m.Cursor = new_cur_pos
             new_item.edited = true
             m.editingItem = true
-            m.textinput.SetValue(new_item.Txt)
+            m.textinput.SetValue(new_item.GetTxt())
         }
 
         item.SetTimestampChangedNow()
@@ -355,7 +355,7 @@ func (m *model) AddNewItemAfterCurrentAndEdit(item *oitem) *oitem {
     return nil
 }
 
-func (m *model) PosInLinearized(item *oitem) int {
+func (m *model) PosInLinearized(item OItem) int {
     result := -1
 
     for idx, cur := range m.linearized {
@@ -368,49 +368,49 @@ func (m *model) PosInLinearized(item *oitem) int {
     return result
 }
 
-func (m *model) Expand(item *oitem) {
-    item.Expanded = true
+func (m *model) Expand(item OItem) {
+    item.SetExpanded(true)
     m.UpdateLinearizedMapping()
 }
 
-func (m *model) Collapse(item *oitem) {
-    was_expanded := item.Expanded
-    item.Expanded = false
+func (m *model) Collapse(item OItem) {
+    was_expanded := item.IsExpanded()
+    item.SetExpanded(false)
     m.UpdateLinearizedMapping()
 
     if was_expanded {
         m.Cursor = m.PosInLinearized(item)
     } else {
-        if nil != item.parent {
-            m.Cursor = m.PosInLinearized(item.parent)
+        if nil != item.GetParent() {
+            m.Cursor = m.PosInLinearized(item.GetParent())
         }
     }
 }
 
-func (m *model) DeleteItem(item *oitem) *oitem{
+func (m *model) DeleteItem(item OItem) OItem {
     if nil == item {
         return nil
     }
 
-    if nil == item.parent {
+    if nil == item.GetParent() {
         return nil
     }
 
     // save
-    p := item.parent
+    p := item.GetParent()
 
     // make sure we're not deleting the last item
-    if (item.Level(nil) == 1) && (len(item.parent.Subs) == 1) {
-        item.Txt = "empty"
+    if (item.Level(nil) == 1) && (len(item.GetParent().GetSubs()) == 1) {
+        item.SetTxt("empty")
 
-        for _, sub := range item.Subs {
-            sub.parent = nil
+        for _, sub := range item.GetSubs() {
+            sub.SetParent(nil)
         }
 
-        item.Subs = nil
+        item.SetSubs(nil)
         item.SetTimestampChangedNow()
     } else {
-        item.parent.Delete(item)
+        item.GetParent().Delete(item)
     }
 
     p.SetTimestampChangedNow()
@@ -419,7 +419,7 @@ func (m *model) DeleteItem(item *oitem) *oitem{
     return item
 }
 
-func (m *model) AddSubAfterThis(o *oitem, item *oitem) {
+func (m *model) AddSubAfterThis(o OItem, item OItem) {
     if nil == o {
         return
     }
@@ -437,12 +437,12 @@ func (m *model) AddSubAfterThis(o *oitem, item *oitem) {
     }
 }
 
-func (m *model) CanMoveUp(item *oitem) bool {
+func (m *model) CanMoveUp(item OItem) bool {
     // TDOO: implement
     return true
 }
 
-func (m *model) MoveUp(item *oitem) bool {
+func (m *model) MoveUp(item OItem) bool {
     idx := item.IndexOfItem()
 
     if -1 == idx {
@@ -450,9 +450,9 @@ func (m *model) MoveUp(item *oitem) bool {
     }
 
     if 0 != idx {
-        tmp := item.parent.Subs[idx - 1]
-        item.parent.Subs[idx - 1] = item
-        item.parent.Subs[idx    ] = tmp
+        tmp := item.GetParent().GetSubs()[idx - 1]
+        item.GetParent().GetSubs()[idx - 1] = item
+        item.GetParent().GetSubs()[idx    ] = tmp
         // parent references can stay the same
     }
 
@@ -471,22 +471,22 @@ func (m *model) MoveUp(item *oitem) bool {
     return result
 }
 
-func (m *model) CanMoveDown(item *oitem) bool {
+func (m *model) CanMoveDown(item OItem) bool {
     // TDOO: implement
     return true
 }
 
-func (m *model) MoveDown(item *oitem) bool {
+func (m *model) MoveDown(item OItem) bool {
     idx := item.IndexOfItem()
 
     if -1 == idx {
         return false
     }
 
-    if (len(item.parent.Subs) - 1) != idx {
-        tmp := item.parent.Subs[idx + 1]
-        item.parent.Subs[idx + 1] = item
-        item.parent.Subs[idx    ] = tmp
+    if (len(item.GetParent().GetSubs()) - 1) != idx {
+        tmp := item.GetParent().GetSubs()[idx + 1]
+        item.GetParent().GetSubs()[idx + 1] = item
+        item.GetParent().GetSubs()[idx    ] = tmp
         // parent references can stay the same
     }
 
@@ -517,12 +517,12 @@ func (m *model) GoUp() {
     }
 }
 
-func (m *model) ToggleChecked(item *oitem) {
+func (m *model) ToggleChecked(item OItem) {
     m.PushUndo()
-    item.Checked = !item.Checked
+    item.SetChecked(!item.IsChecked())
 }
 
-func (m *model) Promote(item *oitem) {
+func (m *model) Promote(item OItem) {
     // Increases the level of the given item
     //
     // This means moving the current item
@@ -541,11 +541,11 @@ func (m *model) Promote(item *oitem) {
     // >  │└─ · new TODO.1 <
     //    └─ · new TODO.2
     //
-    if nil != item.parent {
-        var prec *oitem = nil
+    if nil != item.GetParent() {
+        var prec OItem = nil
         index_of_item_within_parent := item.IndexOfItem()
 
-        for _, cur := range item.parent.Subs {
+        for _, cur := range item.GetParent().GetSubs() {
             if cur == item {
                 break
             }
@@ -556,22 +556,22 @@ func (m *model) Promote(item *oitem) {
         if (nil != prec) && (-1 != index_of_item_within_parent) {
             // remove item from parent's subs
             // trick from https://github.com/golang/go/wiki/SliceTricks
-            item.parent.Subs = append(item.parent.Subs[:index_of_item_within_parent], item.parent.Subs[index_of_item_within_parent + 1 :]...)
+            item.GetParent().SetSubs(append(item.GetParent().GetSubs()[:index_of_item_within_parent], item.GetParent().GetSubs()[index_of_item_within_parent + 1 :]...))
 
             // attach to new parent
-            item.parent.SetTimestampChangedNow()
-            item.parent = prec
-            item.parent.SetTimestampChangedNow()
-            prec.Subs = append(prec.Subs, item)
+            item.GetParent().SetTimestampChangedNow()
+            item.SetParent(prec)
+            item.GetParent().SetTimestampChangedNow()
+            prec.SetSubs(append(prec.GetSubs(), item))
             item.SetTimestampChangedNow()
 
-            m.Expand(item.parent)
+            m.Expand(item.GetParent())
             m.UpdateLinearizedMapping()
         }
     }
 }
 
-func (m *model) Demote(item *oitem) {
+func (m *model) Demote(item OItem) {
     // Decreases the level of the given item
     //
     // This means removing the item from its current parent,
@@ -590,28 +590,28 @@ func (m *model) Demote(item *oitem) {
     // >  ├─ · new TODO.1 <
     //    └─ · new TODO.2
     //
-    if (nil != item.parent) && (nil != item.parent.parent) {
+    if (nil != item.GetParent()) && (nil != item.GetParent().GetParent()) {
         index_of_item_within_parent := item.IndexOfItem()
-        index_of_parent_within_its_parent := item.parent.IndexOfItem()
+        index_of_parent_within_its_parent := item.GetParent().IndexOfItem()
 
         if (-1 != index_of_parent_within_its_parent) && (-1 != index_of_item_within_parent) {
             // remove item from parent's subs
             // trick from https://github.com/golang/go/wiki/SliceTricks
-            item.parent.Subs = append(item.parent.Subs[:index_of_item_within_parent], item.parent.Subs[index_of_item_within_parent + 1 :]...)
+            item.GetParent().SetSubs(append(item.GetParent().GetSubs()[:index_of_item_within_parent], item.GetParent().GetSubs()[index_of_item_within_parent + 1 :]...))
 
             // insert item into item.parent.parent at position index_of_parent_within_its_parent + 1
-            if item.parent.IsLastSibling() {
-               item.parent.parent.Subs = append(item.parent.parent.Subs, item)
+            if item.GetParent().IsLastSibling() {
+               item.GetParent().GetParent().SetSubs(append(item.GetParent().GetParent().GetSubs(), item))
             } else {
                 target_index := index_of_parent_within_its_parent + 1
-                item.parent.parent.Subs = append(item.parent.parent.Subs, &oitem{})
-                copy(item.parent.parent.Subs[target_index + 1:], item.parent.parent.Subs[target_index:])
-                item.parent.parent.Subs[target_index] = item
+                item.GetParent().GetParent().SetSubs(append(item.GetParent().GetParent().GetSubs(), &oitem{}))
+                copy(item.GetParent().GetParent().GetSubs()[target_index + 1:], item.GetParent().GetParent().GetSubs()[target_index:])
+                item.GetParent().GetParent().GetSubs()[target_index] = item
             }
 
-            item.parent.SetTimestampChangedNow()
-            item.parent = item.parent.parent
-            item.parent.SetTimestampChangedNow()
+            item.GetParent().SetTimestampChangedNow()
+            item.SetParent(item.GetParent().GetParent())
+            item.GetParent().SetTimestampChangedNow()
             item.SetTimestampChangedNow()
             m.UpdateLinearizedMapping()
         }
@@ -678,7 +678,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
             switch msg.String() {
 
             case "ctrl+c", "esc":
-                cur.edited = false
+                cur.SetEdited(false)
                 m.editingItem = false
 
                 if nil != m.newestItem {
@@ -687,7 +687,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 }
 
             case "enter":
-                cur.edited = false
+                cur.SetEdited(false)
                 m.editingItem = false
 
                 new_text := m.textinput.Value()
@@ -695,9 +695,9 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 if "" == new_text && cur == m.newestItem {
                     m.DeleteItem(m.newestItem)
                     m.newestItem = nil
-                } else if cur.Txt != new_text {
+                } else if cur.GetTxt() != new_text {
                     m.PushUndo()
-                    cur.Txt = new_text
+                    cur.SetTxt(new_text)
                     cur.SetTimestampChangedNow()
                 }
             }
@@ -717,9 +717,9 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
             switch msg.String() {
 
             case "i":
-                cur.edited = true
+                cur.SetEdited(true)
                 m.editingItem = true
-                m.textinput.SetValue(cur.Txt)
+                m.textinput.SetValue(cur.GetTxt())
                 m.textinput.CursorEnd()
 
             case "c":
@@ -792,19 +792,19 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 canUpdateViewport = false
 
             case "right", "l":
-                if !cur.HasSubs() || cur.Expanded {
+                if !cur.HasSubs() || cur.IsExpanded() {
                     m.GoDown()
                 } else {
                     m.Expand(cur)
                 }
 
             case "left", "h":
-                if cur.HasSubs() && cur.Expanded {
+                if cur.HasSubs() && cur.IsExpanded() {
                     m.Collapse(cur)
                 } else {
                     // if already collapsed, collapse parent
-                    if nil != cur.parent {
-                        m.Collapse(cur.parent)
+                    if nil != cur.GetParent() {
+                        m.Collapse(cur.GetParent())
                     }
                 }
 
@@ -851,7 +851,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
     return m, tea.Batch(cmds...)
 }
 
-func drawItem(m *model, i int, item *oitem, open_elements map[int]bool) string {
+func drawItem(m *model, i int, item OItem, open_elements map[int]bool) string {
     cursor_left := " "
     cursor_right := ""
 
@@ -861,7 +861,7 @@ func drawItem(m *model, i int, item *oitem, open_elements map[int]bool) string {
     }
 
     checked := " "
-    if item.Checked {
+    if item.IsChecked() {
         checked = "✓"
     }
 
@@ -879,7 +879,7 @@ func drawItem(m *model, i int, item *oitem, open_elements map[int]bool) string {
                 branches += "2"
             }
 
-            if item.HasSubs() && item.Expanded {
+            if item.HasSubs() && item.IsExpanded() {
                 if item.IsLastSibling() {
                     level_indicator += "┬" // "┐"
                     branches += "3a"
@@ -905,8 +905,8 @@ func drawItem(m *model, i int, item *oitem, open_elements map[int]bool) string {
         }
     }
 
-    if len(item.Subs) > 0 {
-        if item.Expanded {
+    if len(item.GetSubs()) > 0 {
+        if item.IsExpanded() {
             level_indicator += " ▽ " // " ⊝ "
         } else {
             level_indicator += " ▶ " // " ⊕ "
@@ -932,7 +932,7 @@ func drawItem(m *model, i int, item *oitem, open_elements map[int]bool) string {
         selected_style = selected_style.Background(color_purple).Foreground(lipgloss.Color("255"))
     }
 
-    if item.Checked {
+    if item.IsChecked() {
         selected_style = selected_style.Strikethrough(true)
     }
 
@@ -943,10 +943,10 @@ func drawItem(m *model, i int, item *oitem, open_elements map[int]bool) string {
         selected_style = selected_style.Bold(true)
     }
 
-    if item.edited {
+    if item.IsEdited() {
         return fmt.Sprintf("%s %s%s%s%s%s\n", cursor_left, checked, level_indicator, m.textinput.View(), open_elements_indicator, cursor_right)
     } else {
-        return fmt.Sprintf("%s %s%s%s%s%s\n", cursor_left, checked, level_indicator, selected_style.Render(item.Txt), open_elements_indicator, cursor_right)
+        return fmt.Sprintf("%s %s%s%s%s%s\n", cursor_left, checked, level_indicator, selected_style.Render(item.GetTxt()), open_elements_indicator, cursor_right)
     }
 }
 
@@ -960,7 +960,7 @@ func (m model) contentView() string {
     header_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
     footer_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
 
-    header_text := fmt.Sprintf("%s [%s]", m.Title.Txt, m.filename)
+    header_text := fmt.Sprintf("%s [%s]", m.Title.GetTxt(), m.filename)
     s := header_style.Render(header_text) + "\n\n"
 
     //s += level_headers
@@ -980,17 +980,13 @@ func (m model) contentView() string {
     copiedItemTxt := "-"
 
     if nil != m.copiedItem {
-        copiedItemTxt = m.copiedItem.Txt
+        copiedItemTxt = m.copiedItem.GetTxt()
     }
 
     if m.Cursor < len(m.linearized) {
         s += fmt.Sprintf(
-            "\n" + footer_style.Render("Press q to quit.      cursor: %d  undoIndex: %d redoIndex: %d len(undoList): %d reachedViaUndo: %t copied: %s") + "\n",
+            "\n" + footer_style.Render("Press q to quit.      cursor: %d copied: %s") + "\n",
             m.Cursor,
-            m.undoIndex,
-            m.redoIndex,
-            len(m.undoList),
-            m.currentStateReachedViaUndoList,
             copiedItemTxt)
     }
 
@@ -1016,7 +1012,7 @@ func (m model) contentView() string {
                 prefix += "   "
             }
 
-            s += fmt.Sprintf("%s %s\n", prefix, item.Subs[0].Txt)
+            s += fmt.Sprintf("%s %s\n", prefix, item.GetSubs()[0].GetTxt())
         }
     }
 
