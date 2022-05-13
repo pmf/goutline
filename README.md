@@ -29,7 +29,7 @@ go build
 ## Run
 ```
 ./goutline # implicitly uses out.json in current directory when saving (warning: no auto saving right now; do s, then q)
-./goutline my_file.json # use this file
+./goutline my_file.json # use a specific file
 ```
 
 ## Key bindings
@@ -54,6 +54,7 @@ SUBJECT TO CHANGE!
 | c                    | Copy item |
 | x                    | Cut item |
 | v                    | Paste item |
-| u                    | Undo (*WARNING*: does not work currently) |
+| u                    | Undo |
+| ctrl+r               | Redo |
 | q                    | Leave (*WARNING*: *without* saving currently!) |
 | s                    | Save current file (out.json if nothing else has been specified) |

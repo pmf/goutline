@@ -1,14 +1,16 @@
 {
     "Title": {
+        "Type": "oitem",
         "Id": "",
         "Created": 0,
         "Changed": 0,
         "Txt": "goutline - issues",
         "Numbered": false,
         "Checked": false,
-        "Expanded": false,
+        "Expanded": true,
         "Subs": [
             {
+                "Type": "oitem",
                 "Id": "",
                 "Created": 0,
                 "Changed": 1651556033,
@@ -18,6 +20,7 @@
                 "Expanded": false,
                 "Subs": [
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 1651556017,
@@ -27,6 +30,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 1651556014,
                                 "Changed": 1651556026,
@@ -41,6 +45,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 1651556007,
@@ -50,6 +55,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 1651556005,
                                 "Changed": 1651556012,
@@ -64,6 +70,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 1651556033,
@@ -73,6 +80,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 1651556029,
                                 "Changed": 1651556051,
@@ -90,6 +98,7 @@
                 "Meta": null
             },
             {
+                "Type": "oitem",
                 "Id": "",
                 "Created": 0,
                 "Changed": 0,
@@ -99,6 +108,7 @@
                 "Expanded": true,
                 "Subs": [
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -108,6 +118,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -117,6 +128,7 @@
                                 "Expanded": true,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -128,6 +140,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -139,6 +152,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -156,15 +170,17 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
-                        "Changed": 1651764011,
+                        "Changed": 1652443342,
                         "Txt": "Next issues",
                         "Numbered": false,
                         "Checked": false,
                         "Expanded": true,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -176,6 +192,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -187,6 +204,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -196,6 +214,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -207,6 +226,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -218,6 +238,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -232,6 +253,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -243,6 +265,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -254,6 +277,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -263,6 +287,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -277,6 +302,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -288,6 +314,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -297,6 +324,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -311,6 +339,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 1651496752,
@@ -320,6 +349,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -329,6 +359,7 @@
                                         "Expanded": false,
                                         "Subs": [
                                             {
+                                                "Type": "oitem",
                                                 "Id": "",
                                                 "Created": 0,
                                                 "Changed": 0,
@@ -346,6 +377,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 1651496752,
                                 "Changed": 1651498710,
@@ -355,6 +387,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 1651496769,
                                         "Changed": 1651496797,
@@ -369,6 +402,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 1651498710,
                                 "Changed": 1651520303,
@@ -380,6 +414,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 1651555916,
@@ -389,6 +424,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -400,6 +436,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -414,6 +451,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 1651520303,
                                 "Changed": 1651561008,
@@ -423,6 +461,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 1651561008,
                                         "Changed": 1651561014,
@@ -437,6 +476,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 1651668686,
                                 "Changed": 1651742720,
@@ -448,152 +488,17 @@
                                 "Meta": null
                             },
                             {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 1651667925,
-                                "Txt": "Draw path to current item in bold",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 1651555864,
-                                        "Txt": "Naive implementation causes alignment issues due to control characters messing up character counts",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Id": "",
-                                        "Created": 1651555864,
-                                        "Changed": 1651667925,
-                                        "Txt": "Could actually turn out to be a quite tricky problem ...",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": true,
-                                        "Subs": [],
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Id": "",
-                                        "Created": 1651667914,
-                                        "Changed": 1651667927,
-                                        "Txt": "Alternative (maybe simpler?):",
-                                        "Numbered": false,
-                                        "Checked": true,
-                                        "Expanded": false,
-                                        "Subs": [
-                                            {
-                                                "Id": "",
-                                                "Created": 1651667927,
-                                                "Changed": 1651667949,
-                                                "Txt": "Draw parents of current entry in bold",
-                                                "Numbered": false,
-                                                "Checked": true,
-                                                "Expanded": false,
-                                                "Subs": null,
-                                                "Meta": null
-                                            }
-                                        ],
-                                        "Meta": null
-                                    }
-                                ],
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 1651742720,
-                                "Changed": 1651742734,
-                                "Txt": "Refactor to standard package structure",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 1651732624,
-                                "Txt": "Bite the bullet and make org-mod the native save format",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "new Bite the bullet and make org-mod the native save format",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 1651732624,
-                                        "Txt": "Mainly because I need Orgzly support ...",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": true,
-                                        "Subs": [
-                                            {
-                                                "Id": "",
-                                                "Created": 0,
-                                                "Changed": 1651732614,
-                                                "Txt": ".. but maybe I can extend Orgzly instead ...",
-                                                "Numbered": false,
-                                                "Checked": false,
-                                                "Expanded": true,
-                                                "Subs": [],
-                                                "Meta": null
-                                            }
-                                        ],
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Id": "",
-                                        "Created": 1651732578,
-                                        "Changed": 1651732624,
-                                        "Txt": "The niklasfasching/go-org parser does not allow programmatic manipulation, but is truly a parser only",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": true,
-                                        "Subs": [
-                                            {
-                                                "Id": "",
-                                                "Created": 1651732615,
-                                                "Changed": 1651732665,
-                                                "Txt": "Would need to extend it and make the Document and Outline elements manipulatable",
-                                                "Numbered": false,
-                                                "Checked": false,
-                                                "Expanded": false,
-                                                "Subs": null,
-                                                "Meta": null
-                                            }
-                                        ],
-                                        "Meta": null
-                                    }
-                                ],
-                                "Meta": null
-                            },
-                            {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 1651555916,
                                 "Changed": 1651668707,
                                 "Txt": "Redo",
                                 "Numbered": false,
-                                "Checked": false,
+                                "Checked": true,
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 1651555921,
                                         "Changed": 1651573074,
@@ -603,6 +508,7 @@
                                         "Expanded": true,
                                         "Subs": [
                                             {
+                                                "Type": "oitem",
                                                 "Id": "",
                                                 "Created": 1651555964,
                                                 "Changed": 1651573072,
@@ -612,6 +518,7 @@
                                                 "Expanded": true,
                                                 "Subs": [
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 1651555969,
                                                         "Changed": 1651556202,
@@ -621,6 +528,7 @@
                                                         "Expanded": true,
                                                         "Subs": [
                                                             {
+                                                                "Type": "oitem",
                                                                 "Id": "",
                                                                 "Created": 1651555984,
                                                                 "Changed": 1651556199,
@@ -635,6 +543,7 @@
                                                         "Meta": null
                                                     },
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 1651556199,
                                                         "Changed": 1651556225,
@@ -646,6 +555,7 @@
                                                         "Meta": null
                                                     },
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 1651556225,
                                                         "Changed": 1651556254,
@@ -657,6 +567,7 @@
                                                         "Meta": null
                                                     },
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 1651556254,
                                                         "Changed": 1651573065,
@@ -674,21 +585,134 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 1651573065,
                                         "Changed": 1651573110,
                                         "Txt": "When at the end of the list (after going down and up again), an undo adds a useless entry",
                                         "Numbered": false,
-                                        "Checked": false,
+                                        "Checked": true,
                                         "Expanded": false,
                                         "Subs": null,
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 1651573110,
                                         "Changed": 1651668686,
                                         "Txt": "When at index -1 with non-empty list, restore lags by one",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 1651661706,
+                                "Changed": 1651661753,
+                                "Txt": "Strikethrough support",
+                                "Numbered": false,
+                                "Checked": true,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1651661742,
+                                        "Changed": 1651661757,
+                                        "Txt": "Check how this is handled by lipgloss",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1651661757,
+                                        "Changed": 1651661774,
+                                        "Txt": "Should we wait for generic label support?",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 1652427646,
+                                "Txt": "When doing \"l\" on an already expanded item, do \"down\"",
+                                "Numbered": false,
+                                "Checked": true,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 1652427646,
+                                "Changed": 1652449146,
+                                "Txt": "Fix serialization",
+                                "Numbered": false,
+                                "Checked": true,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652427653,
+                                        "Changed": 1652427680,
+                                        "Txt": "Broken due to change to struct oitem -\u003e interface OItem usage",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Type": "",
+                                "Id": "",
+                                "Created": 1652449146,
+                                "Changed": 1652449194,
+                                "Txt": "When deleting the last sibling, it would be good to select the previous sibling (or parent) instead of the following, unrelated item",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 1652443342,
+                                "Txt": "Transclusion is a must!",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652443253,
+                                        "Changed": 1652443292,
+                                        "Txt": "How to get correct contextual parent for subs in a transcluded item?",
                                         "Numbered": false,
                                         "Checked": false,
                                         "Expanded": false,
@@ -699,6 +723,132 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 1652443292,
+                                "Changed": 1652443342,
+                                "Txt": "Allow splitting line into two items when in prompt",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652443314,
+                                        "Changed": 1652443338,
+                                        "Txt": "Maybe shift+enter or strg+enter",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 1652188126,
+                                "Txt": "Bite the bullet and make org-mod the native save format",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "new Bite the bullet and make org-mod the native save format",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 1651732624,
+                                        "Txt": "Mainly because I need Orgzly support ...",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 1651732614,
+                                                "Txt": ".. but maybe I can extend Orgzly instead ...",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": true,
+                                                "Subs": [],
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1651732578,
+                                        "Changed": 1651732624,
+                                        "Txt": "The niklasfasching/go-org parser does not allow programmatic manipulation, but is truly a parser only",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1651732615,
+                                                "Changed": 1651732665,
+                                                "Txt": "Would need to extend it and make the Document and Outline elements manipulatable",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 1652188126,
+                                "Changed": 1652188141,
+                                "Txt": "Option to hide completed items",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652188141,
+                                        "Changed": 1652188174,
+                                        "Txt": "Probably defer until we have a general virtualization layer re. subs",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 1651661706,
@@ -708,6 +858,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -717,6 +868,7 @@
                                         "Expanded": true,
                                         "Subs": [
                                             {
+                                                "Type": "oitem",
                                                 "Id": "",
                                                 "Created": 0,
                                                 "Changed": 0,
@@ -728,6 +880,7 @@
                                                 "Meta": null
                                             },
                                             {
+                                                "Type": "oitem",
                                                 "Id": "",
                                                 "Created": 0,
                                                 "Changed": 0,
@@ -739,6 +892,7 @@
                                                 "Meta": null
                                             },
                                             {
+                                                "Type": "oitem",
                                                 "Id": "",
                                                 "Created": 0,
                                                 "Changed": 0,
@@ -748,6 +902,7 @@
                                                 "Expanded": true,
                                                 "Subs": [
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
@@ -759,6 +914,7 @@
                                                         "Meta": null
                                                     },
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
@@ -770,6 +926,7 @@
                                                         "Meta": null
                                                     },
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
@@ -781,6 +938,7 @@
                                                         "Meta": null
                                                     },
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
@@ -792,6 +950,7 @@
                                                         "Meta": null
                                                     },
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
@@ -801,6 +960,7 @@
                                                         "Expanded": true,
                                                         "Subs": [
                                                             {
+                                                                "Type": "oitem",
                                                                 "Id": "",
                                                                 "Created": 0,
                                                                 "Changed": 0,
@@ -815,6 +975,7 @@
                                                         "Meta": null
                                                     },
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
@@ -824,6 +985,7 @@
                                                         "Expanded": true,
                                                         "Subs": [
                                                             {
+                                                                "Type": "oitem",
                                                                 "Id": "",
                                                                 "Created": 0,
                                                                 "Changed": 0,
@@ -844,6 +1006,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -853,6 +1016,7 @@
                                         "Expanded": true,
                                         "Subs": [
                                             {
+                                                "Type": "oitem",
                                                 "Id": "",
                                                 "Created": 0,
                                                 "Changed": 0,
@@ -870,75 +1034,7 @@
                                 "Meta": null
                             },
                             {
-                                "Id": "",
-                                "Created": 1651661706,
-                                "Changed": 1651661753,
-                                "Txt": "Strikethrough support",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 1651661742,
-                                        "Changed": 1651661757,
-                                        "Txt": "Check how this is handled by lipgloss",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Id": "",
-                                        "Created": 1651661757,
-                                        "Changed": 1651661774,
-                                        "Txt": "Should we wait for generic label support?",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
-                                        "Meta": null
-                                    }
-                                ],
-                                "Meta": null
-                            },
-                            {
-                                "Id": "",
-                                "Created": 1651667815,
-                                "Changed": 1651667877,
-                                "Txt": "Proper undo entries",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Id": "",
-                                        "Created": 1651667838,
-                                        "Changed": 1651667874,
-                                        "Txt": "So we can label them with action names",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": true,
-                                        "Subs": [
-                                            {
-                                                "Id": "",
-                                                "Created": 1651667852,
-                                                "Changed": 1651667873,
-                                                "Txt": "For example \"Added \u003ctext\u003e to \u003ctext\u003e\"",
-                                                "Numbered": false,
-                                                "Checked": false,
-                                                "Expanded": false,
-                                                "Subs": null,
-                                                "Meta": null
-                                            }
-                                        ],
-                                        "Meta": null
-                                    }
-                                ],
-                                "Meta": null
-                            },
-                            {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -948,6 +1044,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 1651496824,
@@ -959,6 +1056,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 1651496824,
                                         "Changed": 1651496850,
@@ -973,6 +1071,106 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 1651667925,
+                                "Txt": "Draw path to current item in bold",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 1651555864,
+                                        "Txt": "Naive implementation causes alignment issues due to control characters messing up character counts",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1651555864,
+                                        "Changed": 1651667925,
+                                        "Txt": "Could actually turn out to be a quite tricky problem ...",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [],
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1651667914,
+                                        "Changed": 1651667927,
+                                        "Txt": "Alternative (maybe simpler?):",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": false,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1651667927,
+                                                "Changed": 1651667949,
+                                                "Txt": "Draw parents of current entry in bold",
+                                                "Numbered": false,
+                                                "Checked": true,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 1651742720,
+                                "Changed": 1652113321,
+                                "Txt": "Refactor to standard package structure",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652113321,
+                                        "Changed": 1652113332,
+                                        "Txt": "Factor out domain classes",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652113332,
+                                        "Changed": 1652182828,
+                                        "Txt": "Factor out main tool into cmd",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -982,6 +1180,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -993,6 +1192,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1007,17 +1207,7 @@
                                 "Meta": null
                             },
                             {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Home/End for linearized view",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1027,6 +1217,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1038,6 +1229,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1049,6 +1241,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1058,6 +1251,7 @@
                                         "Expanded": false,
                                         "Subs": [
                                             {
+                                                "Type": "oitem",
                                                 "Id": "",
                                                 "Created": 0,
                                                 "Changed": 0,
@@ -1067,6 +1261,7 @@
                                                 "Expanded": true,
                                                 "Subs": [
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
@@ -1081,6 +1276,7 @@
                                                 "Meta": null
                                             },
                                             {
+                                                "Type": "oitem",
                                                 "Id": "",
                                                 "Created": 0,
                                                 "Changed": 0,
@@ -1090,6 +1286,7 @@
                                                 "Expanded": true,
                                                 "Subs": [
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
@@ -1099,6 +1296,7 @@
                                                         "Expanded": true,
                                                         "Subs": [
                                                             {
+                                                                "Type": "oitem",
                                                                 "Id": "",
                                                                 "Created": 0,
                                                                 "Changed": 0,
@@ -1110,6 +1308,7 @@
                                                                 "Meta": null
                                                             },
                                                             {
+                                                                "Type": "oitem",
                                                                 "Id": "",
                                                                 "Created": 0,
                                                                 "Changed": 0,
@@ -1124,6 +1323,7 @@
                                                         "Meta": null
                                                     },
                                                     {
+                                                        "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
@@ -1141,6 +1341,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1155,6 +1356,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1164,6 +1366,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1178,6 +1381,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1187,6 +1391,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1198,6 +1403,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1212,17 +1418,7 @@
                                 "Meta": null
                             },
                             {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "When doing \"l\" on an already expanded item, do \"down\"",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1232,6 +1428,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1246,6 +1443,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1255,6 +1453,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1269,10 +1468,61 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 1652183946,
+                                "Txt": "Hoisting support",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652183946,
+                                        "Changed": 1652186585,
+                                        "Txt": "Trivial impl. could be handled by changing root / linearized view per view",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652186585,
+                                        "Changed": 1652186611,
+                                        "Txt": "Title should change to show current path (prefixes of parent items)",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1652186611,
+                                                "Changed": 1652186622,
+                                                "Txt": "Not a bad idea for the normal view, either?",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
-                                "Txt": "Hoisting support",
+                                "Txt": "Home/End for linearized view",
                                 "Numbered": false,
                                 "Checked": false,
                                 "Expanded": false,
@@ -1280,6 +1530,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1289,6 +1540,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1300,6 +1552,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1312,6 +1565,44 @@
                                     }
                                 ],
                                 "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 1651667815,
+                                "Changed": 1651667877,
+                                "Txt": "Proper undo entries",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": false,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1651667838,
+                                        "Changed": 1651667874,
+                                        "Txt": "So we can label them with action names",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1651667852,
+                                                "Changed": 1651667873,
+                                                "Txt": "For example \"Added \u003ctext\u003e to \u003ctext\u003e\"",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
                             }
                         ],
                         "Meta": null
@@ -1320,6 +1611,7 @@
                 "Meta": null
             },
             {
+                "Type": "oitem",
                 "Id": "",
                 "Created": 0,
                 "Changed": 1651764004,
@@ -1329,26 +1621,17 @@
                 "Expanded": true,
                 "Subs": [
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
-                        "Changed": 0,
+                        "Changed": 1652443244,
                         "Txt": "Virtual nodes",
                         "Numbered": false,
                         "Checked": false,
-                        "Expanded": false,
+                        "Expanded": true,
                         "Subs": [
                             {
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Transclusion is a must!",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": null,
-                                "Meta": null
-                            },
-                            {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1360,6 +1643,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1371,6 +1655,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1382,6 +1667,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1393,6 +1679,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1402,6 +1689,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1414,11 +1702,99 @@
                                     }
                                 ],
                                 "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 1652188784,
+                                "Changed": 1652188794,
+                                "Txt": "Implementation",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652188794,
+                                        "Changed": 1652188809,
+                                        "Txt": "First, refactor oitem to be an interface",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": null,
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652188809,
+                                        "Changed": 1652188938,
+                                        "Txt": "Implement injectible filter",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1652188830,
+                                                "Changed": 1652188938,
+                                                "Txt": "Look filter up in parent? Or just locally? Or both?",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": true,
+                                                "Subs": [],
+                                                "Meta": null
+                                            },
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1652188886,
+                                                "Changed": 1652188903,
+                                                "Txt": "Can be at the parent level or at the item level",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": true,
+                                                "Subs": [
+                                                    {
+                                                        "Type": "oitem",
+                                                        "Id": "",
+                                                        "Created": 1652188903,
+                                                        "Changed": 1652188933,
+                                                        "Txt": "i.e. \"I don't want to be seen\" vs. \"I don't want to have this item in my sub\"",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    }
+                                                ],
+                                                "Meta": null
+                                            },
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1652188869,
+                                                "Changed": 1652188938,
+                                                "Txt": "Define filter interface",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    }
+                                ],
+                                "Meta": null
                             }
                         ],
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1428,6 +1804,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1442,6 +1819,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1451,6 +1829,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1465,6 +1844,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1474,6 +1854,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1485,6 +1866,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1496,6 +1878,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1505,6 +1888,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1516,6 +1900,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1530,6 +1915,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1541,6 +1927,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1552,6 +1939,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1563,6 +1951,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1572,6 +1961,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1589,6 +1979,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1598,6 +1989,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1609,6 +2001,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1620,6 +2013,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1631,6 +2025,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1642,6 +2037,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1656,6 +2052,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1665,6 +2062,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1679,6 +2077,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1688,6 +2087,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1699,6 +2099,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1708,6 +2109,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1719,6 +2121,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1730,6 +2133,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1739,6 +2143,7 @@
                                         "Expanded": false,
                                         "Subs": [
                                             {
+                                                "Type": "oitem",
                                                 "Id": "",
                                                 "Created": 0,
                                                 "Changed": 0,
@@ -1759,6 +2164,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1768,6 +2174,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1782,6 +2189,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1791,6 +2199,7 @@
                         "Expanded": true,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1800,6 +2209,7 @@
                                 "Expanded": true,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1811,6 +2221,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1825,6 +2236,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1834,6 +2246,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1845,6 +2258,7 @@
                                         "Meta": null
                                     },
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1862,6 +2276,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1871,6 +2286,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1880,6 +2296,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1897,6 +2314,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1906,6 +2324,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1917,6 +2336,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 1651757459,
@@ -1928,6 +2348,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 1651757459,
                                 "Changed": 1651757495,
@@ -1937,6 +2358,7 @@
                                 "Expanded": true,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 1651757495,
                                         "Changed": 1651757509,
@@ -1951,6 +2373,7 @@
                                 "Meta": null
                             },
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -1960,6 +2383,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
                                         "Changed": 0,
@@ -1980,6 +2404,7 @@
                 "Meta": null
             },
             {
+                "Type": "oitem",
                 "Id": "",
                 "Created": 0,
                 "Changed": 1651498534,
@@ -1989,6 +2414,7 @@
                 "Expanded": false,
                 "Subs": [
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 0,
@@ -1998,6 +2424,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 0,
@@ -2012,6 +2439,7 @@
                         "Meta": null
                     },
                     {
+                        "Type": "oitem",
                         "Id": "",
                         "Created": 0,
                         "Changed": 1651498517,
@@ -2021,6 +2449,7 @@
                         "Expanded": false,
                         "Subs": [
                             {
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
                                 "Changed": 1651498541,
@@ -2030,6 +2459,7 @@
                                 "Expanded": false,
                                 "Subs": [
                                     {
+                                        "Type": "oitem",
                                         "Id": "",
                                         "Created": 1651498541,
                                         "Changed": 1651507737,
@@ -2053,5 +2483,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 19
+    "Cursor": 22
 }
