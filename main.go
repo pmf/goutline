@@ -25,7 +25,7 @@ func main() {
     m, err := goutlinelib.ModelFromFile(filename)
 
     if err != nil {
-        fmt.Printf("Could not load file: %s; using default contents\n\n", filename)
+        fmt.Printf("Could not load file: %s; using default contents (error was: %w)\n\n", filename, err)
         m = goutlinelib.InitialModel()
         m.SetFilename(filename)
     }

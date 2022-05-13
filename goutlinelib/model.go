@@ -1,6 +1,7 @@
 package goutlinelib
 
 import(
+    "errors"
     "fmt"
     "io/ioutil"
     "encoding/json"
@@ -57,7 +58,6 @@ func (m *model) CommonPostInit() {
     
     m.Title.SetExpanded(true)
 
-
     for _, item := range m.Title.GetSubs() {
         item.SetParent(m.Title)
         item.Init()
@@ -99,20 +99,60 @@ func InitialModel() model {
     return result
 }
 
+func (m *model) UnmarshalJSON(data []byte) (err error) {
+    temp := make(map[string]interface{})
+    err = json.Unmarshal(data, &temp)
+    
+    if err != nil {
+        return
+    }
+
+    if nil != temp["Title"] {
+        var tmpTitle OItem
+        tmpTitle, err = UnmarshalJSONOItem(temp["Title"].(map[string]interface{}))
+
+        if nil != err {
+            err = fmt.Errorf("Could not unmarshal title: %w", err)
+            return
+        }
+
+        m.Title = tmpTitle
+    } else {
+        err = errors.New("No Title attribute")
+        return
+    }
+
+    if nil != temp["Config"] {
+        var tmpConfig OItem
+        tmpConfig, err = UnmarshalJSONOItem(temp["Config"].(map[string]interface{}))
+
+        if nil != err {
+            err = fmt.Errorf("Could not unmarshal config: %w", err)
+            return
+        }
+
+        m.Config = tmpConfig
+    }
+
+    m.Cursor = int(temp["Cursor"].(float64))
+
+    return
+}
+
 func ModelFromFile(filename string) (model, error) {
     b, err := ioutil.ReadFile(filename)
 
     var result model
 
     if err != nil {
-        fmt.Printf("Could not read file %s", filename)
+        fmt.Printf("Could not read file %s\n", filename)
         return result, err
     }
 
     err = json.Unmarshal(b, &result)
 
     if err != nil {
-        fmt.Printf("Could not unmarshal contents from %s", filename)
+        err = fmt.Errorf("Could not unmarshal contents from %s: %w", filename, err)
         return result, err
     }
 
@@ -299,7 +339,7 @@ func (m *model) UpdateLinearizedMapping() {
 }
 
 func (m *model) AddNewItem(parent OItem) OItem {
-    new_item := &oitem{parent: parent, Txt: ""}
+    new_item := &oitem{Type: "oitem", parent: parent, Txt: "", }
     new_item.SetTimestampCreatedNow()
     parent.SetSubs(append(parent.GetSubs(), new_item))
     //new_item.SetTxt(fmt.Sprintf("new %s.%d", parent.GetTxt(), len(parent.GetSubs()) - 1))
@@ -732,6 +772,14 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
                 m.PushUndo()
                 m.copiedItem = m.DeleteItem(cur)
+
+            // TODO: include as transcluded item
+            case "t":
+                if nil != m.copiedItem {
+                    m.PushUndo()
+                    m.AddSubAfterThis(cur, NewProxy(m.copiedItem))
+                    m.copiedItem = nil
+                }
 
             case "v":
                 if nil != m.copiedItem {

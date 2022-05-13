@@ -1,6 +1,8 @@
 package goutlinelib
 
 import(
+    "errors"
+    "fmt"
     "time"
 )
 
@@ -46,6 +48,9 @@ type OItem interface {
 }
 
 type oitem struct {
+    // interface serialization hack
+    Type string
+
     // unique id
     Id string
 
@@ -79,7 +84,102 @@ type oitem struct {
     edited bool
 }
 
+type oitemProxy struct {
+    Type string
+
+    target OItem
+}
+
+func IsOitemTypeEntry(temp map[string]interface{}) bool {
+    typeSwitch := temp["Type"]
+    
+    if  typeSwitch == nil || typeSwitch.(string) == "oitem" || typeSwitch.(string) == "" {
+        return true
+    }
+
+    return false
+}
+
+func UnmarshalJSONOItem(temp map[string]interface{}) (item OItem, err error) {
+    err = nil
+
+    if nil == temp {
+        item = nil
+        return
+    }
+
+    if  IsOitemTypeEntry(temp) {
+        tmpItem := &oitem{}
+        err = tmpItem.UnmarshalOitemStruct(temp)
+        if nil == err {
+            item = tmpItem
+        } else {
+            err = fmt.Errorf("Error when unmarshalling item: %w", err)
+            return
+        }
+    } else {
+        err = errors.New("Unsupported type")
+        return
+    }
+
+    return
+}
+
+func (o *oitem) UnmarshalOitemStruct(temp map[string]interface{}) (err error) {
+    err = nil
+
+    if IsOitemTypeEntry(temp) {
+        o.Type = "oitem"
+    } else {
+        err = errors.New("Unsupported type")
+        return
+    }
+
+    o.Id = temp["Id"].(string)
+    o.Created = int64(temp["Created"].(float64))
+    o.Changed = int64(temp["Changed"].(float64))
+    o.Txt = temp["Txt"].(string)
+    o.Numbered = temp["Numbered"].(bool)
+    o.Checked = temp["Checked"].(bool)
+    o.Expanded = temp["Expanded"].(bool)
+
+    tempMeta := temp["Meta"]
+    if nil != tempMeta {
+        var metaTmp OItem
+        metaTmp, err = UnmarshalJSONOItem(tempMeta.(map[string]interface{}))
+        
+        if err != nil {
+            err = fmt.Errorf("Could not UnmarshalJSONOItem: %w", err)
+            return
+        }
+
+        o.Meta = metaTmp
+    }
+
+    tempSubs := temp["Subs"]
+    if nil != tempSubs {
+        arr := tempSubs.([]interface{})
+        o.Subs = make([]OItem, 0, len(arr))
+        for _, cur := range arr {
+            tempCur := cur.(map[string]interface{})
+            var new_item OItem
+            new_item, err = UnmarshalJSONOItem(tempCur)
+
+            if err != nil {
+                err = fmt.Errorf("Could not create sub: %w", err)
+                return
+            }
+
+            o.Subs = append(o.Subs, new_item)
+        }
+    }    
+
+    return
+}
+
 func (o *oitem) Init() {
+    o.Type = "oitem"
+
     for _, sub := range o.Subs {
         sub.SetParent(o);
         sub.Init();
