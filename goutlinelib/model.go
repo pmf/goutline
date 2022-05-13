@@ -790,7 +790,22 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             case "delete", "d", "backspace":
                 m.PushUndo()
+
+                var toSelect OItem
+
+                if cur.IsLastSibling() {
+                     if len(cur.GetParent().GetSubs()) > 1 {
+                        toSelect = cur.GetParent().GetSubs()[cur.IndexOfItem() - 1]
+                    } else {
+                        toSelect = cur.GetParent()
+                    }
+                }
+
                 m.DeleteItem(cur)
+
+                if nil != toSelect {
+                    m.Cursor = m.PosInLinearized(toSelect)
+                }
 
             case "tab":
                 m.PushUndo()

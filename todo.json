@@ -173,7 +173,7 @@
                         "Type": "oitem",
                         "Id": "",
                         "Created": 0,
-                        "Changed": 1652443342,
+                        "Changed": 1652456405,
                         "Txt": "Next issues",
                         "Numbered": false,
                         "Checked": false,
@@ -686,13 +686,13 @@
                                 "Meta": null
                             },
                             {
-                                "Type": "",
+                                "Type": "oitem",
                                 "Id": "",
                                 "Created": 1652449146,
                                 "Changed": 1652449194,
                                 "Txt": "When deleting the last sibling, it would be good to select the previous sibling (or parent) instead of the following, unrelated item",
                                 "Numbered": false,
-                                "Checked": false,
+                                "Checked": true,
                                 "Expanded": false,
                                 "Subs": null,
                                 "Meta": null
@@ -830,7 +830,7 @@
                                 "Txt": "Option to hide completed items",
                                 "Numbered": false,
                                 "Checked": false,
-                                "Expanded": true,
+                                "Expanded": false,
                                 "Subs": [
                                     {
                                         "Type": "oitem",
@@ -1173,7 +1173,7 @@
                                 "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
-                                "Changed": 0,
+                                "Changed": 1652456400,
                                 "Txt": "Don't use backspace to delete nodes",
                                 "Numbered": false,
                                 "Checked": false,
@@ -1209,9 +1209,9 @@
                             {
                                 "Type": "oitem",
                                 "Id": "",
-                                "Created": 0,
-                                "Changed": 0,
-                                "Txt": "Prompt has problems with German umlauts (probably a general Unicode problem)",
+                                "Created": 1652456400,
+                                "Changed": 1652456405,
+                                "Txt": "Windows specific",
                                 "Numbered": false,
                                 "Checked": false,
                                 "Expanded": false,
@@ -1220,32 +1220,8 @@
                                         "Type": "oitem",
                                         "Id": "",
                                         "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Umlauts are displayed correctly in the items and in the prompt when loading from JSON; it's just entry that seems to be the problem",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Type": "oitem",
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Crashes also when not in the prompt, and also when pasting instead of entering",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": false,
-                                        "Subs": null,
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Type": "oitem",
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "There seems to be an existing issue: https://github.com/charmbracelet/bubbletea/issues/153",
+                                        "Changed": 1652456407,
+                                        "Txt": "Prompt has problems with German umlauts (probably a general Unicode problem)",
                                         "Numbered": false,
                                         "Checked": false,
                                         "Expanded": false,
@@ -1255,24 +1231,11 @@
                                                 "Id": "",
                                                 "Created": 0,
                                                 "Changed": 0,
-                                                "Txt": "After changing the system settings to force UTF-8, it no longer crashes, but umlauts (and space!) don't work",
+                                                "Txt": "Umlauts are displayed correctly in the items and in the prompt when loading from JSON; it's just entry that seems to be the problem",
                                                 "Numbered": false,
                                                 "Checked": false,
-                                                "Expanded": true,
-                                                "Subs": [
-                                                    {
-                                                        "Type": "oitem",
-                                                        "Id": "",
-                                                        "Created": 0,
-                                                        "Changed": 0,
-                                                        "Txt": "Issue with space fixed locally in textinput.go (see also https://github.com/charmbracelet/bubbles/issues/144)",
-                                                        "Numbered": false,
-                                                        "Checked": false,
-                                                        "Expanded": false,
-                                                        "Subs": null,
-                                                        "Meta": null
-                                                    }
-                                                ],
+                                                "Expanded": false,
+                                                "Subs": null,
                                                 "Meta": null
                                             },
                                             {
@@ -1280,17 +1243,29 @@
                                                 "Id": "",
                                                 "Created": 0,
                                                 "Changed": 0,
-                                                "Txt": "We're going deep, boys: https://nullprogram.com/blog/2020/05/04/",
+                                                "Txt": "Crashes also when not in the prompt, and also when pasting instead of entering",
                                                 "Numbered": false,
                                                 "Checked": false,
-                                                "Expanded": true,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            },
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 0,
+                                                "Txt": "There seems to be an existing issue: https://github.com/charmbracelet/bubbletea/issues/153",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
                                                 "Subs": [
                                                     {
                                                         "Type": "oitem",
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
-                                                        "Txt": "Problem might be that normal CONIN reports wide chars, even if system is otherwise configured for UTF-8",
+                                                        "Txt": "After changing the system settings to force UTF-8, it no longer crashes, but umlauts (and space!) don't work",
                                                         "Numbered": false,
                                                         "Checked": false,
                                                         "Expanded": true,
@@ -1300,19 +1275,7 @@
                                                                 "Id": "",
                                                                 "Created": 0,
                                                                 "Changed": 0,
-                                                                "Txt": "This behavior would have to be fixed in cancelreader, I think",
-                                                                "Numbered": false,
-                                                                "Checked": false,
-                                                                "Expanded": false,
-                                                                "Subs": null,
-                                                                "Meta": null
-                                                            },
-                                                            {
-                                                                "Type": "oitem",
-                                                                "Id": "",
-                                                                "Created": 0,
-                                                                "Changed": 0,
-                                                                "Txt": " assumption is that a read returns all runes, but we might have received only a part of multibyte UTF-8 encoded rune and must read more (keeping the start part here) for 'ß', we expect 0xc3 0x9f in UTF-8, but when the error occurs, it's 0xe1 (which is also NOT 'ß'' in the Windows-1252 codepage or the ISO/IEC 8859-1 codepage, where it is 0xdf) This overwiew (https://www.torsten-horn.de/techdocs/encoding.htm) show us: 'ß'' is 0xe1 in Codepage 437 and Codepage 850. After setting the system wide codepage to UTF-8, ReadConsoleInput yields 0xdf for 'ß'",
+                                                                "Txt": "Issue with space fixed locally in textinput.go (see also https://github.com/charmbracelet/bubbles/issues/144)",
                                                                 "Numbered": false,
                                                                 "Checked": false,
                                                                 "Expanded": false,
@@ -1327,14 +1290,76 @@
                                                         "Id": "",
                                                         "Created": 0,
                                                         "Changed": 0,
-                                                        "Txt": "Might also be relevant: https://forum.golangbridge.org/t/windows-raw-console-i-o/22487",
+                                                        "Txt": "We're going deep, boys: https://nullprogram.com/blog/2020/05/04/",
                                                         "Numbered": false,
                                                         "Checked": false,
-                                                        "Expanded": false,
-                                                        "Subs": null,
+                                                        "Expanded": true,
+                                                        "Subs": [
+                                                            {
+                                                                "Type": "oitem",
+                                                                "Id": "",
+                                                                "Created": 0,
+                                                                "Changed": 0,
+                                                                "Txt": "Problem might be that normal CONIN reports wide chars, even if system is otherwise configured for UTF-8",
+                                                                "Numbered": false,
+                                                                "Checked": false,
+                                                                "Expanded": true,
+                                                                "Subs": [
+                                                                    {
+                                                                        "Type": "oitem",
+                                                                        "Id": "",
+                                                                        "Created": 0,
+                                                                        "Changed": 0,
+                                                                        "Txt": "This behavior would have to be fixed in cancelreader, I think",
+                                                                        "Numbered": false,
+                                                                        "Checked": false,
+                                                                        "Expanded": false,
+                                                                        "Subs": null,
+                                                                        "Meta": null
+                                                                    },
+                                                                    {
+                                                                        "Type": "oitem",
+                                                                        "Id": "",
+                                                                        "Created": 0,
+                                                                        "Changed": 0,
+                                                                        "Txt": " assumption is that a read returns all runes, but we might have received only a part of multibyte UTF-8 encoded rune and must read more (keeping the start part here) for 'ß', we expect 0xc3 0x9f in UTF-8, but when the error occurs, it's 0xe1 (which is also NOT 'ß'' in the Windows-1252 codepage or the ISO/IEC 8859-1 codepage, where it is 0xdf) This overwiew (https://www.torsten-horn.de/techdocs/encoding.htm) show us: 'ß'' is 0xe1 in Codepage 437 and Codepage 850. After setting the system wide codepage to UTF-8, ReadConsoleInput yields 0xdf for 'ß'",
+                                                                        "Numbered": false,
+                                                                        "Checked": false,
+                                                                        "Expanded": false,
+                                                                        "Subs": null,
+                                                                        "Meta": null
+                                                                    }
+                                                                ],
+                                                                "Meta": null
+                                                            },
+                                                            {
+                                                                "Type": "oitem",
+                                                                "Id": "",
+                                                                "Created": 0,
+                                                                "Changed": 0,
+                                                                "Txt": "Might also be relevant: https://forum.golangbridge.org/t/windows-raw-console-i-o/22487",
+                                                                "Numbered": false,
+                                                                "Checked": false,
+                                                                "Expanded": false,
+                                                                "Subs": null,
+                                                                "Meta": null
+                                                            }
+                                                        ],
                                                         "Meta": null
                                                     }
                                                 ],
+                                                "Meta": null
+                                            },
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 0,
+                                                "Txt": "Other discussion: https://groups.google.com/g/golang-nuts/c/our8DRS9gaU",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
                                                 "Meta": null
                                             }
                                         ],
@@ -1343,13 +1368,51 @@
                                     {
                                         "Type": "oitem",
                                         "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Other discussion: https://groups.google.com/g/golang-nuts/c/our8DRS9gaU",
+                                        "Created": 1652456407,
+                                        "Changed": 1652456519,
+                                        "Txt": "Strikethrough not displayed",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1652456519,
+                                                "Changed": 1652456525,
+                                                "Txt": "PowerShell and cmd",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652456418,
+                                        "Changed": 1652456533,
+                                        "Txt": "Bold items displayed in yellow",
                                         "Numbered": false,
                                         "Checked": false,
                                         "Expanded": false,
-                                        "Subs": null,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1652456533,
+                                                "Changed": 1652456536,
+                                                "Txt": "PowerShell only",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
                                         "Meta": null
                                     }
                                 ],

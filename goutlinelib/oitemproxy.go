@@ -13,6 +13,8 @@ type oitemproxy struct {
 
     parent OItem
 
+    cachedProxiedSubs []OItem
+
     edited bool
 }
 
@@ -54,7 +56,15 @@ func (o *oitemproxy) SetChecked(checked bool) {
 }
 
 func (o *oitemproxy) GetSubs() []OItem {
-    return o.target.GetSubs()
+    if len(o.cachedProxiedSubs) != len(o.target.GetSubs()) {
+        o.cachedProxiedSubs = make([]OItem, 0, len(o.target.GetSubs()))
+
+        for _, cur := range o.target.GetSubs() {
+            o.cachedProxiedSubs = append(o.cachedProxiedSubs, &oitemproxy{target: cur, parent: o})
+        }
+    }
+
+    return o.cachedProxiedSubs
 }
 
 func (o *oitemproxy) SetSubs(subs []OItem) {
