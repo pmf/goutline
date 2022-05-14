@@ -106,11 +106,11 @@ func (o *oitemproxy) SetTimestampChangedNow() {
 }
 
 func (o *oitemproxy) DeepCopy() OItem {
-    return nil
+    return o.target.DeepCopy()
 }
 
 func (o *oitemproxy) DeepCopyForUndo() OItem {
-    return nil
+    return o.target.DeepCopyForUndo()
 }
 
 func (o *oitemproxy) AddSubAfterThis(item OItem) {
