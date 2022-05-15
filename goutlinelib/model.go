@@ -809,6 +809,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                     m.Cursor = m.PosInLinearized(toSelect)
                 }
 
+                canUpdateViewport = false
+
             case "tab":
                 m.PushUndo()
                 m.Promote(cur)
@@ -827,6 +829,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             case "u":
                 m.PopUndo()
+                canUpdateViewport = false
 
             case "ctrl+r":
                 m.Redo()
