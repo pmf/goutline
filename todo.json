@@ -173,7 +173,7 @@
                         "Type": "oitem",
                         "Id": "",
                         "Created": 0,
-                        "Changed": 1652456405,
+                        "Changed": 1652599553,
                         "Txt": "Next issues",
                         "Numbered": false,
                         "Checked": false,
@@ -701,7 +701,7 @@
                                 "Type": "oitem",
                                 "Id": "",
                                 "Created": 0,
-                                "Changed": 1652443342,
+                                "Changed": 1652599553,
                                 "Txt": "Transclusion is a must!",
                                 "Numbered": false,
                                 "Checked": false,
@@ -711,10 +711,10 @@
                                         "Type": "oitem",
                                         "Id": "",
                                         "Created": 1652443253,
-                                        "Changed": 1652443292,
+                                        "Changed": 1652599534,
                                         "Txt": "How to get correct contextual parent for subs in a transcluded item?",
                                         "Numbered": false,
-                                        "Checked": false,
+                                        "Checked": true,
                                         "Expanded": false,
                                         "Subs": null,
                                         "Meta": null
@@ -725,12 +725,24 @@
                             {
                                 "Type": "oitem",
                                 "Id": "",
+                                "Created": 1652599534,
+                                "Changed": 1652599553,
+                                "Txt": "Deleting item causes viewport to jump",
+                                "Numbered": false,
+                                "Checked": true,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
                                 "Created": 1652443292,
                                 "Changed": 1652443342,
                                 "Txt": "Allow splitting line into two items when in prompt",
                                 "Numbered": false,
                                 "Checked": false,
-                                "Expanded": true,
+                                "Expanded": false,
                                 "Subs": [
                                     {
                                         "Type": "oitem",
@@ -1373,7 +1385,7 @@
                                         "Txt": "Strikethrough not displayed",
                                         "Numbered": false,
                                         "Checked": false,
-                                        "Expanded": true,
+                                        "Expanded": false,
                                         "Subs": [
                                             {
                                                 "Type": "oitem",
@@ -1394,7 +1406,7 @@
                                         "Type": "oitem",
                                         "Id": "",
                                         "Created": 1652456418,
-                                        "Changed": 1652456533,
+                                        "Changed": 1652510913,
                                         "Txt": "Bold items displayed in yellow",
                                         "Numbered": false,
                                         "Checked": false,
@@ -1408,6 +1420,68 @@
                                                 "Txt": "PowerShell only",
                                                 "Numbered": false,
                                                 "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652510913,
+                                        "Changed": 1652513238,
+                                        "Txt": "Console left in a weird state regarding cursor keys",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": false,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1652510933,
+                                                "Changed": 1652510949,
+                                                "Txt": "only cmd",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 1652513238,
+                                        "Changed": 1652532909,
+                                        "Txt": "Unicode characters with more than 3 bytes per char look wrong",
+                                        "Numbered": false,
+                                        "Checked": true,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1652513279,
+                                                "Changed": 1652532913,
+                                                "Txt": "for example U+1F517",
+                                                "Numbered": false,
+                                                "Checked": true,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            },
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 1652532913,
+                                                "Changed": 1652532934,
+                                                "Txt": "Seems to be more of a general PowerShell-cmd host failure",
+                                                "Numbered": false,
+                                                "Checked": true,
                                                 "Expanded": false,
                                                 "Subs": null,
                                                 "Meta": null
@@ -2546,5 +2620,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 22
+    "Cursor": 25
 }

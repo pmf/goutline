@@ -6,8 +6,25 @@ import(
     "time"
 )
 
+type OType int
+
+const (
+    // regular item
+    OTypeRegular OType = 0
+
+    // item is a transcluded item
+    OTypeProxyTransclude   = 1
+
+    // item is a link
+    OTypeProxyLink         = 2
+
+    // item is a proxy for an external datasource
+    OTypeProxyExternal     = 3
+)
+
 type OItem interface {
     Init()
+    GetType() OType
     GetId() string
     GetCreated() int64
     SetTimestampCreatedNow()
@@ -79,15 +96,11 @@ type oitem struct {
     // generic meta information
     Meta OItem
 
+    otype OType
+
     parent OItem
-    
+
     edited bool
-}
-
-type oitemProxy struct {
-    Type string
-
-    target OItem
 }
 
 func IsOitemTypeEntry(temp map[string]interface{}) bool {
@@ -179,11 +192,16 @@ func (o *oitem) UnmarshalOitemStruct(temp map[string]interface{}) (err error) {
 
 func (o *oitem) Init() {
     o.Type = "oitem"
+    o.otype = OTypeRegular
 
     for _, sub := range o.Subs {
         sub.SetParent(o);
         sub.Init();
     }
+}
+
+func (o *oitem) GetType() OType {
+    return o.otype
 }
 
 func (o *oitem) GetId() string {

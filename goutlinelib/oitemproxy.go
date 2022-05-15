@@ -16,6 +16,8 @@ type oitemproxy struct {
     cachedProxiedSubs []OItem
 
     edited bool
+
+    otype OType
 }
 
 func NewProxy(target OItem) OItem {
@@ -25,6 +27,11 @@ func NewProxy(target OItem) OItem {
 
 func (o *oitemproxy) Init() {
     o.Type = "oitemproxy"
+    o.otype = OTypeProxyTransclude
+}
+
+func (o *oitemproxy) GetType() OType {
+    return o.otype
 }
 
 func (o *oitemproxy) GetId() string {
