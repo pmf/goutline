@@ -13,7 +13,11 @@ type oitemproxy struct {
 
     parent OItem
 
+    cachedProxiedSubs []OItem
+
     edited bool
+
+    otype OType
 }
 
 func NewProxy(target OItem) OItem {
@@ -23,6 +27,11 @@ func NewProxy(target OItem) OItem {
 
 func (o *oitemproxy) Init() {
     o.Type = "oitemproxy"
+    o.otype = OTypeProxyTransclude
+}
+
+func (o *oitemproxy) GetType() OType {
+    return o.otype
 }
 
 func (o *oitemproxy) GetId() string {
@@ -54,7 +63,15 @@ func (o *oitemproxy) SetChecked(checked bool) {
 }
 
 func (o *oitemproxy) GetSubs() []OItem {
-    return o.target.GetSubs()
+    if len(o.cachedProxiedSubs) != len(o.target.GetSubs()) {
+        o.cachedProxiedSubs = make([]OItem, 0, len(o.target.GetSubs()))
+
+        for _, cur := range o.target.GetSubs() {
+            o.cachedProxiedSubs = append(o.cachedProxiedSubs, &oitemproxy{target: cur, parent: o})
+        }
+    }
+
+    return o.cachedProxiedSubs
 }
 
 func (o *oitemproxy) SetSubs(subs []OItem) {
@@ -96,11 +113,11 @@ func (o *oitemproxy) SetTimestampChangedNow() {
 }
 
 func (o *oitemproxy) DeepCopy() OItem {
-    return nil
+    return o.target.DeepCopy()
 }
 
 func (o *oitemproxy) DeepCopyForUndo() OItem {
-    return nil
+    return o.target.DeepCopyForUndo()
 }
 
 func (o *oitemproxy) AddSubAfterThis(item OItem) {

@@ -28,6 +28,7 @@ type model struct {
     linearCount int
 
     copiedItem OItem
+    refItem OItem
 
     filename string
 
@@ -763,6 +764,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
                 m.textinput.CursorEnd()
 
             case "c":
+                m.refItem = cur
                 m.copiedItem = cur.DeepCopy()
 
             case "x":
@@ -775,10 +777,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             // TODO: include as transcluded item
             case "t":
-                if nil != m.copiedItem {
+                if nil != m.refItem {
                     m.PushUndo()
-                    m.AddSubAfterThis(cur, NewProxy(m.copiedItem))
-                    m.copiedItem = nil
+                    m.AddSubAfterThis(cur, NewProxy(m.refItem))
+                    m.refItem = nil
                 }
 
             case "v":
@@ -790,7 +792,24 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             case "delete", "d", "backspace":
                 m.PushUndo()
+
+                var toSelect OItem
+
+                if cur.IsLastSibling() {
+                     if len(cur.GetParent().GetSubs()) > 1 {
+                        toSelect = cur.GetParent().GetSubs()[cur.IndexOfItem() - 1]
+                    } else {
+                        toSelect = cur.GetParent()
+                    }
+                }
+
                 m.DeleteItem(cur)
+
+                if nil != toSelect {
+                    m.Cursor = m.PosInLinearized(toSelect)
+                }
+
+                canUpdateViewport = false
 
             case "tab":
                 m.PushUndo()
@@ -810,6 +829,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
             case "u":
                 m.PopUndo()
+                canUpdateViewport = false
 
             case "ctrl+r":
                 m.Redo()
