@@ -700,193 +700,217 @@ func (m *model) handleWinSizeChange(msg tea.WindowSizeMsg) []tea.Cmd {
     return cmds
 }
 
-func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
+func (m *model) UpdateStateEditing(cur OItem, msg tea.Msg)  (canUpdateViewport bool, quit bool, tmodel tea.Model, tcmd tea.Cmd) {
+    var cmds []tea.Cmd
+
+    canUpdateViewport = true
+    quit = false
+
+    switch msg := msg.(type) {
+
+    case tea.WindowSizeMsg:
+        cmds = m.handleWinSizeChange(msg)
+
+    case tea.KeyMsg:
+
+        switch msg.String() {
+
+        case "ctrl+c", "esc":
+            cur.SetEdited(false)
+            m.editingItem = false
+
+            if nil != m.newestItem {
+                m.DeleteItem(m.newestItem)
+                m.newestItem = nil
+            }
+
+        case "enter":
+            cur.SetEdited(false)
+            m.editingItem = false
+
+            new_text := m.textinput.Value()
+
+            if "" == new_text && cur == m.newestItem {
+                m.DeleteItem(m.newestItem)
+                m.newestItem = nil
+            } else if cur.GetTxt() != new_text {
+                m.PushUndo()
+                cur.SetTxt(new_text)
+                cur.SetTimestampChangedNow()
+            }
+        }
+    }
+
+    if m.editingItem {
+        m.textinput, _ = m.textinput.Update(msg)
+    }
+
+    return true, quit, nil, tea.Batch(cmds...)
+}
+
+func (m *model) UpdateStateNavigate(cur OItem, msg tea.Msg) (canUpdateViewport bool, quit bool, tmodel tea.Model, tcmd tea.Cmd) {
+    canUpdateViewport = false
+    quit = false
+
+    var cmds []tea.Cmd
+
+    switch msg := msg.(type) {
+
+    case tea.WindowSizeMsg:
+        cmds = m.handleWinSizeChange(msg)
+
+    case tea.KeyMsg:
+
+        switch msg.String() {
+
+        case "i":
+            cur.SetEdited(true)
+            m.editingItem = true
+            m.textinput.SetValue(cur.GetTxt())
+            m.textinput.CursorEnd()
+
+        case "c":
+            m.refItem = cur
+            m.copiedItem = cur.DeepCopy()
+
+        case "x":
+            // alternative operation would be:
+            // m.copiedItem =m.DeepCopy(cur)
+            // m.DeleteItem(cur)
+
+            m.PushUndo()
+            m.copiedItem = m.DeleteItem(cur)
+
+        // TODO: include as transcluded item
+        case "t":
+            if nil != m.refItem {
+                m.PushUndo()
+                m.AddSubAfterThis(cur, NewProxy(m.refItem))
+                m.refItem = nil
+            }
+
+        case "v":
+            if nil != m.copiedItem {
+                m.PushUndo()
+                m.AddSubAfterThis(cur, m.copiedItem)
+                m.copiedItem = nil
+            }
+
+        case "delete", "d", "backspace":
+            m.PushUndo()
+
+            var toSelect OItem
+
+            if cur.IsLastSibling() {
+                 if len(cur.GetParent().GetSubs()) > 1 {
+                    toSelect = cur.GetParent().GetSubs()[cur.IndexOfItem() - 1]
+                } else {
+                    toSelect = cur.GetParent()
+                }
+            }
+
+            m.DeleteItem(cur)
+
+            if nil != toSelect {
+                m.Cursor = m.PosInLinearized(toSelect)
+            }
+
+            canUpdateViewport = false
+
+        case "tab":
+            m.PushUndo()
+            m.Promote(cur)
+
+        case "shift+tab":
+            m.PushUndo()
+            m.Demote(cur)
+
+        case "ctrl+p":
+            m.newestItem = m.AddNewItemAndEdit(cur)
+            // not pushing onto undo stack; happens either on confirm, or we don't care about the item
+
+        case "enter", "o":
+            m.newestItem = m.AddNewItemAfterCurrentAndEdit(cur)
+            // not pushing onto undo stack; happens either on confirm, or we don't care about the item
+
+        case "u":
+            m.PopUndo()
+            canUpdateViewport = false
+
+        case "ctrl+r":
+            m.Redo()
+
+        case "ctrl+c", "q":
+            quit = true
+            return canUpdateViewport, quit, m, tea.Quit
+
+        case "up", "k":
+            m.GoUp()
+
+        case "ctrl+k":
+            if m.CanMoveUp(cur) {
+                m.PushUndo()
+                m.MoveUp(cur)
+            }
+
+        case "down", "j":
+            m.GoDown()
+
+        case "ctrl+j":
+            if m.CanMoveDown(cur) {
+                m.PushUndo()
+                m.MoveDown(cur)
+            }
+
+        case " ":
+            m.ToggleChecked(cur)
+            canUpdateViewport = false
+
+        case "right", "l":
+            if !cur.HasSubs() || cur.IsExpanded() {
+                m.GoDown()
+            } else {
+                m.Expand(cur)
+            }
+
+        case "left", "h":
+            if cur.HasSubs() && cur.IsExpanded() {
+                m.Collapse(cur)
+            } else {
+                // if already collapsed, collapse parent
+                if nil != cur.GetParent() {
+                    m.Collapse(cur.GetParent())
+                }
+            }
+
+        case "s":
+            m.SaveCurrentAs(m.filename)
+
+        /*
+        case "O":
+            orgConfig := org.New()
+            orgDoc := orgConfig.Parse(strings.NewReader(""), "out.org")
+            fmt.Printf("O %s\n", orgDoc)
+        */
+       }
+    }
+
+    return true, quit, nil, tea.Batch(cmds...)
+}
+
+func (m model) Update(msg tea.Msg) (tmodel tea.Model, tcmd tea.Cmd) {
     var cmd tea.Cmd
     var cmds []tea.Cmd
 
     cur := m.linearized[m.Cursor]
 
     canUpdateViewport := true
+    quit := false
 
     if m.editingItem {
-        switch msg := msg.(type) {
-
-        case tea.WindowSizeMsg:
-            cmds = m.handleWinSizeChange(msg)
-
-        case tea.KeyMsg:
-
-            switch msg.String() {
-
-            case "ctrl+c", "esc":
-                cur.SetEdited(false)
-                m.editingItem = false
-
-                if nil != m.newestItem {
-                    m.DeleteItem(m.newestItem)
-                    m.newestItem = nil
-                }
-
-            case "enter":
-                cur.SetEdited(false)
-                m.editingItem = false
-
-                new_text := m.textinput.Value()
-
-                if "" == new_text && cur == m.newestItem {
-                    m.DeleteItem(m.newestItem)
-                    m.newestItem = nil
-                } else if cur.GetTxt() != new_text {
-                    m.PushUndo()
-                    cur.SetTxt(new_text)
-                    cur.SetTimestampChangedNow()
-                }
-            }
-        }
-
-        if m.editingItem {
-            m.textinput, _ = m.textinput.Update(msg)
-        }
+        canUpdateViewport, quit, tmodel, tcmd = m.UpdateStateEditing(cur, msg)
     } else {
-        switch msg := msg.(type) {
-
-        case tea.WindowSizeMsg:
-            cmds = m.handleWinSizeChange(msg)
-
-        case tea.KeyMsg:
-
-            switch msg.String() {
-
-            case "i":
-                cur.SetEdited(true)
-                m.editingItem = true
-                m.textinput.SetValue(cur.GetTxt())
-                m.textinput.CursorEnd()
-
-            case "c":
-                m.refItem = cur
-                m.copiedItem = cur.DeepCopy()
-
-            case "x":
-                // alternative operation would be:
-                // m.copiedItem =m.DeepCopy(cur)
-                // m.DeleteItem(cur)
-
-                m.PushUndo()
-                m.copiedItem = m.DeleteItem(cur)
-
-            // TODO: include as transcluded item
-            case "t":
-                if nil != m.refItem {
-                    m.PushUndo()
-                    m.AddSubAfterThis(cur, NewProxy(m.refItem))
-                    m.refItem = nil
-                }
-
-            case "v":
-                if nil != m.copiedItem {
-                    m.PushUndo()
-                    m.AddSubAfterThis(cur, m.copiedItem)
-                    m.copiedItem = nil
-                }
-
-            case "delete", "d", "backspace":
-                m.PushUndo()
-
-                var toSelect OItem
-
-                if cur.IsLastSibling() {
-                     if len(cur.GetParent().GetSubs()) > 1 {
-                        toSelect = cur.GetParent().GetSubs()[cur.IndexOfItem() - 1]
-                    } else {
-                        toSelect = cur.GetParent()
-                    }
-                }
-
-                m.DeleteItem(cur)
-
-                if nil != toSelect {
-                    m.Cursor = m.PosInLinearized(toSelect)
-                }
-
-                canUpdateViewport = false
-
-            case "tab":
-                m.PushUndo()
-                m.Promote(cur)
-
-            case "shift+tab":
-                m.PushUndo()
-                m.Demote(cur)
-
-            case "ctrl+p":
-                m.newestItem = m.AddNewItemAndEdit(cur)
-                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
-
-            case "enter", "o":
-                m.newestItem = m.AddNewItemAfterCurrentAndEdit(cur)
-                // not pushing onto undo stack; happens either on confirm, or we don't care about the item
-
-            case "u":
-                m.PopUndo()
-                canUpdateViewport = false
-
-            case "ctrl+r":
-                m.Redo()
-
-            case "ctrl+c", "q":
-                return m, tea.Quit
-
-            case "up", "k":
-                m.GoUp()
-
-            case "ctrl+k":
-                if m.CanMoveUp(cur) {
-                    m.PushUndo()
-                    m.MoveUp(cur)
-                }
-
-            case "down", "j":
-                m.GoDown()
-
-            case "ctrl+j":
-                if m.CanMoveDown(cur) {
-                    m.PushUndo()
-                    m.MoveDown(cur)
-                }
-
-            case " ":
-                m.ToggleChecked(cur)
-                canUpdateViewport = false
-
-            case "right", "l":
-                if !cur.HasSubs() || cur.IsExpanded() {
-                    m.GoDown()
-                } else {
-                    m.Expand(cur)
-                }
-
-            case "left", "h":
-                if cur.HasSubs() && cur.IsExpanded() {
-                    m.Collapse(cur)
-                } else {
-                    // if already collapsed, collapse parent
-                    if nil != cur.GetParent() {
-                        m.Collapse(cur.GetParent())
-                    }
-                }
-
-            case "s":
-                m.SaveCurrentAs(m.filename)
-
-            /*
-            case "O":
-                orgConfig := org.New()
-                orgDoc := orgConfig.Parse(strings.NewReader(""), "out.org")
-                fmt.Printf("O %s\n", orgDoc)
-            */
-           }
-        }
+        canUpdateViewport, quit, tmodel, tcmd = m.UpdateStateNavigate(cur, msg)
     }
 
     // make sure cursor is in valid range
@@ -899,6 +923,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
     }
 
     m.viewport.SetContent(m.contentView())
+
+    if quit {
+        return m, tea.Quit
+    }
 
     switch msg.(type) {
 

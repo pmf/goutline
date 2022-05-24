@@ -173,7 +173,7 @@
                         "Type": "oitem",
                         "Id": "",
                         "Created": 0,
-                        "Changed": 1652599553,
+                        "Changed": 1653413868,
                         "Txt": "Next issues",
                         "Numbered": false,
                         "Checked": false,
@@ -700,8 +700,20 @@
                             {
                                 "Type": "oitem",
                                 "Id": "",
-                                "Created": 0,
+                                "Created": 1652599534,
                                 "Changed": 1652599553,
+                                "Txt": "Deleting item causes viewport to jump",
+                                "Numbered": false,
+                                "Checked": true,
+                                "Expanded": false,
+                                "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 1653413868,
                                 "Txt": "Transclusion is a must!",
                                 "Numbered": false,
                                 "Checked": false,
@@ -711,7 +723,7 @@
                                         "Type": "oitem",
                                         "Id": "",
                                         "Created": 1652443253,
-                                        "Changed": 1652599534,
+                                        "Changed": 1653413831,
                                         "Txt": "How to get correct contextual parent for subs in a transcluded item?",
                                         "Numbered": false,
                                         "Checked": true,
@@ -723,15 +735,213 @@
                                 "Meta": null
                             },
                             {
-                                "Type": "oitem",
+                                "Type": "",
                                 "Id": "",
-                                "Created": 1652599534,
-                                "Changed": 1652599553,
-                                "Txt": "Deleting item causes viewport to jump",
+                                "Created": 1653413831,
+                                "Changed": 1653413877,
+                                "Txt": "Strange behavior after refactoring to state specific update methods",
                                 "Numbered": false,
-                                "Checked": true,
+                                "Checked": false,
                                 "Expanded": false,
                                 "Subs": null,
+                                "Meta": null
+                            },
+                            {
+                                "Type": "oitem",
+                                "Id": "",
+                                "Created": 0,
+                                "Changed": 1651661706,
+                                "Txt": "Search/filter",
+                                "Numbered": false,
+                                "Checked": false,
+                                "Expanded": true,
+                                "Subs": [
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Workflow",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 0,
+                                                "Txt": "Enter \"/\"",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            },
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 0,
+                                                "Txt": "Show prompt",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": true,
+                                                "Subs": null,
+                                                "Meta": null
+                                            },
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 1652628453,
+                                                "Txt": "Filter for contents accorded to prompt",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": true,
+                                                "Subs": [
+                                                    {
+                                                        "Type": "oitem",
+                                                        "Id": "",
+                                                        "Created": 0,
+                                                        "Changed": 0,
+                                                        "Txt": "Live or on key press?",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    },
+                                                    {
+                                                        "Type": "oitem",
+                                                        "Id": "",
+                                                        "Created": 0,
+                                                        "Changed": 0,
+                                                        "Txt": "Show flat or with structure?",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    },
+                                                    {
+                                                        "Type": "oitem",
+                                                        "Id": "",
+                                                        "Created": 0,
+                                                        "Changed": 0,
+                                                        "Txt": "Priorize visible items or items in current linearized view?",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    },
+                                                    {
+                                                        "Type": "oitem",
+                                                        "Id": "",
+                                                        "Created": 0,
+                                                        "Changed": 0,
+                                                        "Txt": "Highlight matching part of lines?",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    },
+                                                    {
+                                                        "Type": "oitem",
+                                                        "Id": "",
+                                                        "Created": 1652628435,
+                                                        "Changed": 1652628453,
+                                                        "Txt": "Implement proper input state machine first",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": false,
+                                                        "Subs": null,
+                                                        "Meta": null
+                                                    },
+                                                    {
+                                                        "Type": "oitem",
+                                                        "Id": "",
+                                                        "Created": 0,
+                                                        "Changed": 1652628453,
+                                                        "Txt": "Do we have to implement virtual nodes first?",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": true,
+                                                        "Subs": [
+                                                            {
+                                                                "Type": "oitem",
+                                                                "Id": "",
+                                                                "Created": 0,
+                                                                "Changed": 1652628435,
+                                                                "Txt": "Might prevent duplication/later refactoring",
+                                                                "Numbered": false,
+                                                                "Checked": false,
+                                                                "Expanded": false,
+                                                                "Subs": null,
+                                                                "Meta": null
+                                                            }
+                                                        ],
+                                                        "Meta": null
+                                                    },
+                                                    {
+                                                        "Type": "oitem",
+                                                        "Id": "",
+                                                        "Created": 0,
+                                                        "Changed": 0,
+                                                        "Txt": "Should not mess up current expansion state",
+                                                        "Numbered": false,
+                                                        "Checked": false,
+                                                        "Expanded": true,
+                                                        "Subs": [
+                                                            {
+                                                                "Type": "oitem",
+                                                                "Id": "",
+                                                                "Created": 0,
+                                                                "Changed": 0,
+                                                                "Txt": "i.e. both when cancelling and when confirming, impact on existing expansion state should be minimal",
+                                                                "Numbered": false,
+                                                                "Checked": false,
+                                                                "Expanded": false,
+                                                                "Subs": null,
+                                                                "Meta": null
+                                                            }
+                                                        ],
+                                                        "Meta": null
+                                                    }
+                                                ],
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    },
+                                    {
+                                        "Type": "oitem",
+                                        "Id": "",
+                                        "Created": 0,
+                                        "Changed": 0,
+                                        "Txt": "Is there a way to integrate this with FZF",
+                                        "Numbered": false,
+                                        "Checked": false,
+                                        "Expanded": true,
+                                        "Subs": [
+                                            {
+                                                "Type": "oitem",
+                                                "Id": "",
+                                                "Created": 0,
+                                                "Changed": 0,
+                                                "Txt": "Maybe by expanding all ald performing the search over a temporary linearized view? Expensive, though",
+                                                "Numbered": false,
+                                                "Checked": false,
+                                                "Expanded": false,
+                                                "Subs": null,
+                                                "Meta": null
+                                            }
+                                        ],
+                                        "Meta": null
+                                    }
+                                ],
                                 "Meta": null
                             },
                             {
@@ -854,192 +1064,6 @@
                                         "Checked": false,
                                         "Expanded": false,
                                         "Subs": null,
-                                        "Meta": null
-                                    }
-                                ],
-                                "Meta": null
-                            },
-                            {
-                                "Type": "oitem",
-                                "Id": "",
-                                "Created": 0,
-                                "Changed": 1651661706,
-                                "Txt": "Search/filter",
-                                "Numbered": false,
-                                "Checked": false,
-                                "Expanded": false,
-                                "Subs": [
-                                    {
-                                        "Type": "oitem",
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Workflow",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": true,
-                                        "Subs": [
-                                            {
-                                                "Type": "oitem",
-                                                "Id": "",
-                                                "Created": 0,
-                                                "Changed": 0,
-                                                "Txt": "Enter \"/\"",
-                                                "Numbered": false,
-                                                "Checked": false,
-                                                "Expanded": false,
-                                                "Subs": null,
-                                                "Meta": null
-                                            },
-                                            {
-                                                "Type": "oitem",
-                                                "Id": "",
-                                                "Created": 0,
-                                                "Changed": 0,
-                                                "Txt": "Show prompt",
-                                                "Numbered": false,
-                                                "Checked": false,
-                                                "Expanded": true,
-                                                "Subs": null,
-                                                "Meta": null
-                                            },
-                                            {
-                                                "Type": "oitem",
-                                                "Id": "",
-                                                "Created": 0,
-                                                "Changed": 0,
-                                                "Txt": "Filter for contents accorded to prompt",
-                                                "Numbered": false,
-                                                "Checked": false,
-                                                "Expanded": true,
-                                                "Subs": [
-                                                    {
-                                                        "Type": "oitem",
-                                                        "Id": "",
-                                                        "Created": 0,
-                                                        "Changed": 0,
-                                                        "Txt": "Live or on key press?",
-                                                        "Numbered": false,
-                                                        "Checked": false,
-                                                        "Expanded": false,
-                                                        "Subs": null,
-                                                        "Meta": null
-                                                    },
-                                                    {
-                                                        "Type": "oitem",
-                                                        "Id": "",
-                                                        "Created": 0,
-                                                        "Changed": 0,
-                                                        "Txt": "Show flat or with structure?",
-                                                        "Numbered": false,
-                                                        "Checked": false,
-                                                        "Expanded": false,
-                                                        "Subs": null,
-                                                        "Meta": null
-                                                    },
-                                                    {
-                                                        "Type": "oitem",
-                                                        "Id": "",
-                                                        "Created": 0,
-                                                        "Changed": 0,
-                                                        "Txt": "Priorize visible items or items in current linearized view?",
-                                                        "Numbered": false,
-                                                        "Checked": false,
-                                                        "Expanded": false,
-                                                        "Subs": null,
-                                                        "Meta": null
-                                                    },
-                                                    {
-                                                        "Type": "oitem",
-                                                        "Id": "",
-                                                        "Created": 0,
-                                                        "Changed": 0,
-                                                        "Txt": "Highlight matching part of lines?",
-                                                        "Numbered": false,
-                                                        "Checked": false,
-                                                        "Expanded": false,
-                                                        "Subs": null,
-                                                        "Meta": null
-                                                    },
-                                                    {
-                                                        "Type": "oitem",
-                                                        "Id": "",
-                                                        "Created": 0,
-                                                        "Changed": 0,
-                                                        "Txt": "Do we have to implement virtual nodes first?",
-                                                        "Numbered": false,
-                                                        "Checked": false,
-                                                        "Expanded": true,
-                                                        "Subs": [
-                                                            {
-                                                                "Type": "oitem",
-                                                                "Id": "",
-                                                                "Created": 0,
-                                                                "Changed": 0,
-                                                                "Txt": "Might prevent duplication/later refactoring",
-                                                                "Numbered": false,
-                                                                "Checked": false,
-                                                                "Expanded": false,
-                                                                "Subs": null,
-                                                                "Meta": null
-                                                            }
-                                                        ],
-                                                        "Meta": null
-                                                    },
-                                                    {
-                                                        "Type": "oitem",
-                                                        "Id": "",
-                                                        "Created": 0,
-                                                        "Changed": 0,
-                                                        "Txt": "Should not mess up current expansion state",
-                                                        "Numbered": false,
-                                                        "Checked": false,
-                                                        "Expanded": true,
-                                                        "Subs": [
-                                                            {
-                                                                "Type": "oitem",
-                                                                "Id": "",
-                                                                "Created": 0,
-                                                                "Changed": 0,
-                                                                "Txt": "i.e. both when cancelling and when confirming, impact on existing expansion state should be minimal",
-                                                                "Numbered": false,
-                                                                "Checked": false,
-                                                                "Expanded": false,
-                                                                "Subs": null,
-                                                                "Meta": null
-                                                            }
-                                                        ],
-                                                        "Meta": null
-                                                    }
-                                                ],
-                                                "Meta": null
-                                            }
-                                        ],
-                                        "Meta": null
-                                    },
-                                    {
-                                        "Type": "oitem",
-                                        "Id": "",
-                                        "Created": 0,
-                                        "Changed": 0,
-                                        "Txt": "Is there a way to integrate this with FZF",
-                                        "Numbered": false,
-                                        "Checked": false,
-                                        "Expanded": true,
-                                        "Subs": [
-                                            {
-                                                "Type": "oitem",
-                                                "Id": "",
-                                                "Created": 0,
-                                                "Changed": 0,
-                                                "Txt": "Maybe by expanding all ald performing the search over a temporary linearized view? Expensive, though",
-                                                "Numbered": false,
-                                                "Checked": false,
-                                                "Expanded": false,
-                                                "Subs": null,
-                                                "Meta": null
-                                            }
-                                        ],
                                         "Meta": null
                                     }
                                 ],
@@ -2620,5 +2644,5 @@
         "Meta": null
     },
     "Config": null,
-    "Cursor": 25
+    "Cursor": 26
 }
