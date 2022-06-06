@@ -35,6 +35,9 @@ type model struct {
     textinput textinput.Model
     editingItem bool
 
+    searchinput textinput.Model
+    searchMode bool
+
     viewport viewport.Model
     winSizeReady bool
 
@@ -72,6 +75,13 @@ func (m *model) CommonPostInit() {
     ti.Focus()
 
     m.textinput = ti
+
+    si := textinput.New()
+    si.Placeholder = "search"
+    si.Prompt = "> "
+    si.Focus()
+
+    m.searchinput = si
 }
 
 func InitialModel() model {
@@ -748,6 +758,36 @@ func (m *model) UpdateStateEditing(cur OItem, msg tea.Msg)  (canUpdateViewport b
     return true, quit, nil, tea.Batch(cmds...)
 }
 
+func (m *model) UpdateStateSearchMode(cur OItem, msg tea.Msg) (canUpdateViewport bool, quit bool, tmodel tea.Model, tcmd tea.Cmd) {
+    var cmds []tea.Cmd
+
+    canUpdateViewport = false
+    quit = false
+
+    switch msg := msg.(type) {
+
+    case tea.WindowSizeMsg:
+        cmds = m.handleWinSizeChange(msg)
+
+    case tea.KeyMsg:
+
+        switch msg.String() {
+
+        case "ctrl+c", "esc":
+            m.searchMode = false
+        }
+    }
+
+    if m.searchMode {
+        m.searchinput, _ = m.searchinput.Update(msg)
+    }
+
+    //fmt.Printf(m.searchinput.Value() + "\n")
+    //fmt.Printf(m.searchinput.View() + "\n")
+
+    return canUpdateViewport, quit, nil, tea.Batch(cmds...)
+}
+
 func (m *model) UpdateStateNavigate(cur OItem, msg tea.Msg) (canUpdateViewport bool, quit bool, tmodel tea.Model, tcmd tea.Cmd) {
     canUpdateViewport = false
     quit = false
@@ -762,6 +802,9 @@ func (m *model) UpdateStateNavigate(cur OItem, msg tea.Msg) (canUpdateViewport b
     case tea.KeyMsg:
 
         switch msg.String() {
+
+        case "/":
+            m.searchMode = true
 
         case "i":
             cur.SetEdited(true)
@@ -910,7 +953,11 @@ func (m model) Update(msg tea.Msg) (tmodel tea.Model, tcmd tea.Cmd) {
     if m.editingItem {
         canUpdateViewport, quit, tmodel, tcmd = m.UpdateStateEditing(cur, msg)
     } else {
-        canUpdateViewport, quit, tmodel, tcmd = m.UpdateStateNavigate(cur, msg)
+        if m.searchMode {
+            canUpdateViewport, quit, tmodel, tcmd = m.UpdateStateSearchMode(cur, msg)
+        } else {
+            canUpdateViewport, quit, tmodel, tcmd = m.UpdateStateNavigate(cur, msg)
+        }
     }
 
     // make sure cursor is in valid range
@@ -934,7 +981,7 @@ func (m model) Update(msg tea.Msg) (tmodel tea.Model, tcmd tea.Cmd) {
             // dispatching key messages while the prompt is open scrolls
             // the viewport on j/k in addition to j/k being added in
             // the input field ...
-            if m.editingItem {
+            if m.editingItem || m.searchMode {
                 canUpdateViewport = false
             }
     }
@@ -1055,9 +1102,20 @@ func (m model) contentView() string {
     color_yellow := lipgloss.Color("227")
     header_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
     footer_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
+    search_style := lipgloss.NewStyle().Background(color_yellow).Foreground(lipgloss.Color("0"));
 
     header_text := fmt.Sprintf("%s [%s]", m.Title.GetTxt(), m.filename)
-    s := header_style.Render(header_text) + "\n\n"
+    s := header_style.Render(header_text) + "\n"
+
+    search_text := ""
+
+    if m.searchMode {
+        search_text = m.searchinput.View()
+    }
+
+    s += search_style.Render(search_text)
+
+    s += "\n\n"
 
     //s += level_headers
 
